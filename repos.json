@@ -1,0 +1,56 @@
+[
+  {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-04-07T02:55:46Z"
+  },
+  {
+    "name": "QoF",
+    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
+    "url": "https://github.com/aitji/QoF",
+    "homepage": "https://github.com/aitji/QoF",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-04-06T01:26:47Z"
+  },
+  {
+    "name": "thatako.net",
+    "description": "",
+    "url": "https://github.com/aitji/thatako.net",
+    "homepage": "https://thatako.net",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-03-30T14:51:03Z"
+  },
+  {
+    "name": "tools",
+    "description": "",
+    "url": "https://github.com/aitji/tools",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-03-26T11:58:59Z"
+  },
+  {
+    "name": "practice",
+    "description": "a repo to track my coding, Logging history and progress as I practice and review code skills over time.",
+    "url": "https://github.com/aitji/practice",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-03-24T11:20:50Z"
+  },
+  {
+    "name": "qol",
+    "description": "just a buch of another pack in 1 pack | this is repo for only version control the pack",
+    "url": "https://github.com/aitji/qol",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-03-21T10:41:32Z"
+  }
+]
