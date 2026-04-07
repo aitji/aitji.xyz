@@ -1,26 +1,46 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { Client, GatewayIntentBits } from 'discord.js'
 
-let cachedStatus: string = 'offline'
-let lastUpdated: number = 0
-const VALID = new Set(['online', 'idle', 'dnd', 'offline'])
+const TOKEN = process.env.DISCORD_BOT_TOKEN!
+const GUILD_ID = '1254409070925058071'
+const USER_ID = '660742557009051659'
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method === 'GET') {
-    res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60')
-    return res.status(200).json({ status: cachedStatus, updated: lastUpdated })
-  }
+const TTL = 15 * 60 * 1000
+type Cache = {
+  status: string
+  updated: number
+}
 
-  if (req.method === 'POST') {
-    const secret = process.env.DISCORD_BOT_SECRET
-    const { status, key } = req.body ?? {}
+let cache: Cache | null = null
+async function fetchStatus(): Promise<string> {
+  const client = new Client({
+    intents: [
+      GatewayIntentBits.Guilds,
+      GatewayIntentBits.GuildMembers,
+      GatewayIntentBits.GuildPresences
+    ]
+  })
 
-    if (!secret || key !== secret) return res.status(401).json({ error: 'unauthorized' })
-    if (!VALID.has(status)) return res.status(400).json({ error: 'invalid status' })
+  await client.login(TOKEN)
+  await new Promise(r => client.once('ready', r))
 
-    cachedStatus = status
-    lastUpdated  = Date.now()
-    return res.status(200).json({ ok: true, status })
-  }
+  const guild = await client.guilds.fetch(GUILD_ID)
+  const member = await guild.members.fetch(USER_ID).catch(() => null)
 
-  return res.status(405).json({ error: 'method not allowed' })
+  const status = member?.presence?.status ?? 'offline'
+
+  await client.destroy()
+  return status
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'GET') return res.status(405).end()
+  if (cache && Date.now() - cache.updated < TTL) return res.json(cache)
+
+  try {
+    const status = await fetchStatus()
+    cache = { status, updated: Date.now() }
+
+    return res.json(cache)
+  } catch { return res.status(500).json({ error: 'failed fetch discord status' }) }
 }
