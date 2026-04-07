@@ -1,0 +1,176 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "aitji",
+  description = "self-taught developer. sort of full-stack web dev.",
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: title,
+  alternateName: description,
+  inLanguage: "en_US",
+  url: "https://aitji.xyz",
+  logo: "https://aitji.xyz/favicon-32x32.png",
+  sameAs: ["https://aitji.is-a.dev"],
+  founder: {
+    "@type": "Person",
+    name: "aitji",
+    url: "https://aitji.is-a.dev",
+    sameAs: ["https://github.com/aitji", "https://www.youtube.com/@aitji."],
+    image: "https://aitji.is-a.dev/img/favicon-32x32.png",
+    description:
+      "Curious full-stack developer, and code optimizer who loves building cool things.",
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta name="author" content="aitji" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://aitji.xyz" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://aitji.xyz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:image" content="/apple-icon-120x120.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="th_TH" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-icon-180x180.png"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta name="msapplication-TileColor" content="#c8496a" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#c8496a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/iconify-icon@2/dist/iconify-icon.min.js"
+      is:inline></script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <slot />
+
+    <!-- click particles -->
+    <div id="particles" aria-hidden="true"></div>
+
+    <script is:inline>
+      (function () {
+        var container = document.getElementById("particles");
+        var COLORS = ["#c8496a", "#e0607e", "#f0a0b8"];
+
+        function burst(x, y) {
+          for (var i = 0; i < 10; i++) spawn(x, y);
+        }
+
+        function spawn(x, y) {
+          var el = document.createElement("div");
+          var size = 4 + Math.random() * 5;
+          var angle = Math.random() * Math.PI * 2;
+          var dist = 35 + Math.random() * 55;
+          var dx = Math.cos(angle) * dist;
+          var dy = Math.sin(angle) * dist - 10;
+          var dur = 450 + Math.random() * 350;
+          var color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+          el.style.cssText = [
+            "position:fixed",
+            "pointer-events:none",
+            "z-index:9999",
+            "border-radius:50%",
+            "left:" + x + "px",
+            "top:" + y + "px",
+            "width:" + size + "px",
+            "height:" + size + "px",
+            "background:" + color,
+            "transform:translate(-50%,-50%)",
+          ].join(";");
+
+          container.appendChild(el);
+
+          el.animate(
+            [
+              { transform: "translate(-50%,-50%) translate(0,0)", opacity: 1 },
+              {
+                transform:
+                  "translate(-50%,-50%) translate(" + dx + "px," + dy + "px)",
+                opacity: 0,
+              },
+            ],
+            { duration: dur, easing: "cubic-bezier(0,.9,.57,1)" },
+          ).onfinish = function () {
+            el.remove();
+          };
+        }
+
+        document.addEventListener("click", function (e) {
+          burst(e.clientX, e.clientY);
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

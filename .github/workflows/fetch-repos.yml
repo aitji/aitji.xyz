@@ -1,0 +1,75 @@
+name: update repo data
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'   # every monday 03:00 UTC (10:00 bangkok)
+  workflow_dispatch:        # run manually from actions tab anytime
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout main (to get workflow file)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup data branch
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # create data branch as orphan if it doesn't exist
+          if git ls-remote --exit-code --heads origin data; then
+            git checkout data
+          else
+            git checkout --orphan data
+            git rm -rf .
+            echo "# data branch auto-generated, do not edit" > README.md
+            git add README.md
+            git commit -m "init: data branch"
+            git push origin data
+          fi
+
+      - name: fetch repos from github api
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/users/aitji/repos?sort=updated&per_page=20&type=owner" \
+          | python3 -c "
+import json, sys
+
+repos = json.load(sys.stdin)
+clean = [
+  {
+    'name':        r['name'],
+    'description': r['description'] or '',
+    'url':         r['html_url'],
+    'homepage':    r['homepage'] or '',
+    'language':    r['language'] or '',
+    'stars':       r['stargazers_count'],
+    'updated':     r['updated_at'],
+  }
+  for r in repos
+  if not r['fork']
+][:6]
+
+print(json.dumps(clean, indent=2))
+" > repos.json
+
+      - name: commit if changed
+        run: |
+          git add repos.json
+          if git diff --staged --quiet; then
+            echo "no changes, skipping commit"
+          else
+            git commit -m "chore: update repos $(date -u +'%Y-%m-%d')"
+            git push origin data
+          fi

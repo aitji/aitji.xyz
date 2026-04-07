@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap');
+
+/* design tokens */
+:root {
+  --bg:          #0c0a0b;
+  --surface:     #141113;
+  --surface-2:   #1e1a1d;
+  --border:      #2e282c;
+  --border-soft: #231f22;
+
+  --text:        #ede0e4;
+  --text-muted:  #9b8890;
+  --text-faint:  #5c5258;
+
+  --accent:      #c8496a;
+  --accent-hi:   #e0607e; /* slightly lighter */
+  --accent-dim:  rgba(200, 73, 106, 0.12);
+  --accent-line: rgba(200, 73, 106, 0.35);
+
+  --radius:      10px;
+  --radius-sm:   6px;
+  --radius-lg:   16px;
+
+  --font-head:   'Syne', sans-serif;
+  --font-body:   'DM Sans', sans-serif;
+  --font-mono:   'DM Mono', monospace;
+
+  --transition:  150ms ease;
+}
+
+/* reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  /* grain noise texture */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+body {
+  position: relative;
+  z-index: 1;
+}
+
+/* typography */
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; }
+
+a {
+  color: var(--accent-hi);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--text); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface-2);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+/* layout */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color var(--transition);
+}
+.card:hover { border-color: var(--border-soft); }
+
+/* utility */
+.accent { color: var(--accent-hi); }
+.muted { color: var(--text-muted); }
+.mono { font-family: var(--font-mono); }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* core */
+::selection, ::-moz-selection { background: var(--accent-hi) !important; color: var(--text); }

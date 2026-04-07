@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Discord from "../components/Discord";
+import Clock from "../components/Clock";
+import Projects from "../components/Projects";
+import { friends } from "../data/friends";
+
+const socials = [
+  { label: "github", url: "https://github.com/aitji", icon: "mdi:github" },
+  {
+    label: "youtube",
+    url: "https://www.youtube.com/@aitji-gamer",
+    icon: "mdi:youtube",
+  },
+  {
+    label: "x/twitter",
+    url: "https://x.com/aitji_",
+    icon: "ri:twitter-x-fill",
+  },
+  {
+    label: "discord",
+    url: "https://aitji.is-a.dev/discord",
+    icon: "ic:baseline-discord",
+  },
+  { label: "email", url: "mailto:aitji@duck.com", icon: "mdi:email-outline" },
+];
+---
+
+<Layout>
+  <main class="page">
+    <!-- hero -->
+    <section class="hero container">
+      <div class="hero-name-row">
+        <h1 class="hero-name">aitji</h1>
+      </div>
+      <div class="hero-meta">
+        <Discord client:load />
+        <span class="meta-sep" aria-hidden="true">·</span>
+        <Clock client:load />
+        <span class="meta-tz muted">gmt+7</span>
+      </div>
+      <p class="hero-sub">
+        self-taught developer &amp; (sort of) full-stack web dev.
+        <br class="br-hide" />i use lowercase letters.
+      </p>
+    </section>
+
+    <div class="divider container" aria-hidden="true"></div>
+
+    <!-- about -->
+    <section class="section container" id="about">
+      <p class="section-label">about</p>
+      <div class="card">
+        <p>
+          hey, i'm <strong>aitji</strong> a developer who builds things. i like making
+          stuff. currently figuring out what to do with this domain.
+        </p>
+        <div class="tag-row">
+          <span class="tag">astro</span>
+          <span class="tag">solidjs</span>
+          <span class="tag">tailwind</span>
+          <span class="tag">vite</span>
+          <span class="tag">typescript</span>
+          <span class="tag">javascript</span>
+          <span class="tag">vercel</span>
+          <span class="tag">cloudflare</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- links -->
+    <section class="section container" id="links">
+      <p class="section-label">links</p>
+      <div class="socials-row">
+        {
+          socials.map((s) => (
+            <a
+              href={s.url}
+              class="social-btn"
+              target={s.url.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+            >
+              <iconify-icon
+                icon={s.icon}
+                width="15"
+                height="15"
+                aria-hidden="true"
+              />
+              <span>{s.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- projects -->
+    <section class="section container" id="projects">
+      <p class="section-label">projects</p>
+      <Projects client:load />
+    </section>
+
+    <!-- friends -->
+    {
+      friends.length > 0 && (
+        <section class="section container" id="friends">
+          <p class="section-label">friends</p>
+          <div class="friends-grid">
+            {friends.map((f) => (
+              <a
+                href={f.url}
+                class="friend-card"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="friend-name">{f.name}</span>
+                <span class="friend-desc muted">{f.desc}</span>
+                <span class="friend-url muted">↗</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- footers -->
+    <footer class="footer container">
+      <div class="footer-inner">
+        <p class="footer-txt muted">
+          aitji.xyz · built with
+          <a href="https://astro.build" target="_blank">astro</a> +
+          <a href="https://solidjs.com" target="_blank">solidjs</a>
+        </p>
+        <a href="https://aitji.xyz" class="badge-88x31">aitji</a>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  @import "../styles/home.css";
+</style>
