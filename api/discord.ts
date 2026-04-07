@@ -50,6 +50,7 @@ async function fetchStatus(): Promise<string> {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') return res.status(405).end()
+  res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=30')
   if (cache && Date.now() - cache.updated < TTL) return res.json({ ...cache, cached: true })
 
   try {
