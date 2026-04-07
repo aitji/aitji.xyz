@@ -21,7 +21,7 @@ const LANG_COLOR: Record<string, string> = Object.freeze({
 });
 
 const DATA_URL =
-  "https://raw.githubusercontent.com/aitji/aitji.xyz/data/repos.json";
+  "https://raw.githubusercontent.com/aitji/aitji.xyz/refs/heads/data/repos.json";
 
 async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(DATA_URL);
