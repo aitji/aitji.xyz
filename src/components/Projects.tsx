@@ -1,4 +1,4 @@
-import { createResource, For, Show } from "solid-js";
+import { createEffect, createResource, For, Show } from "solid-js";
 
 interface Repo {
   name: string;
@@ -29,8 +29,9 @@ async function fetchRepos(): Promise<Repo[]> {
 }
 
 export default function Projects() {
-  const [repos] = createResource(fetchRepos);
+  const [repos, { refetch }] = createResource(fetchRepos);
 
+  createEffect(() => { refetch() });
   return (
     <div class="projects-grid">
       <Show
