@@ -1,12 +1,21 @@
 [
   {
+    "name": "aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "Astro",
+    "stars": 0,
+    "updated": "2026-04-20T22:07:49Z"
+  },
+  {
     "name": "QoF",
     "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
     "url": "https://github.com/aitji/QoF",
-    "homepage": "https://github.com/aitji/QoF",
+    "homepage": "https://aitji.xyz/QoF",
     "language": "TypeScript",
     "stars": 3,
-    "updated": "2026-04-20T05:24:48Z"
+    "updated": "2026-04-20T11:15:40Z"
   },
   {
     "name": "aitji",
@@ -36,15 +45,6 @@
     "updated": "2026-04-08T13:14:10Z"
   },
   {
-    "name": "aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "CSS",
-    "stars": 0,
-    "updated": "2026-04-07T23:21:04Z"
-  },
-  {
     "name": "tools",
     "description": "",
     "url": "https://github.com/aitji/tools",
@@ -52,5 +52,68 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-03-26T11:58:59Z"
+  },
+  {
+    "name": "qol",
+    "description": "just a buch of another pack in 1 pack | this is repo for only version control the pack",
+    "url": "https://github.com/aitji/qol",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-03-21T10:41:32Z"
+  },
+  {
+    "name": "anti-roblox",
+    "description": "do you ever hate everytime you open school computer, and found roblox on it? i don't care i am it so annoy run that exe file on dist it will put on auto start",
+    "url": "https://github.com/aitji/anti-roblox",
+    "homepage": "",
+    "language": "Python",
+    "stars": 3,
+    "updated": "2026-03-20T12:29:15Z"
+  },
+  {
+    "name": "id.thatako.net",
+    "description": "grab free domain [name].id.thatako.net",
+    "url": "https://github.com/aitji/id.thatako.net",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-03-16T16:04:38Z"
+  },
+  {
+    "name": "api.thatako.net",
+    "description": "",
+    "url": "https://github.com/aitji/api.thatako.net",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-03-16T16:04:23Z"
+  },
+  {
+    "name": "status.thatako.net",
+    "description": "status of thatako.net",
+    "url": "https://github.com/aitji/status.thatako.net",
+    "homepage": "https://status.thatako.net",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-03-06T16:28:04Z"
+  },
+  {
+    "name": "addon",
+    "description": "Welcome to the Minecraft Bedrock ScriptAPI! This addon (script) was created by me and is available for you to download and use. Here's everything you need to know",
+    "url": "https://github.com/aitji/addon",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 2,
+    "updated": "2026-02-18T04:01:23Z"
+  },
+  {
+    "name": "brute-force",
+    "description": "this is my program to run testing brute force cracking da password (just a free time programing), don't need install lib",
+    "url": "https://github.com/aitji/brute-force",
+    "homepage": "",
+    "language": "Python",
+    "stars": 0,
+    "updated": "2024-10-25T13:43:45Z"
   }
 ]

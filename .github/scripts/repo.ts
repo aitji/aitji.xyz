@@ -40,7 +40,6 @@ async function fetchRepos(): Promise<void> {
   const repos: GithubRepo[] = await res.json()
   const clean: CleanRepo[] = repos
     .filter((r) => !r.fork)
-    .slice(0, 6)
     .map((r) => ({
       name: r.name,
       description: r.description ?? "",
