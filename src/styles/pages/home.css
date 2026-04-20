@@ -137,6 +137,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.65rem;
+  transition: max-height 400ms ease;
 }
 
 :global(.projects-grid.collapsed) {
@@ -155,6 +156,7 @@
 :global(.projects-grid.expanded) {
   -webkit-mask-image: none;
   mask-image: none;
+  max-height: none;
 }
 
 :global(.show-more-btn) {
