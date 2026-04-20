@@ -1,4 +1,4 @@
-import { createEffect, createResource, For, Show } from "solid-js";
+import { createSignal, onMount, For, Show } from "solid-js";
 
 interface Repo {
   name: string;
@@ -44,13 +44,27 @@ function SkeletonCard() {
 }
 
 export default function Projects() {
-  const [repos, { refetch }] = createResource(fetchRepos);
+  const [repos, setRepos] = createSignal<Repo[]>([]);
+  const [loading, setLoading] = createSignal(true);
+  const [error, setError] = createSignal(false);
 
-  createEffect(() => { refetch() });
+  onMount(async () => {
+    try {
+      const data = await fetchRepos();
+      setRepos(data);
+      setError(false);
+    } catch (err) {
+      console.error("Error fetching repos:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  });
+
   return (
     <div class="projects-grid">
       <Show
-        when={!repos.loading}
+        when={!loading()}
         fallback={
           <>
             <SkeletonCard />
@@ -63,7 +77,7 @@ export default function Projects() {
         }
       >
         <Show
-          when={!repos.error}
+          when={!error()}
           fallback={<p class="projects-placeholder">couldn't load repos :(</p>}
         >
           <For each={repos()}>
