@@ -127,10 +127,45 @@
 .social-btn iconify-icon { flex-shrink: 0; }
 
 /* projects */
+:global(.projects-container) {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 :global(.projects-grid) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 0.65rem;
+}
+
+:global(.project-card-fade) {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+:global(.show-more-btn) {
+  align-self: center;
+  margin-top: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  color: var(--accent-hi);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-weight: 500;
+}
+
+:global(.show-more-btn:hover) {
+  border-color: var(--accent-hi);
+  background: var(--surface-2);
+}
+
+:global(.show-more-btn:active) {
+  transform: scale(0.98);
 }
 :global(.projects-placeholder) {
   color: var(--text-muted);

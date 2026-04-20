@@ -21,6 +21,7 @@ const LANG_COLOR: Record<string, string> = Object.freeze({
 });
 
 const DATA_URL = "/api/repos";
+const INITIAL_SHOW = 6;
 
 async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(DATA_URL);
@@ -43,10 +44,50 @@ function SkeletonCard() {
   );
 }
 
+function ProjectCard(props: { repo: Repo; fade?: boolean }) {
+  return (
+    <a
+      href={props.repo.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="project-card"
+      classList={{ "project-card-fade": props.fade }}
+    >
+      <div class="project-top">
+        <span class="project-name">{props.repo.name}</span>
+        {props.repo.stars > 0 && (
+          <span class="project-stars">★ {props.repo.stars}</span>
+        )}
+      </div>
+      {props.repo.description && (
+        <p class="project-desc">{props.repo.description}</p>
+      )}
+      <div class="project-bottom">
+        {props.repo.language && (
+          <span class="project-lang">
+            <span
+              class="lang-dot"
+              style={{
+                background: LANG_COLOR[props.repo.language] ?? "#9b8890",
+              }}
+            />
+            {props.repo.language}
+          </span>
+        )}
+        {props.repo.homepage && <span class="project-live">↗ live</span>}
+      </div>
+    </a>
+  );
+}
+
 export default function Projects() {
   const [repos, setRepos] = createSignal<Repo[]>([]);
   const [loading, setLoading] = createSignal(true);
   const [error, setError] = createSignal(false);
+  const [expanded, setExpanded] = createSignal(false);
+
+  const displayedRepos = () => expanded() ? repos() : repos().slice(0, INITIAL_SHOW);
+  const hasMore = () => repos().length > INITIAL_SHOW;
 
   onMount(async () => {
     try {
@@ -62,59 +103,43 @@ export default function Projects() {
   });
 
   return (
-    <div class="projects-grid">
-      <Show
-        when={!loading()}
-        fallback={
-          <>
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </>
-        }
-      >
+    <div class="projects-container">
+      <div class="projects-grid">
         <Show
-          when={!error()}
-          fallback={<p class="projects-placeholder">couldn't load repos :(</p>}
+          when={!loading()}
+          fallback={
+            <>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          }
         >
-          <For each={repos()}>
-            {(repo) => (
-              <a
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="project-card"
-              >
-                <div class="project-top">
-                  <span class="project-name">{repo.name}</span>
-                  {repo.stars > 0 && (
-                    <span class="project-stars">★ {repo.stars}</span>
-                  )}
-                </div>
-                {repo.description && (
-                  <p class="project-desc">{repo.description}</p>
-                )}
-                <div class="project-bottom">
-                  {repo.language && (
-                    <span class="project-lang">
-                      <span
-                        class="lang-dot"
-                        style={{
-                          background: LANG_COLOR[repo.language] ?? "#9b8890",
-                        }}
-                      />
-                      {repo.language}
-                    </span>
-                  )}
-                  {repo.homepage && <span class="project-live">↗ live</span>}
-                </div>
-              </a>
-            )}
-          </For>
+          <Show
+            when={!error()}
+            fallback={<p class="projects-placeholder">couldn't load repos :(</p>}
+          >
+            <For each={repos()}>
+              {(repo, idx) => (
+                <ProjectCard
+                  repo={repo}
+                  fade={!expanded() && idx() >= INITIAL_SHOW}
+                />
+              )}
+            </For>
+          </Show>
         </Show>
+      </div>
+      <Show when={hasMore() && !loading()}>
+        <button
+          class="show-more-btn"
+          onClick={() => setExpanded(!expanded())}
+        >
+          {expanded() ? "Show Less" : `Show More (${repos().length - INITIAL_SHOW})`}
+        </button>
       </Show>
     </div>
   );
