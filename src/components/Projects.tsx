@@ -44,14 +44,13 @@ function SkeletonCard() {
   );
 }
 
-function ProjectCard(props: { repo: Repo; fade?: boolean }) {
+function ProjectCard(props: { repo: Repo }) {
   return (
     <a
       href={props.repo.url}
       target="_blank"
       rel="noopener noreferrer"
       class="project-card"
-      classList={{ "project-card-fade": props.fade }}
     >
       <div class="project-top">
         <span class="project-name">{props.repo.name}</span>
@@ -104,7 +103,7 @@ export default function Projects() {
 
   return (
     <div class="projects-container">
-      <div class="projects-grid">
+      <div class="projects-grid" classList={{ "collapsed": !expanded() && !loading() }}>
         <Show
           when={!loading()}
           fallback={
@@ -123,11 +122,8 @@ export default function Projects() {
             fallback={<p class="projects-placeholder">couldn't load repos :(</p>}
           >
             <For each={repos()}>
-              {(repo, idx) => (
-                <ProjectCard
-                  repo={repo}
-                  fade={!expanded() && idx() >= INITIAL_SHOW}
-                />
+              {(repo) => (
+                <ProjectCard repo={repo} />
               )}
             </For>
           </Show>
