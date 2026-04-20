@@ -20,8 +20,7 @@ const LANG_COLOR: Record<string, string> = Object.freeze({
   PowerShell: "#2a6db1",
 });
 
-const DATA_URL =
-  "https://raw.githubusercontent.com/aitji/aitji.xyz/refs/heads/data/repos.json";
+const DATA_URL = "/api/repos";
 
 async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(DATA_URL);
