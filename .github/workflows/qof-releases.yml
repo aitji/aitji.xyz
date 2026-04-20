@@ -1,4 +1,4 @@
-name: update repo data
+name: update qof releases
 on:
   schedule:
     - cron: "0 7 * * *"
@@ -36,22 +36,25 @@ jobs:
 
       - name: copy scripts to data branch
         run: |
-          git checkout origin/main -- .github/scripts/repo.ts .github/scripts/package.json .github/scripts/tsconfig.json
+          git checkout origin/main -- \
+            .github/scripts/releases.ts \
+            .github/scripts/package.json \
+            .github/scripts/tsconfig.json
 
       - name: install script dependencies
         run: npm install --prefix .github/scripts
 
-      - name: fetch and process repos
+      - name: fetch and process releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx --prefix .github/scripts tsx .github/scripts/repo.ts
+        run: npx --prefix .github/scripts tsx .github/scripts/releases.ts
 
       - name: commit if changed
         run: |
-          git add repos.json
+          git add releases.json
           if git diff --staged --quiet; then
             echo "no changes, skipping commit"
           else
-            git commit -m "chore: update repos $(date -u +'%Y-%m-%d')"
+            git commit -m "chore: update releases $(date -u +'%Y-%m-%d')"
             git push origin data
           fi
