@@ -8,31 +8,26 @@ export const friends: Friend[] = [
   {
     name: 'picker',
     url: 'https://github.com/pickerth-12',
-    desc: 'human',
+    desc: 'pixel human',
   },
   {
     name: 'mineners',
     url: 'https://github.com/minenersGaming',
-    desc: 'math guy',
+    desc: 'math human',
   },
   {
     name: 'encyptAES',
     url: 'https://github.com/encyptAES',
-    desc: 'network guy',
-  },
-  {
-    name: 'encyptAES',
-    url: 'https://github.com/encyptAES',
-    desc: 'network guy',
+    desc: 'network human',
   },
   {
     name: 'n1gh7shadez',
     url: 'https://n1gh7shadez.vercel.app',
-    desc: 'gaming guy',
+    desc: 'gaming human',
   },
   {
     name: 't4nluxz',
     url: 'https://github.com/t4nluxz7-bot',
-    desc: 'sweat guy',
+    desc: 'pvp human',
   }
 ]
