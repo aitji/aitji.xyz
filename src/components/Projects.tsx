@@ -28,6 +28,21 @@ async function fetchRepos(): Promise<Repo[]> {
   return res.json();
 }
 
+function SkeletonCard() {
+  return (
+    <div class="project-card skeleton-card">
+      <div class="project-top">
+        <div class="skeleton-title"></div>
+        <div class="skeleton-stars"></div>
+      </div>
+      <div class="skeleton-desc"></div>
+      <div class="project-bottom">
+        <div class="skeleton-lang"></div>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const [repos, { refetch }] = createResource(fetchRepos);
 
@@ -36,7 +51,16 @@ export default function Projects() {
     <div class="projects-grid">
       <Show
         when={!repos.loading}
-        fallback={<p class="projects-placeholder">loading projects...</p>}
+        fallback={
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        }
       >
         <Show
           when={!repos.error}
