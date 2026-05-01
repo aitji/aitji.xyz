@@ -1,5 +1,17 @@
 [
   {
+    "id": 316290569,
+    "tag": "v1.5.1",
+    "name": "QoF v1.5.1",
+    "version": "1.5.1",
+    "body": "## What's Changed\n* fix permission level by @aitji in https://github.com/aitji/QoF/pull/7\n\n\n**Full Changelog**: https://github.com/aitji/QoF/compare/v1.5.0...v1.5.1",
+    "prerelease": true,
+    "publishedAt": "2026-05-01T04:57:17Z",
+    "url": "https://github.com/aitji/QoF/releases/tag/v1.5.1",
+    "downloadUrl": "https://github.com/aitji/QoF/releases/download/v1.5.1/QoF-1.5.1.mcaddon",
+    "downloadSize": 216517
+  },
+  {
     "id": 310799593,
     "tag": "v1.5.0",
     "name": "QoF v1.5.0",
