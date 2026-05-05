@@ -1,12 +1,21 @@
 [
   {
+    "name": "qof.aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/qof.aitji.xyz",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-05-05T07:16:52Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-05-04T03:49:37Z"
+    "updated": "2026-05-05T03:31:48Z"
   },
   {
     "name": "QoF",
@@ -16,15 +25,6 @@
     "language": "TypeScript",
     "stars": 3,
     "updated": "2026-05-03T17:36:07Z"
-  },
-  {
-    "name": "qof.aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/qof.aitji.xyz",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "CSS",
-    "stars": 0,
-    "updated": "2026-05-03T17:35:37Z"
   },
   {
     "name": "aitji.xyz",
