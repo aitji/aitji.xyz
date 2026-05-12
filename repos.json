@@ -6,7 +6,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-05-11T04:04:21Z"
+    "updated": "2026-05-12T03:48:45Z"
+  },
+  {
+    "name": "QoF",
+    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
+    "url": "https://github.com/aitji/QoF",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "TypeScript",
+    "stars": 3,
+    "updated": "2026-05-12T00:29:07Z"
   },
   {
     "name": "qof.aitji.xyz",
@@ -16,15 +25,6 @@
     "language": "HTML",
     "stars": 0,
     "updated": "2026-05-10T07:37:14Z"
-  },
-  {
-    "name": "QoF",
-    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
-    "url": "https://github.com/aitji/QoF",
-    "homepage": "https://aitji.xyz/QoF",
-    "language": "TypeScript",
-    "stars": 3,
-    "updated": "2026-05-03T17:36:07Z"
   },
   {
     "name": "aitji.xyz",
