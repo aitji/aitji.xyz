@@ -5,7 +5,7 @@ interface CacheData {
     timestamp: number
 }
 
-const RAW_URL = "https://raw.githubusercontent.com/aitji/aitji.xyz/refs/heads/data/repos.json"
+const RAW_URL = "https://raw.githubusercontent.com/aitji/aitji.xyz/data/repos.json"
 const CACHE_TTL = 60 * 60 * 1000
 let cache: CacheData | null = null
 
