@@ -1,5 +1,14 @@
 [
   {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-05-14T03:56:11Z"
+  },
+  {
     "name": "aitji.xyz",
     "description": "",
     "url": "https://github.com/aitji/aitji.xyz",
@@ -7,15 +16,6 @@
     "language": "Astro",
     "stars": 0,
     "updated": "2026-05-13T07:02:13Z"
-  },
-  {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-05-13T03:56:53Z"
   },
   {
     "name": "QoF",
