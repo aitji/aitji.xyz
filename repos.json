@@ -1,12 +1,21 @@
 [
   {
+    "name": "qof.aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/qof.aitji.xyz",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-06-10T09:55:58Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-06-09T04:05:34Z"
+    "updated": "2026-06-10T04:17:16Z"
   },
   {
     "name": "tpsc-livestream",
@@ -25,15 +34,6 @@
     "language": "TypeScript",
     "stars": 3,
     "updated": "2026-06-01T12:53:02Z"
-  },
-  {
-    "name": "qof.aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/qof.aitji.xyz",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "HTML",
-    "stars": 0,
-    "updated": "2026-05-28T05:07:21Z"
   },
   {
     "name": "aitji.xyz",
