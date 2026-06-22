@@ -6,7 +6,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-06-21T04:57:22Z"
+    "updated": "2026-06-22T05:04:54Z"
+  },
+  {
+    "name": "aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "Astro",
+    "stars": 0,
+    "updated": "2026-06-22T04:33:09Z"
   },
   {
     "name": "QoF",
@@ -34,15 +43,6 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-06-01T16:41:35Z"
-  },
-  {
-    "name": "aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "Astro",
-    "stars": 0,
-    "updated": "2026-05-13T07:02:13Z"
   },
   {
     "name": "css.tools",
