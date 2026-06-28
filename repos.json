@@ -1,12 +1,12 @@
 [
   {
-    "name": "shell",
-    "description": "terminal profile",
-    "url": "https://github.com/aitji/shell",
-    "homepage": "",
-    "language": "PowerShell",
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
     "stars": 0,
-    "updated": "2026-06-27T09:00:13Z"
+    "updated": "2026-06-28T04:22:15Z"
   },
   {
     "name": "QoF",
@@ -14,8 +14,26 @@
     "url": "https://github.com/aitji/QoF",
     "homepage": "https://qof.aitji.xyz",
     "language": "",
-    "stars": 5,
-    "updated": "2026-06-27T08:36:41Z"
+    "stars": 6,
+    "updated": "2026-06-27T15:55:59Z"
+  },
+  {
+    "name": "qof.aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/qof.aitji.xyz",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-06-27T15:48:21Z"
+  },
+  {
+    "name": "shell",
+    "description": "terminal profile",
+    "url": "https://github.com/aitji/shell",
+    "homepage": "",
+    "language": "PowerShell",
+    "stars": 0,
+    "updated": "2026-06-27T09:00:13Z"
   },
   {
     "name": "thatako.net",
@@ -27,15 +45,6 @@
     "updated": "2026-06-27T04:41:38Z"
   },
   {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-06-27T04:00:10Z"
-  },
-  {
     "name": "aitji.xyz",
     "description": "",
     "url": "https://github.com/aitji/aitji.xyz",
@@ -43,15 +52,6 @@
     "language": "Astro",
     "stars": 0,
     "updated": "2026-06-22T04:33:09Z"
-  },
-  {
-    "name": "qof.aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/qof.aitji.xyz",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "HTML",
-    "stars": 0,
-    "updated": "2026-06-10T09:55:58Z"
   },
   {
     "name": "tpsc-livestream",
