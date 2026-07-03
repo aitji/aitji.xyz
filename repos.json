@@ -6,7 +6,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-02T04:03:56Z"
+    "updated": "2026-07-03T03:50:24Z"
+  },
+  {
+    "name": "shell",
+    "description": "powerShell profile for Windows with Linux-inspired defaults, aliases, and shortcuts.",
+    "url": "https://github.com/aitji/shell",
+    "homepage": "",
+    "language": "PowerShell",
+    "stars": 0,
+    "updated": "2026-07-02T15:29:42Z"
   },
   {
     "name": "QoF",
@@ -34,15 +43,6 @@
     "language": "HTML",
     "stars": 0,
     "updated": "2026-06-29T00:04:09Z"
-  },
-  {
-    "name": "shell",
-    "description": "terminal profile",
-    "url": "https://github.com/aitji/shell",
-    "homepage": "",
-    "language": "PowerShell",
-    "stars": 0,
-    "updated": "2026-06-27T09:00:13Z"
   },
   {
     "name": "thatako.net",
