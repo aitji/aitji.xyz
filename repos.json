@@ -1,12 +1,30 @@
 [
   {
+    "name": "CoM",
+    "description": "Chain of Mining is a Minecraft Bedrock addon",
+    "url": "https://github.com/aitji/CoM",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-07-05T08:23:23Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-04T03:41:44Z"
+    "updated": "2026-07-05T04:01:18Z"
+  },
+  {
+    "name": "qof.aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/qof.aitji.xyz",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-07-04T12:52:32Z"
   },
   {
     "name": "shell",
@@ -34,15 +52,6 @@
     "language": "JavaScript",
     "stars": 1,
     "updated": "2026-06-30T12:25:41Z"
-  },
-  {
-    "name": "qof.aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/qof.aitji.xyz",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "HTML",
-    "stars": 0,
-    "updated": "2026-06-29T00:04:09Z"
   },
   {
     "name": "thatako.net",
