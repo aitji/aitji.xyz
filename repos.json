@@ -6,7 +6,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-07T03:58:17Z"
+    "updated": "2026-07-08T03:24:35Z"
+  },
+  {
+    "name": "CoM",
+    "description": "Break one block, and chain-mine the whole vein, tree, crop field, or leaf cluster at once",
+    "url": "https://github.com/aitji/CoM",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-07-07T14:37:17Z"
   },
   {
     "name": "qof.aitji.xyz",
@@ -25,15 +34,6 @@
     "language": "",
     "stars": 7,
     "updated": "2026-07-07T02:02:09Z"
-  },
-  {
-    "name": "CoM",
-    "description": "Chain of Mining is a Minecraft Bedrock addon",
-    "url": "https://github.com/aitji/CoM",
-    "homepage": "",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-07-05T08:23:23Z"
   },
   {
     "name": "shell",
