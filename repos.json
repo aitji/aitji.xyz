@@ -1,12 +1,23 @@
 [
   {
+    "name": "aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-07-12T09:52:40Z",
+    "private": false
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-12T03:31:15Z"
+    "updated": "2026-07-12T03:31:15Z",
+    "private": false
   },
   {
     "name": "QoF",
@@ -15,7 +26,8 @@
     "homepage": "https://qof.aitji.xyz",
     "language": "",
     "stars": 7,
-    "updated": "2026-07-12T01:30:16Z"
+    "updated": "2026-07-12T01:30:16Z",
+    "private": false
   },
   {
     "name": "qof.aitji.xyz",
@@ -24,7 +36,8 @@
     "homepage": "https://qof.aitji.xyz",
     "language": "HTML",
     "stars": 0,
-    "updated": "2026-07-11T05:19:10Z"
+    "updated": "2026-07-11T05:19:10Z",
+    "private": false
   },
   {
     "name": "CoM",
@@ -33,7 +46,8 @@
     "homepage": "",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-07T14:37:17Z"
+    "updated": "2026-07-07T14:37:17Z",
+    "private": false
   },
   {
     "name": "shell",
@@ -42,7 +56,8 @@
     "homepage": "",
     "language": "PowerShell",
     "stars": 0,
-    "updated": "2026-07-02T15:29:42Z"
+    "updated": "2026-07-02T15:29:42Z",
+    "private": false
   },
   {
     "name": "id.thatako.net",
@@ -51,7 +66,8 @@
     "homepage": "",
     "language": "JavaScript",
     "stars": 1,
-    "updated": "2026-06-30T12:25:41Z"
+    "updated": "2026-06-30T12:25:41Z",
+    "private": false
   },
   {
     "name": "thatako.net",
@@ -60,16 +76,8 @@
     "homepage": "https://thatako.net",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-06-27T04:41:38Z"
-  },
-  {
-    "name": "aitji.xyz",
-    "description": "",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "Astro",
-    "stars": 0,
-    "updated": "2026-06-22T04:33:09Z"
+    "updated": "2026-06-27T04:41:38Z",
+    "private": false
   },
   {
     "name": "tpsc-livestream",
@@ -78,7 +86,8 @@
     "homepage": "",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-06-01T16:41:35Z"
+    "updated": "2026-06-01T16:41:35Z",
+    "private": false
   },
   {
     "name": "css.tools",
@@ -87,7 +96,8 @@
     "homepage": "https://tools.aitji.xyz",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-04-09T15:51:16Z"
+    "updated": "2026-04-09T15:51:16Z",
+    "private": false
   },
   {
     "name": "tools",
@@ -96,7 +106,8 @@
     "homepage": "",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-03-26T11:58:59Z"
+    "updated": "2026-03-26T11:58:59Z",
+    "private": false
   },
   {
     "name": "qol",
@@ -105,7 +116,8 @@
     "homepage": "",
     "language": "",
     "stars": 0,
-    "updated": "2026-03-21T10:41:32Z"
+    "updated": "2026-03-21T10:41:32Z",
+    "private": false
   },
   {
     "name": "anti-roblox",
@@ -114,7 +126,8 @@
     "homepage": "",
     "language": "Python",
     "stars": 3,
-    "updated": "2026-03-20T12:29:15Z"
+    "updated": "2026-03-20T12:29:15Z",
+    "private": false
   },
   {
     "name": "api.thatako.net",
@@ -123,7 +136,8 @@
     "homepage": "",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-03-16T16:04:23Z"
+    "updated": "2026-03-16T16:04:23Z",
+    "private": false
   },
   {
     "name": "status.thatako.net",
@@ -132,7 +146,8 @@
     "homepage": "https://status.thatako.net",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-03-06T16:28:04Z"
+    "updated": "2026-03-06T16:28:04Z",
+    "private": false
   },
   {
     "name": "addon",
@@ -141,7 +156,8 @@
     "homepage": "",
     "language": "JavaScript",
     "stars": 2,
-    "updated": "2026-02-18T04:01:23Z"
+    "updated": "2026-02-18T04:01:23Z",
+    "private": false
   },
   {
     "name": "brute-force",
@@ -150,6 +166,7 @@
     "homepage": "",
     "language": "Python",
     "stars": 0,
-    "updated": "2024-10-25T13:43:45Z"
+    "updated": "2024-10-25T13:43:45Z",
+    "private": false
   }
 ]
