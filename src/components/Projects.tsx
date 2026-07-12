@@ -20,13 +20,24 @@ const LANG_COLOR: Record<string, string> = Object.freeze({
   PowerShell: "#2a6db1",
 });
 
-const DATA_URL = "/api/repos";
 const INITIAL_SHOW = 6;
 
 async function fetchRepos(): Promise<Repo[]> {
-  const res = await fetch(DATA_URL);
-  if (!res.ok) throw new Error("fetch failed -.-;;");
-  return res.json();
+  try {
+    const r = await fetch("https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json");
+    if (r.ok) return r.json();
+  } catch (e) {
+    console.warn("JSDelivr fetch failed, trying backend:", e);
+  }
+
+  try {
+    const r = await fetch("/api/repos");
+    if (r.ok) return r.json();
+  } catch (e) {
+    console.warn("Backend fetch also failed:", e);
+  }
+
+  throw new Error("fetch failed -.-;;");
 }
 
 function SkeletonCard() {

@@ -12,6 +12,7 @@ interface GithubRepo {
   stargazers_count: number
   updated_at: string
   fork: boolean
+  private: boolean
 }
 
 interface CleanRepo {
@@ -22,22 +23,30 @@ interface CleanRepo {
   language: string
   stars: number
   updated: string
+  private: boolean
 }
 
 async function fetchRepos(): Promise<void> {
-  const res = await fetch(
-    `https://api.github.com/users/${username}/repos?sort=updated&per_page=20&type=owner`,
-    {
-      headers: {
-        Authorization: `token ${token}`,
-        Accept: "application/vnd.github.v3+json",
-      },
-    }
-  )
+  const repos: GithubRepo[] = []
 
-  if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`)
+  for (let page = 1; ; page++) {
+    const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&type=owner&per_page=100&page=${page}`,
+      {
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    )
 
-  const repos: GithubRepo[] = await res.json()
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`)
+
+    const data: GithubRepo[] = await res.json()
+    repos.push(...data)
+
+    if (data.length < 100) break
+  }
+
   const clean: CleanRepo[] = repos
     .filter((r) => !r.fork)
     .map((r) => ({
@@ -48,6 +57,7 @@ async function fetchRepos(): Promise<void> {
       language: r.language ?? "",
       stars: r.stargazers_count,
       updated: r.updated_at,
+      private: r.private,
     }))
 
   writeFileSync("repos.json", JSON.stringify(clean, null, 2))

@@ -55,3 +55,6 @@ jobs:
             git commit -m "chore: update repos $(date -u +'%Y-%m-%d')"
             git push origin data
           fi
+      - name: Purge jsDelivr cache
+        run: |
+          curl -fsS "https://purge.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json" || true

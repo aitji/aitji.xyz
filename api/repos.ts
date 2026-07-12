@@ -1,11 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 interface CacheData {
-    repos: unknown[]
+    repos: unknown[] | null
     timestamp: number
 }
 
-const RAW_URL = "https://raw.githubusercontent.com/aitji/aitji.xyz/data/repos.json"
+const JSDELIVR = "https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json"
+const GITHUB = "https://raw.githubusercontent.com/aitji/aitji.xyz/data/repos.json"
 const CACHE_TTL = 60 * 60 * 1000
 let cache: CacheData | null = null
 
@@ -29,11 +30,20 @@ export default async function handler(
         if (process.env.GITHUB_TOKEN)
             headers["Authorization"] = `token ${process.env.GITHUB_TOKEN}`
 
-        const r = await fetch(RAW_URL, { headers })
+        let repos: unknown[] | null = null
 
-        if (!r.ok) throw new Error(`Upstream fetch failed: ${r.status}`)
+        // jsdelivr
+        try {
+            const r = await fetch(JSDELIVR, { headers })
+            if (r.ok) repos = await r.json()
+        } catch (err) { console.warn('JSDelivr fetch failed, trying GitHub:', err) }
 
-        const repos: unknown[] = await r.json()
+        // github
+        if (!repos) {
+            const r = await fetch(GITHUB, { headers })
+            if (!r.ok) throw new Error(`Upstream fetch failed: ${r.status}`)
+            repos = await r.json()
+        }
         cache = { repos, timestamp: now }
 
         res.setHeader('Cache-Control', 'public, max-age=3600')
