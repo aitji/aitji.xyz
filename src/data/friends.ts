@@ -1,6 +1,6 @@
 export interface Friend {
   name: string;
-  url: string;
+  url?: string;
   desc: string;
 }
 
@@ -29,5 +29,9 @@ export const friends: Friend[] = [
     name: 't4nluxz',
     url: 'https://github.com/t4nluxz7-bot',
     desc: 'pvp human',
+  },
+  {
+    name: 'vongwean',
+    desc: 'art human'
   }
 ]

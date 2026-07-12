@@ -288,10 +288,14 @@
   transition: border-color var(--transition), background var(--transition);
   position: relative;
 }
-.friend-card:hover { border-color: var(--accent-line); background: var(--surface-2); }
+a.friend-card:hover { border-color: var(--accent-line); background: var(--surface-2); }
 .friend-name  { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); }
 .friend-desc  { font-size: 0.78rem; line-height: 1.5; }
 .friend-url   { position: absolute; top: 0.85rem; right: 0.9rem; font-size: 0.75rem; }
+/* .friend-name iconify-icon {
+  vertical-align: -2px;
+  margin-right: -4px;
+} */
 
 /* footer */
 .footer { margin-top: 4rem; }

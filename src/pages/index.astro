@@ -6,23 +6,41 @@ import Projects from "../components/Projects";
 import { friends } from "../data/friends";
 
 const socials = [
-  { label: "github", url: "https://github.com/aitji", icon: "mdi:github" },
+  {
+    label: "me",
+    url: "mailto:me@aitji.com",
+    icon: "material-symbols:alternate-email",
+  },
+  {
+    label: "github",
+    url: "https://github.com/aitji",
+    icon: "mdi:github",
+  },
+  {
+    label: "curseforge",
+    url: "https://www.curseforge.com/members/aitji/projects",
+    icon: "simple-icons:curseforge",
+  },
   {
     label: "youtube",
     url: "https://www.youtube.com/@aitji-gamer",
     icon: "mdi:youtube",
   },
   {
-    label: "x/twitter",
+    label: "discord",
+    url: "https://aitji.xyz/discord",
+    icon: "ic:baseline-discord",
+  },
+  {
+    label: "x",
     url: "https://x.com/aitji_",
     icon: "ri:twitter-x-fill",
   },
   {
-    label: "discord",
-    url: "https://aitji.is-a.dev/discord",
-    icon: "ic:baseline-discord",
+    label: "reddit",
+    url: "https://reddit.com/u/aitji",
+    icon: "basil:reddit-solid",
   },
-  { label: "email", url: "mailto:aitji@duck.com", icon: "mdi:email-outline" },
 ];
 ---
 
@@ -105,18 +123,37 @@ const socials = [
         <section class="section container" id="friends">
           <p class="section-label">friends</p>
           <div class="friends-grid">
-            {friends.map((f) => (
-              <a
-                href={f.url}
-                class="friend-card"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="friend-name">{f.name}</span>
-                <span class="friend-desc muted">{f.desc}</span>
-                <span class="friend-url muted">↗</span>
-              </a>
-            ))}
+            {friends.map((f) => {
+              let icon
+              if (f.url) {
+                icon = "gridicons:domains"
+                if (f.url.startsWith("https://github.com/")) icon = "mdi:github"
+              }
+              const Tag = f?.url ? "a" : "span"
+
+              return (
+                <Tag
+                  href={f.url}
+                  title={f.url}
+                  class="friend-card"
+                  target={f.url ? "_blank" : undefined}
+                  rel={f.url ? "noopener noreferrer" : undefined}
+                >
+                  <span class="friend-name">{f.name}</span>
+                  <span class="friend-desc muted">{f.desc}</span>
+                  {icon && (
+                    <span class="friend-url muted">
+                      <iconify-icon
+                        icon={icon}
+                        width="15"
+                        height="15"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  )}
+                </Tag>
+              );
+            })}
           </div>
         </section>
       )
@@ -126,11 +163,11 @@ const socials = [
     <footer class="footer container">
       <div class="footer-inner">
         <p class="footer-txt muted">
-          aitji.xyz · built with
+          <a href="https://aitji.xyz">aitji.xyz</a> · built with
           <a href="https://astro.build" target="_blank">astro</a> +
           <a href="https://solidjs.com" target="_blank">solidjs</a>
         </p>
-        <a href="https://aitji.xyz" class="badge-88x31">aitji</a>
+        <a href="mailto:me@aitji.com" class="badge-88x31">@me</a>
       </div>
     </footer>
   </main>

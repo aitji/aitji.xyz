@@ -84,7 +84,6 @@ function ProjectCard(props: { repo: Repo }) {
             {props.repo.language}
           </span>
         )}
-        {props.repo.homepage && <span class="project-live">↗ live</span>}
       </div>
     </a>
   );
@@ -96,13 +95,22 @@ export default function Projects() {
   const [error, setError] = createSignal(false);
   const [expanded, setExpanded] = createSignal(false);
 
-  const displayedRepos = () => expanded() ? repos() : repos().slice(0, INITIAL_SHOW);
   const hasMore = () => repos().length > INITIAL_SHOW;
-
   onMount(async () => {
     try {
       const data = await fetchRepos();
-      setRepos(data);
+      setRepos(
+        data.sort((a, b) => {
+          const starDiff = b.stars - a.stars
+          if (starDiff) return starDiff
+
+          const desDiff = b.description.length - a.description.length
+          if (desDiff) return desDiff
+
+          const titleDiff = b.name.length - a.name.length
+          return titleDiff
+        })
+      )
       setError(false);
     } catch (err) {
       console.error("Error fetching repos:", err);

@@ -19,5 +19,17 @@
         }
       ]
     }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(discord|dsc|gg|dis)",
+      "status": 302,
+      "headers": {
+        "Location": "https://discord.gg/YPjawnUnsx"
+      }
+    }
   ]
 }
