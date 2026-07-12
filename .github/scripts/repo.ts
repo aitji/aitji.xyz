@@ -23,7 +23,6 @@ interface CleanRepo {
   language: string
   stars: number
   updated: string
-  private: boolean
 }
 
 async function fetchRepos(): Promise<void> {
@@ -48,7 +47,7 @@ async function fetchRepos(): Promise<void> {
   }
 
   const clean: CleanRepo[] = repos
-    .filter((r) => !r.fork)
+    .filter(r => !r.fork && !r.private)
     .map((r) => ({
       name: r.name,
       description: r.description ?? "",
@@ -56,8 +55,7 @@ async function fetchRepos(): Promise<void> {
       homepage: r.homepage ?? "",
       language: r.language ?? "",
       stars: r.stargazers_count,
-      updated: r.updated_at,
-      private: r.private,
+      updated: r.updated_at
     }))
 
   writeFileSync("repos.json", JSON.stringify(clean, null, 2))
