@@ -1,12 +1,21 @@
 [
   {
+    "name": "addon",
+    "description": "Welcome to the Minecraft Bedrock ScriptAPI! This addon (script) was created by me and is available for you to download and use. Here's everything you need to know",
+    "url": "https://github.com/aitji/addon",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 3,
+    "updated": "2026-07-15T05:24:43Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-14T02:54:57Z"
+    "updated": "2026-07-15T02:53:59Z"
   },
   {
     "name": "aitji.xyz",
@@ -133,15 +142,6 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-03-06T16:28:04Z"
-  },
-  {
-    "name": "addon",
-    "description": "Welcome to the Minecraft Bedrock ScriptAPI! This addon (script) was created by me and is available for you to download and use. Here's everything you need to know",
-    "url": "https://github.com/aitji/addon",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 2,
-    "updated": "2026-02-18T04:01:23Z"
   },
   {
     "name": "brute-force",
