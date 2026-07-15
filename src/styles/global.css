@@ -105,4 +105,14 @@ code {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
 /* core */
-::selection, ::-moz-selection { background: var(--accent-hi) !important; color: var(--text); }
+::selection {
+  background: var(--accent-hi) !important;
+  background-color: var(--accent-hi) !important;
+  color: var(--text) !important;
+}
+
+::-moz-selection {
+  background: var(--accent-hi) !important;
+  background-color: var(--accent-hi) !important;
+  color: var(--text) !important;
+}
