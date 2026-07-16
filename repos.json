@@ -1,21 +1,12 @@
 [
   {
-    "name": "addon",
-    "description": "Welcome to the Minecraft Bedrock ScriptAPI! This addon (script) was created by me and is available for you to download and use. Here's everything you need to know",
-    "url": "https://github.com/aitji/addon",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 3,
-    "updated": "2026-07-15T05:24:43Z"
-  },
-  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-07-15T02:53:59Z"
+    "updated": "2026-07-16T03:15:33Z"
   },
   {
     "name": "aitji.xyz",
@@ -24,7 +15,16 @@
     "homepage": "https://aitji.xyz",
     "language": "HTML",
     "stars": 0,
-    "updated": "2026-07-12T14:48:40Z"
+    "updated": "2026-07-15T13:37:10Z"
+  },
+  {
+    "name": "addon",
+    "description": "Welcome to the Minecraft Bedrock ScriptAPI! This addon (script) was created by me and is available for you to download and use. Here's everything you need to know",
+    "url": "https://github.com/aitji/addon",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 3,
+    "updated": "2026-07-15T05:24:43Z"
   },
   {
     "name": "QoF",
