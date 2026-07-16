@@ -1,4 +1,6 @@
-const CACHE_NAME = 'aitji-cache-v1'
+// doesn't use anymore
+
+/*const CACHE_NAME = 'aitji-cache-v1'
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
@@ -120,4 +122,4 @@ self.addEventListener('fetch', event => {
 
         return cached || network
     })())
-})
+})*/

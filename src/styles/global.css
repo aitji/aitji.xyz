@@ -97,6 +97,13 @@ code {
 .accent { color: var(--accent-hi); }
 .muted { color: var(--text-muted); }
 .mono { font-family: var(--font-mono); }
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
 
 /* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
@@ -105,14 +112,5 @@ code {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
 /* core */
-::selection {
-  background: var(--accent-hi) !important;
-  background-color: var(--accent-hi) !important;
-  color: var(--text) !important;
-}
-
-::-moz-selection {
-  background: var(--accent-hi) !important;
-  background-color: var(--accent-hi) !important;
-  color: var(--text) !important;
-}
+::selection { background: var(--accent-hi) !important; background-color: var(--accent-hi) !important; color: var(--text); }
+::-moz-selection { background: var(--accent-hi) !important; background-color: var(--accent-hi) !important; color: var(--text); }

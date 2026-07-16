@@ -1,19 +1,25 @@
 {
   "name": "aitji-xyz",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.3.0",
+  "private": false,
+  "author": "aitji",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "node build.js",
+
+    "dev": "node server.js --https",
+    "dev_http": "node server.js"
+  },
+  "imports": {
+    "#api/*": "./api/*"
   },
   "dependencies": {
-    "@astrojs/solid-js": "^6.0.1",
-    "aitji-xyz": "file:",
-    "astro": "^6.1.4",
     "discord.js": "^14.26.2",
-    "marked": "^18.0.2",
-    "solid-js": "^1.9.0"
+
+    "esbuild": "^0.27.3",
+    "html-minifier-terser": "^7.2.0",
+    "ignore": "^7.0.5",
+    "terser": "^5.46.0"
   },
   "devDependencies": {
     "@vercel/node": "^5.0.0"

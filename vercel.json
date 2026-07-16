@@ -1,35 +1,60 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
         {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://aitji.xyz"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type"
+            "source": "/api/(.*)",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://aitji.xyz"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET, POST, OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "Content-Type"
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(discord|dsc|gg|dis)",
-      "status": 302,
-      "headers": {
-        "Location": "https://discord.gg/YPjawnUnsx"
-      }
-    }
-  ]
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/img/favicon.ico"
+        },
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(discord|dsc|gg|dis)",
+            "status": 302,
+            "headers": {
+                "Location": "https://discord.gg/YPjawnUnsx"
+            }
+        },
+        {
+            "src": "/img/(.*)",
+            "headers": {
+                "cache-control": "public, max-age=2592000, immutable"
+            }
+        },
+        {
+            "src": "/routes.json",
+            "headers": {
+                "cache-control": "public, max-age=2592000, immutable"
+            }
+        },
+        {
+            "src": "/(.*)",
+            "status": 404,
+            "dest": "/404.html"
+        }
+    ]
 }

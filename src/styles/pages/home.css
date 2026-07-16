@@ -38,7 +38,7 @@
 }
 
 /* discord pill */
-:global(.discord-pill) {
+.discord-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -50,19 +50,19 @@
   color: var(--text-muted);
   font-family: var(--font-mono);
 }
-:global(.discord-dot) {
+.discord-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-:global(.discord-loading) {
+.discord-loading {
   display: inline-block;
   width: 64px; height: 22px;
   background: var(--surface);
   border-radius: 99px;
   opacity: 0.4;
 }
-:global(.clock) {
+.clock {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -103,6 +103,21 @@
   font-family: var(--font-mono);
 }
 
+/* icons (svg mask, tintable via currentColor) */
+.icon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
 /* socials */
 .socials-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
@@ -124,23 +139,22 @@
   color: var(--text);
   background: var(--accent-dim);
 }
-.social-btn iconify-icon { flex-shrink: 0; }
 
 /* projects */
-:global(.projects-container) {
+.projects-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-:global(.projects-grid) {
+.projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.65rem;
   transition: max-height 400ms ease;
 }
 
-:global(.projects-grid.collapsed) {
+.projects-grid.collapsed {
   max-height: 21rem;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
@@ -153,13 +167,13 @@
   );
 }
 
-:global(.projects-grid.expanded) {
+.projects-grid.expanded {
   -webkit-mask-image: none;
   mask-image: none;
   max-height: none;
 }
 
-:global(.show-more-btn) {
+.show-more-btn {
   align-self: center;
   margin-top: 0.5rem;
   padding: 0.65rem 1.5rem;
@@ -174,21 +188,21 @@
   font-weight: 500;
 }
 
-:global(.show-more-btn:hover) {
+.show-more-btn:hover {
   border-color: var(--accent-hi);
   background: var(--surface-2);
 }
 
-:global(.show-more-btn:active) {
+.show-more-btn:active {
   transform: scale(0.98);
 }
-:global(.projects-placeholder) {
+.projects-placeholder {
   color: var(--text-muted);
   font-size: 0.875rem;
   padding: 1.5rem 0;
   text-align: center;
 }
-:global(.project-card) {
+.project-card {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -201,15 +215,15 @@
   text-decoration: none;
   transition: border-color var(--transition), background var(--transition);
 }
-:global(.project-card:hover) { border-color: var(--accent-line); background: var(--surface-2); }
-:global(.project-top)   { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-:global(.project-name)  { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); font-weight: 500; }
-:global(.project-stars) { font-size: 0.72rem; color: var(--accent-hi); font-family: var(--font-mono); flex-shrink: 0; }
-:global(.project-desc)  { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-:global(.project-bottom){ display: flex; align-items: center; justify-content: space-between; margin-top: 0.2rem; }
-:global(.project-lang)  { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-faint); }
-:global(.lang-dot)      { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-:global(.project-live)  { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-faint); }
+.project-card:hover { border-color: var(--accent-line); background: var(--surface-2); }
+.project-top   { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.project-name  { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); font-weight: 500; }
+.project-stars { font-size: 0.72rem; color: var(--accent-hi); font-family: var(--font-mono); flex-shrink: 0; }
+.project-desc  { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.project-bottom{ display: flex; align-items: center; justify-content: space-between; margin-top: 0.2rem; }
+.project-lang  { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-faint); }
+.lang-dot      { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.project-live  { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-faint); }
 
 /* skeleton loading */
 @keyframes shimmer {
@@ -221,21 +235,21 @@
   }
 }
 
-:global(.skeleton-card) {
+.skeleton-card {
   pointer-events: none;
   cursor: default;
   border-color: var(--border);
 }
 
-:global(.skeleton-card:hover) {
+.skeleton-card:hover {
   border-color: var(--border);
   background: var(--surface);
 }
 
-:global(.skeleton-title),
-:global(.skeleton-stars),
-:global(.skeleton-desc),
-:global(.skeleton-lang) {
+.skeleton-title,
+.skeleton-stars,
+.skeleton-desc,
+.skeleton-lang {
   background: linear-gradient(
     90deg,
     var(--surface) 0%,
@@ -248,24 +262,24 @@
   border-radius: 4px;
 }
 
-:global(.skeleton-title) {
+.skeleton-title {
   height: 0.6rem;
   width: 65%;
 }
 
-:global(.skeleton-stars) {
+.skeleton-stars {
   height: 0.6rem;
   width: 3rem;
   flex-shrink: 0;
 }
 
-:global(.skeleton-desc) {
+.skeleton-desc {
   height: 2.25rem;
   width: 100%;
   margin-top: 0.25rem;
 }
 
-:global(.skeleton-lang) {
+.skeleton-lang {
   height: 0.6rem;
   width: 5rem;
 }
@@ -292,10 +306,6 @@ a.friend-card:hover { border-color: var(--accent-line); background: var(--surfac
 .friend-name  { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); }
 .friend-desc  { font-size: 0.78rem; line-height: 1.5; }
 .friend-url   { position: absolute; top: 0.85rem; right: 0.9rem; font-size: 0.75rem; }
-/* .friend-name iconify-icon {
-  vertical-align: -2px;
-  margin-right: -4px;
-} */
 
 /* footer */
 .footer { margin-top: 4rem; }
@@ -334,7 +344,7 @@ a.friend-card:hover { border-color: var(--accent-line); background: var(--surfac
   .hero-sub { font-size: 0.9rem; }
   .socials-row { gap: 0.4rem; }
   .social-btn { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
-  :global(.projects-grid) { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
   .friends-grid { grid-template-columns: 1fr 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
