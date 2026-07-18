@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:bimi="http://www.trusteddomain.org/bimi"
+  version="1.2"
+  baseProfile="tiny-ps"
+  viewBox="0 0 512 512">
+
+  <circle cx="256" cy="230" r="90" fill="#c8496a" />
+  <circle cx="256" cy="512" r="170" fill="#c8496a" />
+</svg>
