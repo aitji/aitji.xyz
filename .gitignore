@@ -1,5 +1,10 @@
 node_modules
 .vercel
-.env*
+
+*.7z
+*.zip
+# *.rar
+*.env*
+*.pem
 
 public/
