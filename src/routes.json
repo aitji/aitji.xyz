@@ -1,4 +1,23 @@
 {
     "$schema": "./routes.schema.json",
-    "routes": []
+    "routes": [
+        { "title": "home", "slug": "/", "path": "home" },
+        { "title": "about", "slug": "/about", "path": "about" },
+        {
+            "title": "blogs",
+            "slug": "/blogs",
+            "path": "blogs",
+            "pages": [
+                { "title": "post", "slug": "/blogs/*", "path": "blogs/post" }
+            ]
+        },
+        {
+            "title": "projects",
+            "slug": "/projects",
+            "path": "projects",
+            "pages": [
+                { "title": "project", "slug": "/projects/*", "path": "projects/detail" }
+            ]
+        }
+    ]
 }

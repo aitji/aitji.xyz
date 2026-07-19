@@ -1,0 +1,68 @@
+.status-pill {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: var(--z-nav);
+  transform: translate(-50%, 0);
+  opacity: 1;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(20, 17, 19, 0.72);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-lg);
+
+  transition: transform var(--transition-slow), opacity var(--transition-slow);
+  pointer-events: auto;
+}
+
+.status-pill .clock { font-family: var(--font-mono); font-size: 0.74rem; }
+.status-pill .meta-sep { color: var(--border); }
+.status-pill.pill-hidden {
+  transform: translate(-50%, calc(100% + 32px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* reverse home */
+body[data-route="home"] .status-pill {
+  transform: translate(-50%, calc(100% + 32px));
+  opacity: 0;
+  pointer-events: none;
+}
+body[data-route="home"] .status-pill.pill-hidden {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+/* body[data-route="home"] .status-pill { display: none; } */
+
+@supports (bottom: env(safe-area-inset-bottom)) { /* iOS safe */
+  .status-pill { bottom: calc(22px + env(safe-area-inset-bottom)); }
+}
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .status-pill { background: rgba(20, 17, 19, 0.97); }
+}
+@media (max-width: 580px) {
+  .status-pill {
+    padding-left: 8px;
+    border-radius: 3px;
+    font-size: 0.74rem;
+
+    -webkit-backdrop-filter: blur(0px) saturate(140%);
+    backdrop-filter: blur(0px) saturate(140%);
+    background: rgba(20, 17, 19, 0.97);
+  }
+  .status-pill .discord-pill {
+    border-radius: 3px;
+    border: none;
+    background-color: none;
+  }
+}

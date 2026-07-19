@@ -1,209 +1,136 @@
 (function () {
     "use strict"
-
-    function getThaiTime() {
-        return new Date().toLocaleTimeString("en-GB", {
-            timeZone: "Asia/Bangkok",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false
-        })
-    }
-
-    function initClock() {
-        var el = document.getElementById("clock")
-        if (!el) return
-
-        const tick = () => el.textContent = getThaiTime()
-        tick()
-        setInterval(tick, 1000)
-    }
-
-    var DOT = Object.freeze({
-        online: "#4ade80",
-        idle: "#facc15",
-        dnd: "#f87171",
-        offline: "#6b7280"
-    })
-
-    var LABEL = Object.freeze({
-        online: "online",
-        idle: "idle",
-        dnd: "dnd",
-        offline: "offline"
-    })
-
-    async function initDiscord() {
-        var slot = document.getElementById("discord-slot")
-        if (!slot) return
-
-        var status = "offline"
-        try {
-            var res = await fetch("/api/discord")
-            if (res.ok) {
-                var data = await res.json()
-                if (data.status in DOT) status = data.status
-            }
-        } catch (e) { }
-
-        var pill = document.createElement("span")
-        pill.className = "discord-pill"
-
-        var dot = document.createElement("span")
-        dot.className = "discord-dot"
-        dot.style.background = DOT[status]
-        dot.setAttribute("aria-hidden", "true")
-
-        var label = document.createElement("span")
-        label.className = "discord-label"
-        label.textContent = LABEL[status]
-
-        pill.appendChild(dot)
-        pill.appendChild(label)
-
-        slot.innerHTML = ""
-        slot.appendChild(pill)
-    }
-
-    var LANG_COLOR = Object.freeze({
-        TypeScript: "#3178c6",
-        JavaScript: "#f1e05a",
-        HTML: "#e34c26",
-        Astro: "#ff5a03",
-        CSS: "#563d7c",
-        Python: "#3572a5",
-        PHP: "#777bb4",
-        PowerShell: "#2a6db1",
-    })
+    window.AITJI = window.AITJI || {}
 
     var INITIAL_SHOW = 6
-    async function fetchRepos() {
-        try {
-            var r = await fetch("https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json")
-            if (r.ok) return r.json()
-        } catch (e) {
-            console.warn("JSDelivr fetch failed, trying backend:", e)
-        }
-
-        try {
-            var r2 = await fetch("/api/repos")
-            if (r2.ok) return r2.json()
-        } catch (e) {
-            console.warn("Backend fetch also failed:", e)
-        }
-
-        throw new Error("fetch failed -.-;;")
+    if (window.screen.availWidth < 580) INITIAL_SHOW = 4
+    function socialsRow() {
+        var u = AITJI.Utils
+        return [
+            { href: "mailto:me@aitji.com", icon: "email", label: "me", ext: false },
+            { href: "https://github.com/aitji", icon: "github", label: "github", ext: true },
+            { href: "https://www.curseforge.com/members/aitji/projects", icon: "curseforge", label: "curseforge", ext: true },
+            { href: "https://www.youtube.com/@aitji-gamer", icon: "youtube", label: "youtube", ext: true },
+            { href: "https://aitji.xyz/discord", icon: "discord", label: "discord", ext: true },
+            { href: "https://x.com/aitji_", icon: "twitter-x", label: "x", ext: true },
+            { href: "https://reddit.com/u/aitji", icon: "reddit", label: "reddit", ext: true },
+        ].map((it) => (
+            '<a href="' + it.href + '" class="social-btn"' +
+            (it.ext ? ' target="_blank" rel="noopener noreferrer"' : "") + ">" +
+            u.iconSpan(it.icon) + "<span>" + it.label + "</span></a>"
+        )).join("")
     }
 
-    function buildProjectCard(repo) {
-        var card = document.createElement("a")
-        card.href = repo.url
-        card.target = "_blank"
-        card.rel = "noopener noreferrer"
-        card.className = "project-card"
+    function friendGrid() {
+        var u = AITJI.Utils
+        var html = [
+            { name: "picker", desc: "pixel human", url: "https://github.com/pickerth-12", icon: "github" },
+            { name: "mineners", desc: "math human", url: "https://github.com/minenersGaming", icon: "github" },
+            { name: "encyptAES", desc: "network human", url: "https://github.com/encyptAES", icon: "github" },
+            { name: "n1gh7shadez", desc: "gaming human", url: "https://n1gh7shadez.vercel.app", icon: "domain" },
+            { name: "t4nluxz", desc: "pvp human", url: "https://github.com/t4nluxz7-bot", icon: "github" },
+        ].map((f) => (
+            '<a href="' + f.url + '" title="' + f.url + '" class="friend-card" target="_blank" rel="noopener noreferrer">' +
+            '<span class="friend-name">' + f.name + '</span>' +
+            '<span class="friend-desc muted">' + f.desc + '</span>' +
+            '<span class="friend-url muted">' + u.iconSpan(f.icon) + "</span>" +
+            "</a>"
+        )).join("")
 
-        var top = document.createElement("div")
-        top.className = "project-top"
-
-        var name = document.createElement("span")
-        name.className = "project-name"
-        name.textContent = repo.name
-        top.appendChild(name)
-
-        if (repo.stars > 0) {
-            var stars = document.createElement("span")
-            stars.className = "project-stars"
-            stars.textContent = "\u2605 " + repo.stars
-            top.appendChild(stars)
-        }
-
-        card.appendChild(top)
-        if (repo.description) {
-            var desc = document.createElement("p")
-            desc.className = "project-desc"
-            desc.textContent = repo.description
-            card.appendChild(desc)
-        }
-
-        var bottom = document.createElement("div")
-        bottom.className = "project-bottom"
-
-        if (repo.language) {
-            var lang = document.createElement("span")
-            lang.className = "project-lang"
-
-            var dot = document.createElement("span")
-            dot.className = "lang-dot"
-            dot.style.background = LANG_COLOR[repo.language] || "#9b8890"
-
-            lang.appendChild(dot)
-            lang.appendChild(document.createTextNode(repo.language))
-            bottom.appendChild(lang)
-        }
-
-        card.appendChild(bottom)
-        return card
+        html += '<span class="friend-card"><span class="friend-name">vongwean</span><span class="friend-desc muted">art human</span></span>'
+        return html
     }
 
-    function sortRepos(data) {
-        return data.sort(function (a, b) {
-            var starDiff = b.stars - a.stars
-            if (starDiff) return starDiff
+    function blogsHTML() {
+        var posts = (AITJI.BLOGS || []).slice().sort(function (a, b) { return b.date.localeCompare(a.date) }).slice(0, 3)
+        if (!posts.length) return '<p class="empty-state">nothing written yet.</p>'
 
-            var desDiff = b.description.length - a.description.length
-            if (desDiff) return desDiff
-
-            return b.name.length - a.name.length
-        })
+        var u = AITJI.Utils
+        return '<div class="blog-preview-list">' + posts.map((p) => (
+            '<a href="/blogs/' + p.slug + '" class="blog-preview-card">' +
+            '<span class="blog-preview-title">' + u.escapeHtml(p.title) + "</span>" +
+            '<span class="blog-preview-date">' + u.formatDate(p.date) + "</span>" +
+            "</a>"
+        )).join("") + "</div>"
     }
 
-    async function initProjects() {
-        var grid = document.getElementById("projects-grid")
+    function template() {
+        return (
+            '<div class="page">' +
+            '<section class="hero container">' +
+            '<div class="hero-name-row"><h1 class="hero-name">aitji</h1></div>' +
+            '<div class="hero-meta">' +
+            '<span id="hero-discord-slot"><span class="discord-loading"></span></span>' +
+            '<span class="meta-sep" aria-hidden="true">&middot;</span>' +
+            '<span class="clock" id="hero-clock" title="thailand, gmt+7"></span>' +
+            '<span class="meta-tz muted">gmt+7</span>' +
+            "</div>" +
+            '<p class="hero-sub">self-taught developer &amp; (sort of) full-stack web dev.' +
+            '<br class="br-hide" />i use lowercase letters.</p>' +
+            "</section>" +
+
+            '<section class="section container" id="about">' +
+            '<p class="section-label">about</p>' +
+            '<div class="card">' +
+            "<p>hey, i'm <strong>aitji</strong> a developer who builds things. i like making stuff. " +
+            "currently figuring out what to do with this domain.</p>" +
+            '<div class="tag-row" style="margin-top:0.85rem">' +
+            '<span class="tag">javascript</span><span class="tag">typescript</span><span class="tag">python</span>' +
+            '<span class="tag">solidjs</span><span class="tag">vercel</span>' +
+            "</div></div>" +
+            '<a href="/about" class="section-more">more about me</a>' +
+            "</section>" +
+
+            '<section class="section container" id="links">' +
+            '<p class="section-label">links</p>' +
+            '<div class="socials-row">' + socialsRow() + "</div>" +
+            "</section>" +
+
+            '<section class="section container" id="writing">' +
+            '<p class="section-label">writing</p>' +
+            blogsHTML() +
+            '<a href="/blogs" class="section-more">read more posts</a>' +
+            "</section>" +
+
+            '<section class="section container" id="projects">' +
+            '<p class="section-label">projects</p>' +
+            '<div class="projects-container collapsed"><div class="projects-grid" id="home-projects-grid">' +
+            AITJI.ProjectUI.skeletonCards(6) +
+            "</div></div>" +
+            '<a href="/projects" class="section-more">view all projects</a>' +
+            "</section>" +
+
+            '<section class="section container" id="friends">' +
+            '<p class="section-label">friends</p>' +
+            '<div class="friends-grid">' + friendGrid() + "</div>" +
+            "</section>" +
+
+            "</div>"
+        )
+    }
+
+    async function initProject() {
+        var grid = document.getElementById("home-projects-grid")
         if (!grid) return
-        var container = grid.closest(".projects-container")
 
-        var repos = []
-        var error = false
-
-        try { repos = sortRepos(await fetchRepos()) }
-        catch (err) {
-            console.error("Error fetching repos:", err)
-            error = true
-        }
-
-        grid.innerHTML = ""
-        if (error) {
-            var placeholder = document.createElement("p")
-            placeholder.className = "projects-placeholder"
-            placeholder.textContent = "couldn't load repos :("
-            grid.appendChild(placeholder)
-        } else repos.forEach(function (repo) {
-            grid.appendChild(buildProjectCard(repo))
-        })
-
-        var expanded = false
-        grid.classList.toggle("collapsed", !expanded)
-
-        var hasMore = !error && repos.length > INITIAL_SHOW
-        if (hasMore && container) {
-            var btn = document.createElement("button")
-            btn.className = "show-more-btn"
-            btn.textContent = "Show More (" + (repos.length - INITIAL_SHOW) + ")"
-
-            btn.addEventListener("click", function () {
-                expanded = !expanded
-                grid.classList.toggle("collapsed", !expanded)
-                btn.textContent = expanded
-                    ? "Show Less"
-                    : "Show More (" + (repos.length - INITIAL_SHOW) + ")"
-            })
-
-            container.appendChild(btn)
+        try {
+            var repos = await AITJI.Data.fetchRepos()
+            if (!document.getElementById("home-projects-grid")) return // route changed while loading
+            grid.innerHTML = repos.slice(0, INITIAL_SHOW).map(AITJI.ProjectUI.cardHTML).join("")
+        } catch (e) {
+            if (!document.getElementById("home-projects-grid")) return
+            grid.innerHTML = '<p class="empty-state">couldn\'t load repos :(</p>'
         }
     }
 
-    initClock()
-    initDiscord()
-    initProjects()
+    AITJI.Router.registerView("home", {
+        title: "aitji",
+        description: "self-taught developer. sort of full-stack web dev.",
+        render: function (container) {
+            container.innerHTML = template()
+            AITJI.Widgets.initClock("hero-clock")
+            AITJI.Widgets.initDiscordPill("hero-discord-slot")
+            initProject()
+        }
+    })
 })()

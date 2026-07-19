@@ -201,6 +201,10 @@ const handler = (req, res) => {
     // check spa routes
     const normPath = url.replace(/\/$/, '') || '/'
     const isSpaRoute = spaRoutes.some(route => {
+        if (route.endsWith('/*')) {
+            const prefix = route.slice(0, -2) || ''
+            return normPath === prefix || normPath.startsWith(prefix + '/')
+        }
         const normRoute = route.replace(/\/$/, '') || '/'
         return normRoute === normPath
     })
