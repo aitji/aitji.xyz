@@ -50,7 +50,35 @@
     <link rel="stylesheet" href="/styles/pages/404.css" />
 
     <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"WebSite","name":"404 aitji","alternateName":"page not found","inLanguage":"en_US","url":"https://aitji.xyz","logo":"https://aitji.xyz/favicon-32x32.png","sameAs":["https://aitji.is-a.dev"],"founder":{"@type":"Person","name":"aitji","url":"https://aitji.is-a.dev","sameAs":["https://github.com/aitji","https://www.youtube.com/@aitji."],"image":"https://aitji.is-a.dev/img/favicon-32x32.png","description":"Curious full-stack developer, and code optimizer who loves building cool things."}}
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://aitji.xyz/#website",
+                "name": "aitji",
+                "alternateName": "aitji.xyz",
+                "url": "https://aitji.xyz/",
+                "inLanguage": "en-US",
+                "creator": {
+                    "@id": "https://aitji.xyz/#person"
+                }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://aitji.xyz/#person",
+                "name": "aitji",
+                "url": "https://aitji.xyz/",
+                "image": "https://aitji.xyz/img/favicon-96x96.png",
+                "description": "aitji is a curious self-taught full-stack and software developer who builds Minecraft Bedrock addons, including Quality of Feature and Chain of Mining, and browser extensions such as 7TV Anywhere.",
+                "sameAs": [
+                    "https://github.com/aitji",
+                    "https://www.youtube.com/@aitji-gamer",
+                    "https://aitji.is-a.dev/"
+                ]
+            }
+        ]
+    }
     </script>
 </head>
 
