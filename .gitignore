@@ -6,5 +6,8 @@ node_modules
 # *.rar
 *.env*
 *.pem
+*.crt
+*.key
 
+key/
 public/

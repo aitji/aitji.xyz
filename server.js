@@ -2,6 +2,7 @@ import fs from 'fs'
 import http from 'http'
 import https from 'https'
 import path from 'path'
+import tls from 'tls'
 import { spawn } from 'child_process'
 
 const USE_HTTPS = process.argv.includes('--https')
@@ -122,6 +123,7 @@ const handler = (req, res) => {
         return
     }
 
+    res.setHeader('X-Powered-By', 'aitji & questionable decisions')
     let filePath = path.join(OUT, url)
 
     // validate res-path ; ensure it stays within the root dir (OUT) to prevent path traversal
@@ -236,20 +238,42 @@ http.createServer((req, res) => {
     res.end()
 }).listen(HTTP_PORT, () => console.log(`  [live] HTTP:${HTTP_PORT} → HTTPS:${HTTPS_PORT} redirect on http://localhost`))
 
-let server
-if (USE_HTTPS) {
-    const certFile = process.argv.find(a => a.startsWith('--cert='))?.split('=')[1] ?? 'localhost+2.pem'
-    const keyFile = process.argv.find(a => a.startsWith('--key='))?.split('=')[1] ?? 'localhost+2-key.pem'
+const KEY_DIR = path.resolve('key')
+const loadCert = (cert, key) => {
+    const certFile = path.join(KEY_DIR, cert)
+    const keyFile = path.join(KEY_DIR, key)
 
     if (!fs.existsSync(certFile) || !fs.existsSync(keyFile)) {
-        console.error(`[error] SSL cert/key not found: ${certFile}, ${keyFile}`)
-        console.error('        Generate with: mkcert localhost')
+        console.error(`[error] SSL cert/key not found:\n   - ${certFile}\n   - ${keyFile}`)
         process.exit(1)
     }
 
-    server = https.createServer({
+    return {
         cert: fs.readFileSync(certFile),
         key: fs.readFileSync(keyFile),
+    }
+}
+
+let server
+if (USE_HTTPS) {
+    const localCert = loadCert('localhost.pem', 'localhost-key.pem')
+    const tsCert = loadCert(
+        'aitji-box.echo-hadar.ts.net.crt',
+        'aitji-box.echo-hadar.ts.net.key'
+    )
+
+    const contexts = new Map([
+        ['localhost', tls.createSecureContext(localCert)],
+        ['127.0.0.1', tls.createSecureContext(localCert)],
+        ['box.aitji.xyz', tls.createSecureContext(localCert)],
+        ['aitji-box.echo-hadar.ts.net', tls.createSecureContext(tsCert)],
+    ])
+
+    server = https.createServer({
+        ...localCert,
+        SNICallback(hostname, callback) {
+            callback(null, contexts.get(hostname.toLowerCase()) ?? contexts.get('localhost'))
+        },
     }, handler)
 } else server = http.createServer(handler)
 
