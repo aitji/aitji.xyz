@@ -49,7 +49,7 @@
 .post-content li { margin-bottom: 0.4rem; }
 .post-content a { text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 .post-content strong { color: var(--text); font-weight: 500; }
-.post-content img { border-radius: var(--radius); border: 1px solid var(--border); margin: 1.25rem 0; }
+.post-content img:not([data-emoteanywhere-skip="true"]) { border-radius: var(--radius); border: 1px solid var(--border); margin: 1.25rem 0; }
 
 .post-footer-nav {
   display: grid;
