@@ -1,21 +1,21 @@
 [
   {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-07-24T03:20:41Z"
-  },
-  {
     "name": "7tv-anywhere",
     "description": "Bring 7TV emotes to [text fields] and [rendered text] on any website*",
     "url": "https://github.com/aitji/7tv-anywhere",
     "homepage": "",
     "language": "JavaScript",
     "stars": 1,
-    "updated": "2026-07-23T18:42:39Z"
+    "updated": "2026-07-25T05:36:21Z"
+  },
+  {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-07-25T03:18:48Z"
   },
   {
     "name": "aitji.xyz",
