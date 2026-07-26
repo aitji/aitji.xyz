@@ -40,6 +40,11 @@
             }
         },
         {
+            "src": "/(7tv|7tv-anywhere|7tvanywhere)",
+            "status": 307,
+            "dest": "/misc/7tv-anywhere.html"
+        },
+        {
             "src": "/img/(.*)",
             "headers": {
                 "cache-control": "public, max-age=2592000, immutable"

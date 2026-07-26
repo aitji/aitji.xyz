@@ -22,7 +22,7 @@ async function getSpaRoutes(request) {
         return cacheRoutes
     } catch (e) {
         console.error('failed to load routes:', e)
-        return ['/', '/about'] // fallback, if this happens ; it bad tell me
+        return ['/'] // fallback, if this happens ; it bad tell me
     }
 }
 
