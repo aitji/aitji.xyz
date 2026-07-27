@@ -1,12 +1,12 @@
 [
   {
-    "name": "aitji.xyz",
-    "description": "it's me",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "JavaScript",
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
     "stars": 0,
-    "updated": "2026-07-26T08:00:08Z"
+    "updated": "2026-07-27T03:40:43Z"
   },
   {
     "name": "7tv-anywhere",
@@ -15,16 +15,16 @@
     "homepage": "https://aitji.xyz/7tv-anywhere",
     "language": "JavaScript",
     "stars": 1,
-    "updated": "2026-07-26T07:56:29Z"
+    "updated": "2026-07-26T17:54:31Z"
   },
   {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
+    "name": "aitji.xyz",
+    "description": "it's me",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-07-26T03:32:48Z"
+    "updated": "2026-07-26T08:00:08Z"
   },
   {
     "name": "qof.aitji.xyz",
