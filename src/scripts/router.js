@@ -55,13 +55,39 @@
         return "/" + pathname.split("/")[1]
     }
 
+    function setAtt(selector, name, value) {
+        var element = document.querySelector(selector)
+        if (element && value) element.setAttribute(name, value)
+    }
+
     function setMeta(meta) {
         if (!meta) return
-        if (meta.title) document.title = meta.title + " \u2014 aitji"
-        if (meta.description) {
-            var m = document.querySelector('meta[name="description"]')
-            if (m) m.setAttribute("content", meta.description)
-        }
+
+        var title = meta.title || "aitji"
+        var fullTitle = title === "aitji" ? "aitji" : title + " - aitji"
+        var description = meta.description || "self-taught developer. sort of full-stack web dev."
+        var canonical = new URL(meta.pathname || location.pathname, location.origin).href
+
+        document.title = fullTitle
+        setAtt('meta[name="description"]', "content", description)
+        setAtt('link[rel="canonical"]', "href", canonical)
+        setAtt('meta[property="og:title"]', "content", fullTitle)
+        setAtt('meta[property="og:description"]', "content", description)
+        setAtt('meta[property="og:url"]', "content", canonical)
+        setAtt('meta[property="og:type"]', "content", meta.type || "website")
+    }
+
+    function resolveMetaValue(value, params) {
+        return typeof value === "function" ? value(params) : value
+    }
+
+    function applyViewMeta(def, params, pathname) {
+        setMeta({
+            title: resolveMetaValue(def.title, params),
+            description: resolveMetaValue(def.description, params),
+            type: resolveMetaValue(def.type, params),
+            pathname: pathname
+        })
     }
 
     function updateActiveTab(pathname) {
@@ -118,6 +144,11 @@
         if (!isPopState) window.scrollTo(0, 0)
     }
 
+    async function useResult(result) {
+        if (result && typeof result.then === "function") result = await result
+        if (result && typeof result.cleanup === "function") currentCleanup = result.cleanup
+    }
+
     async function render(pathname, opts) {
         opts = opts || {}
         var hash = opts.hash || ""
@@ -125,7 +156,7 @@
 
         if (typeof currentCleanup === "function") {
             try { currentCleanup() }
-            catch (e) {}
+            catch (e) { }
             currentCleanup = null
         }
 
@@ -137,26 +168,32 @@
                 '<p class="muted" style="margin-top:0.5rem">that page doesn\'t exist.</p>' +
                 '<a href="/" class="btn btn-accent" style="margin-top:1.5rem;display:inline-flex">back home</a>' +
                 "</div>"
-            setMeta({ title: "404", description: "page not found" })
+            setMeta({ title: "404", description: "page not found", pathname: pathname })
             updateActiveTab(pathname)
             lastPathname = normalize(pathname)
+            return
+        }
+
+        var prerenderedRoute = document.body.dataset.prerenderedRoute
+        var usePrerendered = opts.initial && prerenderedRoute && normalize(prerenderedRoute) === normalize(pathname)
+
+        if (usePrerendered) {
+            if (typeof def.mount === "function") await useResult(def.mount(viewEl, match.params))
+            updateActiveTab(pathname)
+            lastPathname = normalize(pathname)
+            scrollForNav(hash, !!opts.isPopState)
             return
         }
 
         if (!opts.initial) {
             viewEl.classList.remove("view-enter")
             viewEl.classList.add("view-exit")
-            await new Promise(function (res) { setTimeout(res, 110) })
+            await new Promise(function (resolve) { setTimeout(resolve, 110) })
         }
 
         viewEl.innerHTML = ""
-        var result = def.render(viewEl, match.params)
-        if (result && typeof result.then === "function") await result
-        if (result && typeof result.cleanup === "function") currentCleanup = result.cleanup
-
-        if (typeof def.title === "function") setMeta({ title: def.title(match.params), description: def.description })
-        else setMeta({ title: def.title, description: def.description })
-
+        await useResult(def.render(viewEl, match.params))
+        applyViewMeta(def, match.params, pathname)
         updateActiveTab(pathname)
         lastPathname = normalize(pathname)
 
@@ -176,7 +213,8 @@
         if (a.dataset.external !== undefined) return false
 
         var url
-        try { url = new URL(a.href, location.href) } catch (e) { return false }
+        try { url = new URL(a.href, location.href) }
+        catch { return false }
         return url.origin === location.origin
     }
 
@@ -217,7 +255,7 @@
                 { title: "home", slug: "/", path: "home" },
                 { title: "about", slug: "/about", path: "about" },
                 { title: "blogs", slug: "/blogs", path: "blogs" },
-                { title: "projects", slug: "/projects", path: "projects" },
+                { title: "projects", slug: "/projects", path: "projects" }
             ]
             matchList = topRoutes.slice()
         }
@@ -242,6 +280,6 @@
         registerView: registerView,
         navigate: navigate,
         setMeta: setMeta,
-        init: init,
+        init: init
     }
 })()

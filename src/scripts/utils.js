@@ -92,16 +92,19 @@
             } catch { }
 
             var data = null
-            try {
-                var r = await fetch("https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json")
-                if (r.ok) data = await r.json()
-            } catch { }
+            var sources = [
+                "/data/repos.json",
+                "https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json",
+                "/api/repos"
+            ]
 
-            if (!data) {
-                var r2 = await fetch("/api/repos")
-                if (!r2.ok) throw new Error("fetch failed -.-;;")
-                data = await r2.json()
+            for (var i = 0; i < sources.length && !data; i++) {
+                try {
+                    var response = await fetch(sources[i])
+                    if (response.ok) data = await response.json()
+                } catch { }
             }
+            if (!data) throw new Error("fetch failed -.-;;")
 
             data = data.sort(function (a, b) {
                 var starDiff = (b.stars || 0) - (a.stars || 0)

@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.3.0",
   "private": false,
+  "license": "MPL-2.0",
   "author": "aitji",
   "scripts": {
     "build": "node build.js",
@@ -24,5 +25,9 @@
   },
   "devDependencies": {
     "@vercel/node": "^5.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.27.0": true,
+    "esbuild@0.27.7": true
   }
 }

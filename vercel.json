@@ -1,6 +1,52 @@
 {
     "buildCommand": "npm run build",
     "outputDirectory": "public",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+        {
+            "source": "/discord",
+            "destination": "https://discord.gg/YPjawnUnsx",
+            "permanent": false
+        },
+        {
+            "source": "/dsc",
+            "destination": "https://discord.gg/YPjawnUnsx",
+            "permanent": false
+        },
+        {
+            "source": "/gg",
+            "destination": "https://discord.gg/YPjawnUnsx",
+            "permanent": false
+        },
+        {
+            "source": "/dis",
+            "destination": "https://discord.gg/YPjawnUnsx",
+            "permanent": false
+        },
+
+        {
+            "source": "/7tv",
+            "destination": "/misc/7tv-anywhere",
+            "permanent": false
+        },
+        {
+            "source": "/7tv-anywhere",
+            "destination": "/misc/7tv-anywhere",
+            "permanent": false
+        },
+        {
+            "source": "/7tvanywhere",
+            "destination": "/misc/7tv-anywhere",
+            "permanent": false
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/favicon.ico",
+            "destination": "/img/favicon.ico"
+        }
+    ],
     "headers": [
         {
             "source": "/api/(.*)",
@@ -18,60 +64,33 @@
                     "value": "Content-Type"
                 }
             ]
-        }
-    ],
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/index.html"
         },
         {
-            "src": "/favicon.ico",
-            "dest": "/img/favicon.ico"
+            "source": "/img/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=2592000, immutable"
+                }
+            ]
         },
         {
-            "handle": "filesystem"
+            "source": "/data/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=300, s-maxage=300, stale-while-revalidate=86400"
+                }
+            ]
         },
         {
-            "src": "/(discord|dsc|gg|dis)",
-            "status": 302,
-            "headers": {
-                "Location": "https://discord.gg/YPjawnUnsx"
-            }
-        },
-        {
-            "src": "/(7tv|7tv-anywhere|7tvanywhere)",
-            "status": 307,
-            "dest": "/misc/7tv-anywhere.html"
-        },
-        {
-            "src": "/img/(.*)",
-            "headers": {
-                "cache-control": "public, max-age=2592000, immutable"
-            }
-        },
-        {
-            "src": "/routes.json",
-            "headers": {
-                "cache-control": "public, max-age=2592000, immutable"
-            }
-        },
-        {
-            "src": "^/about$",
-            "dest": "/index.html"
-        },
-        {
-            "src": "^/blogs(?:/.*)?$",
-            "dest": "/index.html"
-        },
-        {
-            "src": "^/projects(?:/.*)?$",
-            "dest": "/index.html"
-        },
-        {
-            "src": "/(.*)",
-            "status": 404,
-            "dest": "/404.html"
+            "source": "/routes.json",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=2592000, immutable"
+                }
+            ]
         }
     ]
 }
