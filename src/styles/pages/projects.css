@@ -1,1 +1,5 @@
-.projects-page { min-height: 100vh; padding-top: clamp(2.25rem, 6vw, 3.5rem); padding-bottom: 4rem; }
+.projects-page {
+    min-height: 100vh;
+    padding-top: clamp(2.25rem, 6vw, 3.5rem);
+    padding-bottom: 4rem;
+}

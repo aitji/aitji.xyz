@@ -37,7 +37,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
 
-    <link rel="manifest" href="/img/manifest.json" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="search" type="application/opensearchdescription+xml" title="aitji.xyz" href="/opensearch.xml" />
 
     <meta name="msapplication-TileColor" content="#c8496a" />
     <meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png" />
@@ -103,6 +104,19 @@
 
     <main id="view"></main>
 
+
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+            <p class="site-footer-copy">built somewhere between intentional and accidental.</p>
+            <nav class="site-footer-links" aria-label="site information">
+                <a href="/privacy">privacy</a>
+                <a href="/tos">terms</a>
+                <a href="/humans.txt" target="_blank" data-external>humans</a>
+                <a href="/.well-known/security.txt" target="_blank" data-external>security</a>
+            </nav>
+        </div>
+    </footer>
+
     <div class="status-pill" id="status-pill">
         <span id="nav-discord-slot"><span class="discord-loading"></span></span>
         <span class="clock" id="nav-clock" title="thailand, gmt+7"></span>
@@ -116,6 +130,7 @@
     <script src="/scripts/toc.js" defer></script>
     <script src="/scripts/project-ui.js" defer></script>
     <script src="/scripts/page-templates.js" defer></script>
+    <script src="/scripts/analytics.js" defer></script>
     <script src="/scripts/router.js" defer></script>
     <script src="/scripts/status-pill.js" defer></script>
     <script src="/scripts/pages/home.js" defer></script>
@@ -124,6 +139,7 @@
     <script src="/scripts/pages/blog-post.js" defer></script>
     <script src="/scripts/pages/projects.js" defer></script>
     <script src="/scripts/pages/project-detail.js" defer></script>
+    <script src="/scripts/pages/legal.js" defer></script>
     <script src="/scripts/app.js" defer></script>
 </body>
 

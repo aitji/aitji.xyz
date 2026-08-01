@@ -1,0 +1,4 @@
+Contact: mailto:me@aitji.xyz
+Expires: 2027-07-31T00:00:00Z
+Preferred-Languages: en, th
+Canonical: https://aitji.xyz/.well-known/security.txt

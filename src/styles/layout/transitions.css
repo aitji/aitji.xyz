@@ -1,26 +1,40 @@
 #view {
-  transition: filter var(--transition-slow);
-  min-height: calc(100dvh - var(--header-h));
+    transition: filter var(--transition-slow);
+    min-height: calc(100dvh - var(--header-h));
 }
 
 #view.view-enter {
-  animation: view-in var(--transition-slow) both;
+    animation: view-in var(--transition-slow) both;
 }
 
 @keyframes view-in {
-  from { opacity: 1; }
-  to   { opacity: 1; }
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 #view.view-exit {
-  animation: view-out 120ms ease both;
+    animation: view-out 120ms ease both;
 }
 
 @keyframes view-out {
-  from { opacity: 1; }
-  to   { opacity: 1; }
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #view.view-enter, #view.view-exit { animation: none; }
+
+    #view.view-enter,
+    #view.view-exit {
+        animation: none;
+    }
 }

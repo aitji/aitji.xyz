@@ -1,14 +1,38 @@
 {
     "$schema": "./routes.schema.json",
     "routes": [
-        { "title": "home", "slug": "/", "path": "home" },
-        { "title": "about", "slug": "/about", "path": "about" },
+        {
+            "title": "home",
+            "slug": "/",
+            "path": "home"
+        },
+        {
+            "title": "about",
+            "slug": "/about",
+            "path": "about",
+            "pages": [
+                {
+                    "title": "privacy",
+                    "slug": "/privacy",
+                    "path": "legal/privacy"
+                },
+                {
+                    "title": "terms",
+                    "slug": "/tos",
+                    "path": "legal/tos"
+                }
+            ]
+        },
         {
             "title": "blogs",
             "slug": "/blogs",
             "path": "blogs",
             "pages": [
-                { "title": "post", "slug": "/blogs/*", "path": "blogs/post" }
+                {
+                    "title": "post",
+                    "slug": "/blogs/*",
+                    "path": "blogs/post"
+                }
             ]
         },
         {
@@ -16,7 +40,11 @@
             "slug": "/projects",
             "path": "projects",
             "pages": [
-                { "title": "project", "slug": "/projects/*", "path": "projects/detail" }
+                {
+                    "title": "project",
+                    "slug": "/projects/*",
+                    "path": "projects/detail"
+                }
             ]
         }
     ]

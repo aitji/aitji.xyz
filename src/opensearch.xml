@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>aitji.xyz</ShortName>
+    <Description>search aitji.xyz with Google</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <OutputEncoding>UTF-8</OutputEncoding>
+    <Image height="16" width="16" type="image/x-icon">https://aitji.xyz/favicon.ico</Image>
+    <Url type="text/html" method="get" template="https://www.google.com/search?q=site%3Aaitji.xyz+{searchTerms}" />
+</OpenSearchDescription>

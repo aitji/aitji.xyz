@@ -1,0 +1,21 @@
+/* TEAM */
+
+Developer: aitji
+Contact: me [at] aitji.xyz
+From: Thailand
+Timezone: GMT+7
+
+/* SITE */
+
+Name: aitji.xyz
+Language: English
+Standards: HTML5, CSS, JavaScript, OpenSearch, Web App Manifest
+Build: custom static-site generator + client-side router
+Hosting: Vercel
+Domain and DNS: Cloudflare
+Analytics: Google Analytics 4, on by default, opt-out available at /privacy
+Source: https://github.com/aitji/aitji.xyz
+
+/* SMALL NOTE */
+
+lowercase is intentional.

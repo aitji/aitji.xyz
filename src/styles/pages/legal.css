@@ -1,0 +1,119 @@
+.legal-page {
+    min-height: 100vh;
+    padding-top: clamp(2.25rem, 6vw, 3.5rem);
+    padding-bottom: 4rem;
+}
+
+.legal-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.9rem;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.legal-intro {
+    max-width: 64ch;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2.25rem;
+}
+
+.legal-content {
+    display: grid;
+    gap: 2rem;
+}
+
+.legal-section {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+.legal-section h2 {
+    margin-bottom: 0.65rem;
+    font-size: 1.15rem;
+    letter-spacing: -0.015em;
+}
+
+.legal-section p,
+.legal-section li {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.legal-section p+p {
+    margin-top: 0.75rem;
+}
+
+.legal-section ul {
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.legal-section strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.legal-callout {
+    border: 1px solid var(--accent-line);
+    background: linear-gradient(135deg, var(--accent-dim), transparent 70%);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+}
+
+.privacy-control {
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.privacy-control-state {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+
+.privacy-control button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.legal-provider-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.8rem;
+}
+
+.legal-provider {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 0.9rem 1rem;
+}
+
+.legal-provider-name {
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.legal-provider p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+@media (max-width: 580px) {
+
+    .legal-callout,
+    .legal-provider {
+        border-radius: 0;
+    }
+}

@@ -1,61 +1,29 @@
-import fs from 'fs'
-import http from 'http'
-import https from 'https'
-import path from 'path'
-import tls from 'tls'
-import { spawn } from 'child_process'
+import fs from 'node:fs'
+import http from 'node:http'
+import https from 'node:https'
+import path from 'node:path'
+import tls from 'node:tls'
+import { spawn } from 'node:child_process'
 
 const USE_HTTPS = process.argv.includes('--https')
-const OUT = 'public'
-
-let spaRoutes = []
-
-// recursively collect every slug from nested routes
-const collectSlugs = (routes) => {
-    const slugs = []
-    for (const r of routes) {
-        if (r.slug) slugs.push(r.slug)
-        if (r.pages?.length) slugs.push(...collectSlugs(r.pages))
-    }
-    return slugs
-}
-
-// fetch spa routes from routes.json
-const loadSpaRoutes = () => {
-    try {
-        const routesFile = path.join('src', 'routes.json')
-        if (fs.existsSync(routesFile)) {
-            const data = JSON.parse(fs.readFileSync(routesFile, 'utf8'))
-            spaRoutes = collectSlugs(data.routes)
-            console.log(`[server] loaded spa routes (x${spaRoutes.length}): \n   - ${spaRoutes.join('\n   - ')}\n`)
-        }
-    } catch (e) {
-        console.error('[server] failed to load routes:', e)
-        spaRoutes = ['/']
-    }
-}
-
-// watch routes.json & reload on change
-let routesWatchTimer = null
-fs.watch(path.join('src', 'routes.json'), () => {
-    clearTimeout(routesWatchTimer)
-    routesWatchTimer = setTimeout(() => {
-        loadSpaRoutes()
-        console.log('[server] routes reloaded')
-    }, 250)
-})
-
-loadSpaRoutes()
+const OUT = path.resolve('public')
+const PORT = Number(process.env.PORT || (USE_HTTPS ? 443 : 3000))
+const HTTP_PORT = Number(process.env.HTTP_PORT || 80)
+const ensure = target => fs.mkdirSync(target, { recursive: true })
 
 const MIME = {
     '.html': 'text/html; charset=utf-8',
-    '.js': 'application/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
+    '.js': 'application/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
+    '.webmanifest': 'application/manifest+json; charset=utf-8',
+    '.xml': 'application/xml; charset=utf-8',
+    '.txt': 'text/plain; charset=utf-8',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
     '.gif': 'image/gif',
+    '.webp': 'image/webp',
     '.svg': 'image/svg+xml',
     '.ico': 'image/x-icon',
     '.woff': 'font/woff',
@@ -63,231 +31,190 @@ const MIME = {
     '.ttf': 'font/ttf',
     '.mp4': 'video/mp4',
     '.webm': 'video/webm',
-    '.pdf': 'application/pdf',
+    '.pdf': 'application/pdf'
 }
 
-const LIVERELOAD_SCRIPT = `
-<!-- [live] ignore this injected by aitji self-build live server -->
+const LIVERELOAD = `
+<!-- [live] local reload helper -->
 <script>
 (function () {
-    try { new EventSource('/__livereload').close() }
-    catch { return console.warn('[live] EventSource not supported, live reload disabled') }
+    var source = new EventSource('/__livereload')
+    source.onmessage = function () {
+        source.close()
+        location.reload()
+    }
+})()
+</script>`
 
-    try {
-        const es = new EventSource('/__livereload')
-        es.onmessage = () => { es.close(); location.reload() }
-        es.onerror = () => {
-            if (es.readyState === EventSource.CLOSED) return
-            setTimeout(() => location.reload(), 1000)
-        }
-        console.log('[live] socket connected successfully')
-    } catch {}
-})()</script>`
+ensure(OUT)
 
 const clients = new Set()
-const broadcastReload = () => {
-    for (const res of clients) {
-        try { res.write('data: reload\n\n') } catch { }
+let reloadTimer = null
+
+function broadcastReload() {
+    for (const response of clients) {
+        try { response.write('data: reload\n\n') }
+        catch (e) { clients.delete(response) }
     }
-    console.log(`[live] reload → ${clients.size} client(s)`)
 }
 
-let reloadTimer = null
-fs.watch(OUT, { recursive: true }, () => {
+fs.watch(OUT, { recursive: true }, function () {
     clearTimeout(reloadTimer)
-    reloadTimer = setTimeout(broadcastReload, 250)
+    reloadTimer = setTimeout(broadcastReload, 180)
 })
 
-const serveHTML = (res, filePath, statusCode = 200) => {
-    let html = fs.readFileSync(filePath, 'utf8')
-    if (!filePath.includes('docs')) html = html.includes('</body>')
-        ? html.replace('</body>', `${LIVERELOAD_SCRIPT}</body>`)
-        : html + LIVERELOAD_SCRIPT
-    res.writeHead(statusCode, { 'Content-Type': 'text/html; charset=utf-8' })
-    res.end(html)
+function safePath(pathname) {
+    const candidate = path.resolve(OUT, '.' + pathname)
+    if (candidate !== OUT && !candidate.startsWith(OUT + path.sep)) return null
+    return candidate
 }
 
-const handler = (req, res) => {
-    const url = req.url.split('?')[0]
+function serveHTML(response, file, status = 200) {
+    let html = fs.readFileSync(file, 'utf8')
+    html = html.includes('</body>') ? html.replace('</body>', LIVERELOAD + '</body>') : html + LIVERELOAD
 
-    if (url === '/__livereload') {
-        res.writeHead(200, {
+    response.writeHead(status, {
+        'Content-Type': MIME['.html'],
+        'Cache-Control': 'no-store'
+    })
+    response.end(html)
+}
+
+function serve404(response) {
+    const file = path.join(OUT, '404.html')
+    if (fs.existsSync(file)) return serveHTML(response, file, 404)
+
+    response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' })
+    response.end('404 Not Found')
+}
+
+function handler(request, response) {
+    if (request.url === '/__livereload') {
+        response.writeHead(200, {
             'Content-Type': 'text/event-stream',
             'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'Access-Control-Allow-Origin': '*',
+            Connection: 'keep-alive'
         })
-        res.write(': connected\n\n')
-        clients.add(res)
-        req.on('close', () => clients.delete(res))
+        response.write(': connected\n\n')
+        clients.add(response)
+        request.on('close', function () { clients.delete(response) })
         return
     }
 
-    res.setHeader('X-Powered-By', 'aitji & questionable decisions')
-    let filePath = path.join(OUT, url)
+    response.setHeader('X-Powered-By', 'aitji & questionable decisions')
 
-    // validate res-path ; ensure it stays within the root dir (OUT) to prevent path traversal
+    let pathname
     try {
-        const rootDir = path.resolve(OUT)
-        // First resolve the requested path relative to the root directory
-        const candidatePath = path.resolve(rootDir, url.replace(/^\//, ''))
-        const normalizedPath = fs.existsSync(candidatePath)
-            ? fs.realpathSync(candidatePath)
-            : candidatePath
-
-        const rootWithSep = rootDir.endsWith(path.sep) ? rootDir : rootDir + path.sep
-        if (normalizedPath !== rootDir && !normalizedPath.startsWith(rootWithSep)) {
-            // path escapes root dir ; reject it
-            const notFound = path.join(OUT, '404.html')
-            if (fs.existsSync(notFound)) serveHTML(res, notFound, 404)
-            else {
-                res.writeHead(404)
-                res.end('404 Not Found')
-            }
-
-            return
-        }
-
-        filePath = normalizedPath
+        pathname = decodeURIComponent(new URL(request.url, 'http://local').pathname)
     } catch (e) {
-        // path res fails, reject the request
-        const notFound = path.join(OUT, '404.html')
-        if (fs.existsSync(notFound)) {
-            serveHTML(res, notFound, 404)
-        } else {
-            res.writeHead(404)
-            res.end('404 Not Found')
-        }
-        return
+        return serve404(response)
     }
 
-    // directory → index.html
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) filePath = path.join(filePath, 'index.html')
+    if (pathname === '/favicon.ico') pathname = '/img/favicon.ico'
 
-    let fileExists = fs.existsSync(filePath) // check if file exists
-    if (!fileExists && !path.extname(filePath)) { // extensionless files → try .html
-        // construct .html variant safely under the same root directory
-        const rootDir = path.resolve(OUT)
-        const relativeFromRoot = path.relative(rootDir, filePath)
-        const htmlRelative = relativeFromRoot + '.html'
-        const withHtml = path.resolve(rootDir, htmlRelative)
-        // verify it's within root dir and exists
-        const resolvedHtmlPath = fs.existsSync(withHtml)
-            ? fs.realpathSync(withHtml)
-            : withHtml
-        const rootWithSep = rootDir.endsWith(path.sep) ? rootDir : rootDir + path.sep
-        if ((resolvedHtmlPath === rootDir || resolvedHtmlPath.startsWith(rootWithSep)) && fs.existsSync(withHtml)) {
-            filePath = withHtml
-            fileExists = true
-        }
+    let file = safePath(pathname)
+    if (!file) return serve404(response)
+
+    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
+        var indexFile = path.join(file, 'index.html')
+        var siblingFile = file + '.html'
+        if (fs.existsSync(indexFile)) file = indexFile
+        else if (fs.existsSync(siblingFile)) file = siblingFile
+    } else if (!fs.existsSync(file) && !path.extname(file)) {
+        file += '.html'
     }
 
-    if (fileExists) { // file exists, serve it
-        const ext = path.extname(filePath).toLowerCase()
-        const mime = MIME[ext] ?? 'application/octet-stream'
+    if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return serve404(response)
 
-        if (ext === '.html') {
-            serveHTML(res, filePath, 200)
-        } else {
-            const data = fs.readFileSync(filePath)
-            res.writeHead(200, { 'Content-Type': mime })
-            res.end(data)
-        }
-        return
-    }
+    const extension = path.extname(file).toLowerCase()
+    if (extension === '.html') return serveHTML(response, file)
 
-    // file not found - check spa routes
-    const ext = path.extname(filePath).toLowerCase()
-    const isAsset = ext && ['.js', '.css', '.json', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.webp', '.mp4', '.webm', '.pdf'].includes(ext)
-
-    // check spa routes
-    const normPath = url.replace(/\/$/, '') || '/'
-    const isSpaRoute = spaRoutes.some(route => {
-        if (route.endsWith('/*')) {
-            const prefix = route.slice(0, -2) || ''
-            return normPath === prefix || normPath.startsWith(prefix + '/')
-        }
-        const normRoute = route.replace(/\/$/, '') || '/'
-        return normRoute === normPath
+    response.writeHead(200, {
+        'Content-Type': MIME[extension] || 'application/octet-stream',
+        'Cache-Control': 'no-store'
     })
-
-    if (isSpaRoute && !isAsset) {
-        const indexPath = path.join(OUT, 'index.html')
-        if (fs.existsSync(indexPath)) {
-            serveHTML(res, indexPath, 200)
-            return
-        }
-    }
-
-    // 404 not found
-    const notFound = path.join(OUT, '404.html')
-    if (fs.existsSync(notFound)) {
-        serveHTML(res, notFound, 404)
-    } else {
-        res.writeHead(404)
-        res.end('404 Not Found')
-    }
+    fs.createReadStream(file).pipe(response)
 }
 
-const HTTP_PORT = 80
-const HTTPS_PORT = 443
-http.createServer((req, res) => {
-    const host = req.headers.host?.replace(/:\d+$/, '') ?? 'localhost'
-    const location = `https://${host}${req.url}`
-    res.writeHead(301, { Location: location })
-    res.end()
-}).listen(HTTP_PORT, () => console.log(`  [live] HTTP:${HTTP_PORT} → HTTPS:${HTTPS_PORT} redirect on http://localhost`))
-
-const KEY_DIR = path.resolve('key')
-const loadCert = (cert, key) => {
-    const certFile = path.join(KEY_DIR, cert)
-    const keyFile = path.join(KEY_DIR, key)
+function loadCert(cert, key) {
+    const directory = path.resolve('key')
+    const certFile = path.join(directory, cert)
+    const keyFile = path.join(directory, key)
 
     if (!fs.existsSync(certFile) || !fs.existsSync(keyFile)) {
-        console.error(`[error] SSL cert/key not found:\n   - ${certFile}\n   - ${keyFile}`)
-        process.exit(1)
+        throw new Error(`SSL cert or key missing:\n  ${certFile}\n  ${keyFile}`)
     }
 
     return {
         cert: fs.readFileSync(certFile),
-        key: fs.readFileSync(keyFile),
+        key: fs.readFileSync(keyFile)
     }
 }
 
+function listen(server, port, label) {
+    server.on('error', function (error) {
+        console.error(`[server] ${error.code || 'error'}: ${error.message}`)
+        process.exitCode = 1
+    })
+    server.listen(port, function () {
+        console.log(`[server] ${label}`)
+    })
+}
+
 let server
-if (USE_HTTPS) {
-    const localCert = loadCert('localhost.pem', 'localhost-key.pem')
-    const tsCert = loadCert(
-        'aitji-box.echo-hadar.ts.net.crt',
-        'aitji-box.echo-hadar.ts.net.key'
-    )
+try {
+    if (USE_HTTPS) {
+        const localCert = loadCert('localhost.pem', 'localhost-key.pem')
+        const tailscaleCert = loadCert(
+            'aitji-box.echo-hadar.ts.net.crt',
+            'aitji-box.echo-hadar.ts.net.key'
+        )
+        const contexts = new Map([
+            ['localhost', tls.createSecureContext(localCert)],
+            ['127.0.0.1', tls.createSecureContext(localCert)],
+            ['box.aitji.xyz', tls.createSecureContext(localCert)],
+            ['aitji-box.echo-hadar.ts.net', tls.createSecureContext(tailscaleCert)]
+        ])
 
-    const contexts = new Map([
-        ['localhost', tls.createSecureContext(localCert)],
-        ['127.0.0.1', tls.createSecureContext(localCert)],
-        ['box.aitji.xyz', tls.createSecureContext(localCert)],
-        ['aitji-box.echo-hadar.ts.net', tls.createSecureContext(tsCert)],
-    ])
+        server = https.createServer({
+            ...localCert,
+            SNICallback(hostname, callback) {
+                callback(null, contexts.get(hostname.toLowerCase()) || contexts.get('localhost'))
+            }
+        }, handler)
 
-    server = https.createServer({
-        ...localCert,
-        SNICallback(hostname, callback) {
-            callback(null, contexts.get(hostname.toLowerCase()) ?? contexts.get('localhost'))
-        },
-    }, handler)
-} else server = http.createServer(handler)
+        const redirect = http.createServer(function (request, response) {
+            const host = (request.headers.host || 'localhost').replace(/:\d+$/, '')
+            response.writeHead(301, { Location: `https://${host}${request.url}` })
+            response.end()
+        })
+        listen(redirect, HTTP_PORT, `redirecting http://localhost:${HTTP_PORT} to HTTPS`)
+        listen(server, PORT, `https://localhost${PORT === 443 ? '' : ':' + PORT}`)
+    } else {
+        server = http.createServer(handler)
+        listen(server, PORT, `http://localhost:${PORT}`)
+    }
+} catch (error) {
+    console.error(`[server] ${error.message}`)
+    process.exit(1)
+}
 
-server.listen(HTTPS_PORT, () => {
-    const proto = USE_HTTPS ? 'https' : 'http'
-    console.log(`\n  [live] Server running at ${proto}://localhost`)
-    console.log(`  [live] Watching: ${OUT}/`)
-    console.log(`  [live] Press Ctrl+C to stop\n`)
-    console.log(`~~~~~~~~~~~~~~~~~~~~ Live Logs ~~~~~~~~~~~~~~~~~~~~`)
+const builder = spawn(process.execPath, ['build.js', '--watch'], { stdio: 'inherit' })
+builder.on('close', function (code) {
+    if (code) console.error(`[build] exited with code ${code}`)
 })
 
-const builder = spawn('node', ['build.js', '--watch'], { stdio: 'inherit' })
-builder.on('close', code => {
-    if (code !== 0) console.error(`[build] exited with code ${code}`)
+function shutdown() {
+    builder.kill()
+    if (server) server.close()
+}
+
+process.on('SIGINT', function () {
+    shutdown()
+    process.exit()
 })
-process.on('exit', () => builder.kill())
-process.on('SIGINT', () => { builder.kill(); process.exit() })
+process.on('SIGTERM', function () {
+    shutdown()
+    process.exit()
+})
+process.on('exit', shutdown)

@@ -52,6 +52,7 @@
     function topSegmentSlug(pathname) {
         pathname = normalize(pathname)
         if (pathname === "/") return "/"
+        if (pathname === "/privacy" || pathname === "/tos") return "/about"
         return "/" + pathname.split("/")[1]
     }
 
@@ -88,6 +89,10 @@
             type: resolveMetaValue(def.type, params),
             pathname: pathname
         })
+    }
+
+    function trackPageView() {
+        if (AITJI.Analytics) AITJI.Analytics.trackPageView()
     }
 
     function updateActiveTab(pathname) {
@@ -162,13 +167,14 @@
 
         var def = match && views[match.view]
         if (!def) {
-            viewEl.innerHTML =
-                '<div class="container" style="padding-top:4rem;text-align:center">' +
-                '<p class="page-title">nothing here</p>' +
-                '<p class="muted" style="margin-top:0.5rem">that page doesn\'t exist.</p>' +
-                '<a href="/" class="btn btn-accent" style="margin-top:1.5rem;display:inline-flex">back home</a>' +
-                "</div>"
-            setMeta({ title: "404", description: "page not found", pathname: pathname })
+            viewEl.innerHTML = AITJI.PageTemplates.notFound(pathname)
+            var back = document.getElementById("go-back")
+            if (back) back.addEventListener("click", function () {
+                if (history.length > 1) history.back()
+                else navigate("/")
+            })
+            setMeta({ title: "404", description: "that route wandered somewhere else.", pathname: pathname })
+            if (!opts.initial) trackPageView()
             updateActiveTab(pathname)
             lastPathname = normalize(pathname)
             return
@@ -194,6 +200,7 @@
         viewEl.innerHTML = ""
         await useResult(def.render(viewEl, match.params))
         applyViewMeta(def, match.params, pathname)
+        if (!opts.initial) trackPageView()
         updateActiveTab(pathname)
         lastPathname = normalize(pathname)
 
@@ -215,6 +222,7 @@
         var url
         try { url = new URL(a.href, location.href) }
         catch { return false }
+        if (/\.[a-z0-9]+$/i.test(url.pathname)) return false
         return url.origin === location.origin
     }
 
@@ -257,7 +265,10 @@
                 { title: "blogs", slug: "/blogs", path: "blogs" },
                 { title: "projects", slug: "/projects", path: "projects" }
             ]
-            matchList = topRoutes.slice()
+            matchList = topRoutes.concat([
+                { title: "privacy", slug: "/privacy", path: "legal/privacy" },
+                { title: "terms", slug: "/tos", path: "legal/tos" }
+            ])
         }
 
         renderNav()

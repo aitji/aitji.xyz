@@ -24,7 +24,6 @@
             "destination": "https://discord.gg/YPjawnUnsx",
             "permanent": false
         },
-
         {
             "source": "/7tv",
             "destination": "/misc/7tv-anywhere",
@@ -48,6 +47,27 @@
         }
     ],
     "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "Permissions-Policy",
+                    "value": "camera=(), microphone=(), geolocation=()"
+                }
+            ]
+        },
         {
             "source": "/api/(.*)",
             "headers": [
@@ -89,6 +109,58 @@
                 {
                     "key": "Cache-Control",
                     "value": "public, max-age=2592000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/manifest.webmanifest",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/manifest+json; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400, s-maxage=86400"
+                }
+            ]
+        },
+        {
+            "source": "/opensearch.xml",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/opensearchdescription+xml; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400, s-maxage=86400"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/security.txt",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600, s-maxage=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/assetlinks.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json; charset=utf-8"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600, s-maxage=3600"
                 }
             ]
         }

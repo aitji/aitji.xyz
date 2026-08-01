@@ -54,3 +54,6 @@ key/
 | localhost-key.pem
 | localhost.pem
 ```
+## privacy and site files
+
+The build generates SSG pages for `/privacy` and `/tos`, validates site metadata, and ships OpenSearch, web manifest, `humans.txt`, `security.txt`, and Android App Links files. Google Analytics is consent-first and can be changed from the privacy page.

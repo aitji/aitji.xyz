@@ -1,13 +1,12 @@
 {
   "name": "aitji-xyz",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": false,
   "license": "MPL-2.0",
   "author": "aitji",
   "scripts": {
     "build": "node build.js",
-
     "dev": "node server.js --https",
     "dev_http": "node server.js",
     "tls": "cd key && mkcert -cert-file localhost.pem -key-file localhost-key.pem localhost 127.0.0.1 box.aitji.xyz 100.93.138.17 && tailscale cert aitji-box.echo-hadar.ts.net"
@@ -17,7 +16,6 @@
   },
   "dependencies": {
     "discord.js": "^14.26.2",
-
     "esbuild": "^0.27.3",
     "html-minifier-terser": "^7.2.0",
     "ignore": "^7.0.5",

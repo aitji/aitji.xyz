@@ -1,38 +1,48 @@
 .with-toc {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
 }
 
 .toc {
-  display: none;
+    display: none;
 }
 
 .toc-inner {
-  position: sticky;
-  top: calc(var(--header-h) + 24px);
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--border-soft);
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--border-soft);
 }
 
 .toc-label {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.75rem;
 }
 
-.toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-.toc-list a {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  transition: color var(--transition), padding-left var(--transition);
+.toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
 }
-.toc-list a:hover { color: var(--text); }
+
+.toc-list a {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    transition: color var(--transition), padding-left var(--transition);
+}
+
+.toc-list a:hover {
+    color: var(--text);
+}
+
 /*it broke
 .toc-list a.active {
   color: var(--accent-hi);
@@ -51,14 +61,20 @@
   box-shadow: 0 0 8px var(--accent-line);
 }
 */
-.toc-list .toc-h3 { padding-left: 0.85rem; font-size: 0.78rem; }
+.toc-list .toc-h3 {
+    padding-left: 0.85rem;
+    font-size: 0.78rem;
+}
 
 @media (min-width: 980px) {
-  .with-toc {
-    max-width: calc(var(--content-w) + var(--toc-w) + 3rem);
-    grid-template-columns: minmax(0, var(--content-w)) var(--toc-w);
-    gap: 3rem;
-    align-items: start;
-  }
-  .toc { display: block; }
+    .with-toc {
+        max-width: calc(var(--content-w) + var(--toc-w) + 3rem);
+        grid-template-columns: minmax(0, var(--content-w)) var(--toc-w);
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .toc {
+        display: block;
+    }
 }

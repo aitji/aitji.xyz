@@ -14,8 +14,20 @@ const OUT = 'public'
 const SITE = 'https://aitji.xyz'
 const WATCH = process.argv.includes('--watch')
 const ensure = target => fs.mkdirSync(target, { recursive: true })
+const emptyDir = target => {
+    ensure(target)
 
-const headTag = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-SFQWJ1KSXT"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-SFQWJ1KSXT");</script>'
+    for (const name of fs.readdirSync(target)) {
+        fs.rmSync(path.join(target, name), {
+            recursive: true,
+            force: true,
+            maxRetries: 10,
+            retryDelay: 100
+        })
+    }
+}
+
+const headTag = ''
 const bodyTag = ''
 const bannerText = `
                           ,
@@ -284,6 +296,45 @@ const writePage = async (page) => {
     await minifyHTMLFile(file)
 }
 
+const validateSSG = pages => {
+    const required = [
+        '404.html',
+        'manifest.webmanifest',
+        'opensearch.xml',
+        'humans.txt',
+        '.well-known/security.txt',
+        '.well-known/assetlinks.json',
+        'scripts/analytics.js',
+        'img/android-icon-512x512.png',
+        'img/android-icon-maskable-512x512.png'
+    ]
+
+    for (const relative of required) {
+        const file = path.join(OUT, relative)
+        if (!fs.existsSync(file)) throw new Error(`[ssg] missing output: ${relative}`)
+    }
+
+    JSON.parse(fs.readFileSync(path.join(OUT, 'manifest.webmanifest'), 'utf8'))
+    JSON.parse(fs.readFileSync(path.join(OUT, '.well-known', 'assetlinks.json'), 'utf8'))
+
+    const sitemap = fs.readFileSync(path.join(OUT, 'sitemap.xml'), 'utf8')
+    for (const page of pages) {
+        const file = routeFile(page.route)
+        const html = fs.readFileSync(file, 'utf8')
+        if (/<main[^>]*id=["']?view["']?[^>]*>\s*<\/main>/i.test(html)) {
+            throw new Error(`[ssg] empty prerendered view: ${page.route}`)
+        }
+        if (!html.includes(routeURL(page.route))) {
+            throw new Error(`[ssg] canonical URL missing: ${page.route}`)
+        }
+        if (!sitemap.includes(`<loc>${routeURL(page.route)}</loc>`)) {
+            throw new Error(`[ssg] sitemap route missing: ${page.route}`)
+        }
+    }
+
+    console.log(`[ssg] validated ${pages.length} routes and site metadata`)
+}
+
 const sitemapXML = (pages) => {
     const seen = new Set()
     const entries = pages.filter(page => {
@@ -333,6 +384,20 @@ const genSSG = async (refresh = false) => {
             description: 'things aitji built, mostly for fun, occasionally on purpose.',
             content: template.projects(repos, 'all'),
             lastmod: today
+        },
+        {
+            route: '/privacy',
+            title: 'privacy',
+            description: 'how aitji.xyz handles analytics, hosting logs, browser storage, and third-party services.',
+            content: template.privacy(),
+            lastmod: '2026-08-01'
+        },
+        {
+            route: '/tos',
+            title: 'terms',
+            description: 'small, plain-language terms for using aitji.xyz.',
+            content: template.tos(),
+            lastmod: '2026-08-01'
         }
     ]
 
@@ -362,6 +427,7 @@ const genSSG = async (refresh = false) => {
     ensure(path.join(OUT, 'data'))
     fs.writeFileSync(path.join(OUT, 'data', 'repos.json'), JSON.stringify(repos))
     fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemapXML(pages))
+    validateSSG(pages)
 
     console.log(`[ssg] generated ${pages.length} routes`)
 }
@@ -404,10 +470,8 @@ const startWatch = () => {
 }
 
 const main = async () => {
-    if (!WATCH) {
-        fs.rmSync(OUT, { recursive: true, force: true })
-        ensure(OUT)
-    } else ensure(OUT)
+    if (!WATCH) emptyDir(OUT)
+    else ensure(OUT)
 
     await walk(SRC)
     copyRoot('img')

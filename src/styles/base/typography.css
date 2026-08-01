@@ -1,42 +1,70 @@
-h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.2; }
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-head);
+    line-height: 1.2;
+}
 
 a {
-  color: var(--accent-hi);
-  text-decoration: none;
-  transition: color var(--transition);
+    color: var(--accent-hi);
+    text-decoration: none;
+    transition: color var(--transition);
 }
-a:hover { color: var(--text); }
-p { text-wrap: pretty; }
+
+a:hover {
+    color: var(--text);
+}
+
+p {
+    text-wrap: pretty;
+}
 
 code {
-  font-family: var(--font-mono);
-  font-size: 0.875em;
-  background: var(--surface-2);
-  padding: 0.1em 0.4em;
-  border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--surface-2);
+    padding: 0.1em 0.4em;
+    border-radius: var(--radius-sm);
 }
 
 pre {
-  font-family: var(--font-mono);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem 1.1rem;
-  overflow-x: auto;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  margin: 1.25rem 0;
-}
-pre code { background: none; padding: 0; }
-blockquote {
-  border-left: 2px solid var(--accent-line);
-  padding: 0.2rem 0 0.2rem 1rem;
-  color: var(--text-muted);
-  font-style: italic;
-  margin: 1.25rem 0;
+    font-family: var(--font-mono);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    margin: 1.25rem 0;
 }
 
-.accent { color: var(--accent-hi); }
-.muted  { color: var(--text-muted); }
-.faint  { color: var(--text-faint); }
-.mono   { font-family: var(--font-mono); }
+pre code {
+    background: none;
+    padding: 0;
+}
+
+blockquote {
+    border-left: 2px solid var(--accent-line);
+    padding: 0.2rem 0 0.2rem 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 1.25rem 0;
+}
+
+.accent {
+    color: var(--accent-hi);
+}
+
+.muted {
+    color: var(--text-muted);
+}
+
+.faint {
+    color: var(--text-faint);
+}
+
+.mono {
+    font-family: var(--font-mono);
+}

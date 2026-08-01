@@ -5,100 +5,103 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>404 aitji</title>
+    <title>404 - aitji</title>
 
-    <meta name="description" content="page not found" />
+    <meta name="description" content="that route wandered somewhere else." />
     <meta name="author" content="aitji" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="noindex, follow" />
 
-    <link rel="canonical" href="https://aitji.xyz" />
-
-    <meta property="og:title" content="404 aitji" />
-    <meta property="og:description" content="page not found" />
-    <meta property="og:url" content="https://aitji.xyz" />
+    <meta property="og:title" content="404 - aitji" />
+    <meta property="og:description" content="that route wandered somewhere else." />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="404 aitji" />
+    <meta property="og:site_name" content="aitji" />
     <meta property="og:image" content="/img/apple-icon-120x120.png" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="th_TH" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png" />
-
     <link rel="icon" type="image/png" sizes="192x192" href="/img/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="search" type="application/opensearchdescription+xml" title="aitji.xyz" href="/opensearch.xml" />
 
-    <link rel="manifest" href="/img/manifest.json" />
-
-    <meta name="msapplication-TileColor" content="#c8496a" />
-    <meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png" />
     <meta name="theme-color" content="#c8496a" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="/styles/pages/404.css" />
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "WebSite",
-                "@id": "https://aitji.xyz/#website",
-                "name": "aitji",
-                "alternateName": "aitji.xyz",
-                "url": "https://aitji.xyz/",
-                "inLanguage": "en-US",
-                "creator": {
-                    "@id": "https://aitji.xyz/#person"
-                }
-            },
-            {
-                "@type": "Person",
-                "@id": "https://aitji.xyz/#person",
-                "name": "aitji",
-                "url": "https://aitji.xyz/",
-                "image": "https://aitji.xyz/img/favicon-96x96.png",
-                "description": "aitji is a curious self-taught full-stack and software developer who builds Minecraft Bedrock addons, including Quality of Feature and Chain of Mining, and browser extensions such as 7TV Anywhere.",
-                "affiliation": {
-                    "@id": "https://thatako.net/#school"
-                },
-                "sameAs": [
-                    "https://github.com/aitji",
-                    "https://www.youtube.com/@aitji-gamer",
-                    "https://aitji.is-a.dev/"
-                ]
-            }
-        ]
-    }
-    </script>
 </head>
 
 <body>
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a href="/" class="brand">aitji<span class="brand-dot">.</span>xyz</a>
+            <a href="/" class="nf-header-home">return to known space</a>
+        </div>
+    </header>
+
     <main class="not-found container">
-        <div class="nf-inner">
-            <p class="nf-code">404</p>
-            <h1 class="nf-title">nothing here</h1>
-            <p class="nf-sub muted">
-                this page doesn't exist (or i deleted it, whoops)
-            </p>
-            <a href="/" class="nf-home">back?</a>
+        <div class="nf-copy">
+            <p class="nf-kicker">route resolution failed</p>
+            <div class="nf-number" aria-label="error 404">
+                <span>4</span><span class="nf-zero">0</span><span>4</span>
+            </div>
+            <h1 class="nf-title">this page wandered off.</h1>
+            <p class="nf-sub">checked the cache, the router, and under the keyboard.</p>
+
+            <div class="nf-terminal" aria-label="missing route details">
+                <div class="nf-terminal-bar" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                    <b>route-check.sh</b>
+                </div>
+                <div class="nf-terminal-body">
+                    <p><span class="nf-prompt">$</span> resolve <code id="missing-path">/somewhere</code></p>
+                    <p><span class="nf-key">status</span> 404_not_found</p>
+                    <p><span class="nf-key">mewo</span> <span class="nf-cat">//\_/\\<br />( o.o )<br />&nbsp;&gt; ^ &lt;</span></p>
+                    <p><span class="nf-key">hint</span> try a route that exists</p>
+                </div>
+            </div>
+
+            <nav class="nf-actions" aria-label="working routes">
+                <a href="/" class="btn btn-accent">home</a>
+                <a href="/blogs" class="btn">blogs</a>
+                <a href="/projects" class="btn">projects</a>
+                <button type="button" class="btn" id="go-back">go back</button>
+            </nav>
+        </div>
+
+        <div class="nf-orbit" aria-hidden="true">
+            <span class="nf-orbit-ring"></span>
+            <span class="nf-orbit-dot"></span>
+            <span class="nf-orbit-core">?</span>
         </div>
     </main>
 
+    <footer class="site-footer">
+        <div class="container site-footer-inner">
+            <p class="site-footer-copy">built somewhere between intentional and accidental</p>
+            <nav class="site-footer-links" aria-label="site information">
+                <a href="/privacy">privacy</a>
+                <a href="/tos">terms</a>
+                <a href="/humans.txt" target="_blank">humans</a>
+                <a href="/.well-known/security.txt" target="_blank">security</a>
+            </nav>
+        </div>
+    </footer>
+
     <div id="particles" aria-hidden="true"></div>
-    <script src="/scripts/particles.js"></script>
+    <script src="/scripts/particles.js" defer></script>
+    <script src="/scripts/analytics.js" defer></script>
+    <script>
+    (function () {
+        var path = document.getElementById('missing-path')
+        var back = document.getElementById('go-back')
+        if (path) path.textContent = location.pathname + location.search
+        if (back) back.addEventListener('click', function () {
+            if (history.length > 1) history.back()
+            else location.href = '/'
+        })
+    })()
+    </script>
 </body>
 
 </html>

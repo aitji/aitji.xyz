@@ -1,2 +1,13 @@
-.cta-row { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 0.5rem; }
-.post-meta-item .lang-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.5rem;
+}
+
+.post-meta-item .lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}

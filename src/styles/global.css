@@ -5,22 +5,25 @@
 @import 'layout/nav.css';
 @import 'layout/transitions.css';
 @import 'layout/status-pill.css';
+@import 'layout/footer.css';
+@import 'layout/analytics-prompt.css';
 
 @import 'components/shared.css';
 @import 'components/project-card.css';
 @import 'components/toc.css';
+@import 'pages/404.css';
 
 #particles {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: var(--z-particle);
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: var(--z-particle);
 }
 
 .particle {
-  position: fixed;
-  pointer-events: none;
-  z-index: var(--z-particle);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-particle);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
 }
