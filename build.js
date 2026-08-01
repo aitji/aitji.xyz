@@ -302,7 +302,7 @@ const genSSG = async (refresh = false) => {
     const AITJI = loadRuntime()
     const template = AITJI.PageTemplates
     const blog = (AITJI.BLOGS || []).slice()
-    const repo = await loadRepos(refresh)
+    const repos = await loadRepos(refresh)
     const today = new Date().toISOString().slice(0, 10)
 
     const pages = [
@@ -310,7 +310,7 @@ const genSSG = async (refresh = false) => {
             route: '/',
             title: 'aitji',
             description: 'self-taught developer. sort of full-stack web dev.',
-            content: template.home(repo, 6),
+            content: template.home(repos, 6),
             lastmod: today
         },
         {
@@ -331,7 +331,7 @@ const genSSG = async (refresh = false) => {
             route: '/projects',
             title: 'projects',
             description: 'things aitji built, mostly for fun, occasionally on purpose.',
-            content: template.projects(repo, 'all'),
+            content: template.projects(repos, 'all'),
             lastmod: today
         }
     ]
@@ -345,7 +345,7 @@ const genSSG = async (refresh = false) => {
         lastmod: post.date
     })
 
-    for (const repo of repo) {
+    for (const repo of repos) {
         const slug = AITJI.Utils.slugify(repo.name)
         if (!slug) continue
         pages.push({
@@ -360,7 +360,7 @@ const genSSG = async (refresh = false) => {
     for (const page of pages) await writePage(page)
 
     ensure(path.join(OUT, 'data'))
-    fs.writeFileSync(path.join(OUT, 'data', 'repos.json'), JSON.stringify(repo))
+    fs.writeFileSync(path.join(OUT, 'data', 'repos.json'), JSON.stringify(repos))
     fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemapXML(pages))
 
     console.log(`[ssg] generated ${pages.length} routes`)
