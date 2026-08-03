@@ -1,12 +1,39 @@
 [
   {
+    "name": "QoF",
+    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
+    "url": "https://github.com/aitji/QoF",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "",
+    "stars": 7,
+    "updated": "2026-08-03T06:44:14Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-08-02T03:32:02Z"
+    "updated": "2026-08-03T03:32:55Z"
+  },
+  {
+    "name": "id.thatako.net",
+    "description": "grab free domain [name].id.thatako.net",
+    "url": "https://github.com/aitji/id.thatako.net",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-08-03T01:01:10Z"
+  },
+  {
+    "name": "thatako.net",
+    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
+    "url": "https://github.com/aitji/thatako.net",
+    "homepage": "https://thatako.net",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-08-03T00:59:51Z"
   },
   {
     "name": "aitji.xyz",
@@ -45,15 +72,6 @@
     "updated": "2026-07-17T02:52:24Z"
   },
   {
-    "name": "QoF",
-    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
-    "url": "https://github.com/aitji/QoF",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "",
-    "stars": 7,
-    "updated": "2026-07-12T01:30:16Z"
-  },
-  {
     "name": "CoM",
     "description": "Break one block, and chain-mine the whole vein, tree, crop field, or leaf cluster at once",
     "url": "https://github.com/aitji/CoM",
@@ -70,24 +88,6 @@
     "language": "PowerShell",
     "stars": 0,
     "updated": "2026-07-02T15:29:42Z"
-  },
-  {
-    "name": "id.thatako.net",
-    "description": "grab free domain [name].id.thatako.net",
-    "url": "https://github.com/aitji/id.thatako.net",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-06-30T12:25:41Z"
-  },
-  {
-    "name": "thatako.net",
-    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
-    "url": "https://github.com/aitji/thatako.net",
-    "homepage": "https://thatako.net",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-06-27T04:41:38Z"
   },
   {
     "name": "tpsc-livestream",
