@@ -4,74 +4,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Redirecting...</title>
 
+    <title>Extensions - aitji</title>
+
+    <meta name="description" content="Browser extensions by aitji.">
+    <meta name="author" content="aitji">
+    <meta name="robots" content="noindex, follow">
+
+    <link rel="canonical" href="https://aitji.xyz/get">
+
+    <meta property="og:title" content="Extensions - aitji">
+    <meta property="og:description" content="Browser extensions by aitji.">
+    <meta property="og:url" content="https://aitji.xyz/get">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="aitji">
+    <meta property="og:image" content="https://aitji.xyz/img/apple-icon-120x120.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="search" type="application/opensearchdescription+xml" title="aitji.xyz" href="/opensearch.xml">
+
+    <meta name="theme-color" content="#0c0a0b">
+
+    <link rel="stylesheet" href="/styles/global.css">
     <style>
-        * { box-sizing: border-box }
         body {
+            background-color: var(--bg, #0c0a0b);
             min-height: 100vh;
-            margin: 0;
             display: grid;
             place-items: center;
-            background: #111113;
-            color: #eee;
-            font: 14px system-ui, sans-serif
+            padding: 2rem 20px
         }
-        main { text-align: center }
-        .icon {
-            width: 42px;
-            height: 42px;
-            margin: auto auto 18px;
-            border: 2px solid #333;
-            border-top-color: #fff;
+
+        .get-page {
+            width: min(460px, 100%)
+        }
+
+        .get-word {
+            width: fit-content;
+            display: flex;
+            align-items: baseline;
+            margin: .3rem 0 .8rem;
+            font-family: var(--font-head);
+            font-size: clamp(4rem, 19vw, 6.5rem);
+            font-weight: 800;
+            line-height: .85;
+            letter-spacing: -.1em
+        }
+
+        .get-word span {
+            display: inline-block
+        }
+
+        .get-word span:nth-child(1) {
+            transform: rotate(-3deg)
+        }
+
+        .get-word span:nth-child(2) {
+            transform: rotate(2deg) translateY(-.03em)
+        }
+
+        .get-word span:nth-child(3) {
+            transform: rotate(-1deg)
+        }
+
+        .get-mark {
+            position: relative;
+            margin-left: .08em;
+            color: var(--text-muted);
+            font-size: .68em;
+            transform: rotate(8deg)
+        }
+
+        .get-mark::after {
+            content: '';
+            position: absolute;
+            inset: 12% -18%;
+            border: 1px dashed var(--border);
             border-radius: 50%;
-            animation: spin .7s linear infinite
+            animation: get-spin 10s linear infinite
         }
-        h1 { margin: 0 0 6px; font-size: 18px; font-weight: 600 }
-        p { margin: 0; color: #888 }
-        a { color: #aaa }
-        @keyframes spin { to { transform: rotate(360deg) } }
+
+        .get-path {
+            margin-top: .65rem;
+            color: var(--text-faint);
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            word-break: break-all
+        }
+
+        .get-list {
+            margin-top: 1.5rem
+        }
+
+        .get-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: .85rem 1rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .get-item:last-child {
+            border-bottom: 0
+        }
+
+        .get-item:hover {
+            color: var(--text);
+            background: var(--surface-2)
+        }
+
+        .get-item-name {
+            font-weight: 500
+        }
+
+        .get-item-path {
+            color: var(--text-faint);
+            font-family: var(--font-mono);
+            font-size: .72rem
+        }
+
+        .get-home {
+            margin-top: 1rem
+        }
+
+        .get-loading {
+            text-align: center
+        }
+
+        .get-spinner {
+            width: 38px;
+            height: 38px;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--border);
+            border-top-color: var(--text-muted);
+            border-radius: 50%;
+            animation: get-spin .7s linear infinite
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        @keyframes get-spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .get-mark::after,
+            .get-spinner {
+                animation: none
+            }
+        }
     </style>
 </head>
 
 <body>
-    <main>
-        <div class="icon"></div>
-        <h1 id="name">Opening extension...</h1>
-        <p id="browser">Finding the right store</p>
+    <main class="get-page">
+        <section class="get-loading" id="loading">
+            <div class="get-spinner"></div>
+            <h1 class="nf-title" id="loading-name">Opening extension...</h1>
+            <p class="nf-sub" id="loading-store">finding the right store</p>
+        </section>
+
+        <section id="fallback" hidden>
+            <p class="nf-kicker" id="kicker">extension resolution failed</p>
+
+            <div class="get-word" aria-hidden="true">
+                <span>g</span>
+                <span>e</span>
+                <span>t</span>
+                <span class="get-mark" id="hero-mark">?</span>
+            </div>
+
+            <h1 class="nf-title" id="fallback-title">extension not found.</h1>
+            <p class="nf-sub" id="fallback-sub">that one seems to have wandered somewhere else</p>
+            <p class="get-path" id="missing-path"></p>
+
+            <div class="nf-terminal get-list">
+                <div class="nf-terminal-bar" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <b>extension-index</b>
+                </div>
+
+                <div id="extension-list"></div>
+            </div>
+
+            <a class="btn get-home" href="/">home</a>
+        </section>
+
+        <noscript>
+            <section>
+                <p class="nf-kicker">automatic redirect unavailable</p>
+
+                <div class="get-word" aria-hidden="true">
+                    <span>g</span>
+                    <span>e</span>
+                    <span>t</span>
+                    <span class="get-mark">?</span>
+                </div>
+
+                <h1 class="nf-title">JavaScript required.</h1>
+                <p class="nf-sub">browser detection cannot continue without it</p>
+            </section>
+        </noscript>
     </main>
 
-    <noscript>
-        <p>
-            JavaScript is required for automatic redirect...
-        </p>
-    </noscript>
-
     <script>
-        const app = {
-            "7tv": {
+        const app = Object.freeze({
+            "7tv": Object.freeze({
                 name: "7TV Anywhere",
                 firefox: "https://addons.mozilla.org/en-US/addon/7tv-anywhere",
                 chrome: "https://chromewebstore.google.com/detail/7tv-anywhere/cgkabhdkbomilgoofppnnanckhadjmkj"
-            },
-            "cuemark": {
+            }),
+            "cuemark": Object.freeze({
                 name: "CueMark",
                 firefox: "https://addons.mozilla.org/en-US/addon/cuemark",
                 chrome: "https://chromewebstore.google.com/detail/cuemark/jfojkjcmlfcolkcpccobpfdghpabgcaa"
+            })
+        })
+
+        const part = location.pathname.split("/").filter(Boolean)
+        const id = part[0] === "get" ? part[1]?.toLowerCase() : undefined
+        const ext = id && part.length === 2 ? app[id] : undefined
+        const root = part.length === 1 && part[0] === "get"
+
+        if (ext) {
+            const isFox = navigator.userAgent.includes("Firefox")
+            const store = isFox ? "firefox" : "chrome"
+
+            document.title = `${ext.name} - Redirecting`
+            document.querySelector("#loading-name").textContent = ext.name
+            document.querySelector("#loading-store").textContent = `opening ${isFox ? "Firefox Add-ons" : "Chrome Web Store"}...`
+            location.replace(ext[store])
+        } else {
+            document.querySelector("#loading").hidden = true
+            document.querySelector("#fallback").hidden = false
+
+            if (root) {
+                document.title = "Extensions - aitji"
+                document.querySelector("#kicker").textContent = "browser extension index"
+                document.querySelector("#hero-mark").textContent = "."
+                document.querySelector("#fallback-title").textContent = "pick an extension"
+                document.querySelector("#fallback-sub").textContent = "i'll send you to the right store for your browser"
+            } else {
+                document.title = "Extension not found - aitji"
+                document.querySelector("#missing-path").textContent = location.pathname
             }
+
+            const list = document.querySelector("#extension-list")
+            Object.entries(app).forEach(([id, ext]) => {
+                const a = document.createElement("a")
+                const name = document.createElement("span")
+                const path = document.createElement("span")
+
+                a.className = "get-item"
+                a.href = `/get/${encodeURIComponent(id)}`
+
+                name.className = "get-item-name"
+                name.textContent = ext.name
+
+                path.className = "get-item-path"
+                path.textContent = `/get/${id}`
+
+                a.append(name, path)
+                list.append(a)
+            })
         }
-
-        const id = location.pathname.split("/").filter(Boolean).at(-1)?.toLowerCase()
-        const ext = app[id] || app["7tv"]
-        const isFox = navigator.userAgent.includes("Firefox")
-        const store = isFox ? "firefox" : "chrome"
-
-        document.title = `${ext.name} - Redirecting`
-        document.querySelector("#name").textContent = ext.name
-        document.querySelector("#browser").textContent = `Opening ${isFox ? "Firefox Add-ons" : "Chrome Web Store"}...`
-
-        location.replace(ext[store])
     </script>
 </body>
 
