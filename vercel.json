@@ -31,8 +31,12 @@
             "destination": "/img/favicon.ico"
         },
         {
+            "source": "/get",
+            "destination": "/misc/get"
+        },
+        {
             "source": "/get/:path*",
-            "destination": "/misc/get.html"
+            "destination": "/misc/get"
         }
     ],
     "headers": [
