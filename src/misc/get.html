@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Redirecting...</title>
+
+    <style>
+        * { box-sizing: border-box }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            background: #111113;
+            color: #eee;
+            font: 14px system-ui, sans-serif
+        }
+        main { text-align: center }
+        .icon {
+            width: 42px;
+            height: 42px;
+            margin: auto auto 18px;
+            border: 2px solid #333;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin .7s linear infinite
+        }
+        h1 { margin: 0 0 6px; font-size: 18px; font-weight: 600 }
+        p { margin: 0; color: #888 }
+        a { color: #aaa }
+        @keyframes spin { to { transform: rotate(360deg) } }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="icon"></div>
+        <h1 id="name">Opening extension...</h1>
+        <p id="browser">Finding the right store</p>
+    </main>
+
+    <noscript>
+        <p>
+            JavaScript is required for automatic redirect...
+        </p>
+    </noscript>
+
+    <script>
+        const app = {
+            "7tv": {
+                name: "7TV Anywhere",
+                firefox: "https://addons.mozilla.org/en-US/addon/7tv-anywhere",
+                chrome: "https://chromewebstore.google.com/detail/7tv-anywhere/cgkabhdkbomilgoofppnnanckhadjmkj"
+            },
+            "cuemark": {
+                name: "CueMark",
+                firefox: "https://addons.mozilla.org/en-US/addon/cuemark",
+                chrome: "https://chromewebstore.google.com/detail/cuemark/jfojkjcmlfcolkcpccobpfdghpabgcaa"
+            }
+        }
+
+        const id = location.pathname.split("/").filter(Boolean).at(-1)?.toLowerCase()
+        const ext = app[id] || app["7tv"]
+        const isFox = navigator.userAgent.includes("Firefox")
+        const store = isFox ? "firefox" : "chrome"
+
+        document.title = `${ext.name} - Redirecting`
+        document.querySelector("#name").textContent = ext.name
+        document.querySelector("#browser").textContent = `Opening ${isFox ? "Firefox Add-ons" : "Chrome Web Store"}...`
+
+        location.replace(ext[store])
+    </script>
+</body>
+
+</html>
