@@ -23,27 +23,20 @@
             "source": "/dis",
             "destination": "https://discord.gg/YPjawnUnsx",
             "permanent": false
-        },
-        {
-            "source": "/7tv",
-            "destination": "/misc/7tv-anywhere",
-            "permanent": false
-        },
-        {
-            "source": "/7tv-anywhere",
-            "destination": "/misc/7tv-anywhere",
-            "permanent": false
-        },
-        {
-            "source": "/7tvanywhere",
-            "destination": "/misc/7tv-anywhere",
-            "permanent": false
         }
     ],
     "rewrites": [
         {
             "source": "/favicon.ico",
             "destination": "/img/favicon.ico"
+        },
+        {
+            "source": "/get",
+            "destination": "/misc/get"
+        },
+        {
+            "source": "/get/:path*",
+            "destination": "/misc/get"
         }
     ],
     "headers": [
