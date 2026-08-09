@@ -6,16 +6,34 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-08-08T01:59:57Z"
+    "updated": "2026-08-09T02:07:56Z"
+  },
+  {
+    "name": "7tv-anywhere",
+    "description": "Bring 7TV emotes to [text fields] and [rendered text] on any website*",
+    "url": "https://github.com/aitji/7tv-anywhere",
+    "homepage": "https://aitji.xyz/get/7tv",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-08-08T17:49:35Z"
   },
   {
     "name": "cuemark",
     "description": "Turn timestamped YouTube comments into moments that return during playback.",
     "url": "https://github.com/aitji/cuemark",
-    "homepage": "",
+    "homepage": "https://aitji.xyz/get/cuemark",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-08-04T00:01:02Z"
+    "updated": "2026-08-08T17:49:19Z"
+  },
+  {
+    "name": "aitji.xyz",
+    "description": "it's me",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-08-08T17:48:55Z"
   },
   {
     "name": "QoF",
@@ -43,24 +61,6 @@
     "language": "JavaScript",
     "stars": 1,
     "updated": "2026-08-03T00:59:51Z"
-  },
-  {
-    "name": "aitji.xyz",
-    "description": "it's me",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-08-01T16:12:53Z"
-  },
-  {
-    "name": "7tv-anywhere",
-    "description": "Bring 7TV emotes to [text fields] and [rendered text] on any website*",
-    "url": "https://github.com/aitji/7tv-anywhere",
-    "homepage": "https://aitji.xyz/7tv-anywhere",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-07-30T15:56:29Z"
   },
   {
     "name": "qof.aitji.xyz",
