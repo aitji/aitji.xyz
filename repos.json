@@ -6,7 +6,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-09-10T04:06:59Z"
+    "updated": "2026-09-11T04:05:01Z"
+  },
+  {
+    "name": "aitji.xyz",
+    "description": "it's me",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-09-10T17:24:50Z"
   },
   {
     "name": "7tv-anywhere",
@@ -16,15 +25,6 @@
     "language": "JavaScript",
     "stars": 1,
     "updated": "2026-08-20T14:24:33Z"
-  },
-  {
-    "name": "aitji.xyz",
-    "description": "it's me",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-08-08T17:48:55Z"
   },
   {
     "name": "QoF",
