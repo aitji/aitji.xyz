@@ -1,12 +1,21 @@
 [
   {
+    "name": "id.thatako.net",
+    "description": "grab free domain [name].id.thatako.net",
+    "url": "https://github.com/aitji/id.thatako.net",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-09-20T08:03:53Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-09-19T04:07:20Z"
+    "updated": "2026-09-20T04:26:30Z"
   },
   {
     "name": "aitji.xyz",
@@ -34,15 +43,6 @@
     "language": "",
     "stars": 7,
     "updated": "2026-08-03T06:44:14Z"
-  },
-  {
-    "name": "id.thatako.net",
-    "description": "grab free domain [name].id.thatako.net",
-    "url": "https://github.com/aitji/id.thatako.net",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-08-03T01:01:10Z"
   },
   {
     "name": "thatako.net",
