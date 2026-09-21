@@ -1,5 +1,14 @@
 [
   {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-09-21T04:24:33Z"
+  },
+  {
     "name": "id.thatako.net",
     "description": "grab free domain [name].id.thatako.net",
     "url": "https://github.com/aitji/id.thatako.net",
@@ -7,15 +16,6 @@
     "language": "JavaScript",
     "stars": 1,
     "updated": "2026-09-20T08:03:53Z"
-  },
-  {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-09-20T04:26:30Z"
   },
   {
     "name": "aitji.xyz",
