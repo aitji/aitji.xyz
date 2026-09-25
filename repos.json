@@ -1,12 +1,21 @@
 [
   {
+    "name": "songs.thatako.net",
+    "description": "morning song request. pr @ thatakophitthayakhom",
+    "url": "https://github.com/aitji/songs.thatako.net",
+    "homepage": "https://songs.thatako.net",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-09-25T08:06:03Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-09-24T04:13:04Z"
+    "updated": "2026-09-25T04:25:46Z"
   },
   {
     "name": "id.thatako.net",
