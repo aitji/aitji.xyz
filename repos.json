@@ -1,12 +1,30 @@
 [
   {
+    "name": "aitji.xyz",
+    "description": "it's me",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-10-16T09:01:14Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-10-15T04:07:12Z"
+    "updated": "2026-10-16T04:03:20Z"
+  },
+  {
+    "name": "aCSS",
+    "description": "aitji.xyz color coded css bundle",
+    "url": "https://github.com/aitji/aCSS",
+    "homepage": "",
+    "language": "CSS",
+    "stars": 0,
+    "updated": "2026-10-15T13:37:58Z"
   },
   {
     "name": "id.thatako.net",
@@ -25,15 +43,6 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-10-02T15:32:59Z"
-  },
-  {
-    "name": "aitji.xyz",
-    "description": "it's me",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-09-10T17:24:50Z"
   },
   {
     "name": "7tv-anywhere",
