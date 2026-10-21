@@ -304,7 +304,6 @@ const validateSSG = pages => {
         'humans.txt',
         '.well-known/security.txt',
         '.well-known/assetlinks.json',
-        'scripts/analytics.js',
         'img/android-icon-512x512.png',
         'img/android-icon-maskable-512x512.png'
     ]
@@ -388,9 +387,9 @@ const genSSG = async (refresh = false) => {
         {
             route: '/privacy',
             title: 'privacy',
-            description: 'how aitji.xyz handles analytics, hosting logs, browser storage, and third-party services.',
+            description: 'how aitji.xyz handles hosting logs, browser storage, and third-party services.',
             content: template.privacy(),
-            lastmod: '2026-08-01'
+            lastmod: '2026-10-21'
         },
         {
             route: '/tos',

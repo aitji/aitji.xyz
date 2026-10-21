@@ -440,36 +440,33 @@
     function privacy() {
         return (
             '<div class="legal-page container">' +
-            '<p class="legal-stamp">last updated 1 august 2026</p>' +
+            '<p class="legal-stamp">last updated 21 october 2026</p>' +
             '<h1 class="page-title">privacy</h1>' +
-            '<p class="legal-intro">this is a small personal site. it has no accounts, payments, advertising, or form that asks for personal details. some technical data is still processed so pages can load, stay secure, and optionally produce basic traffic statistics.</p>' +
+            '<p class="legal-intro">this is a small personal site. it has no accounts, payments, advertising, or form that asks for personal details. some technical data is still processed so pages can load and stay secure. there is no analytics or tracking script on this site.</p>' +
             '<div class="legal-content">' +
             '<section class="legal-section legal-callout" id="summary"><h2>the useful summary</h2>' +
-            '<p>vercel handles normal web requests. cloudflare manages the domain, with some DNS records served through google. google analytics is on by default unless your browser sends a recognized privacy signal, and you can turn it off below at any time.</p>' +
-            '<div class="privacy-control"><button class="btn btn-accent" type="button" id="analytics-toggle">checking analytics...</button><span class="privacy-control-state" id="analytics-state" aria-live="polite"></span></div>' +
+            '<p>vercel handles normal web requests. cloudflare manages the domain, with some DNS records served through google. this site does not use analytics and does not set tracking cookies.</p>' +
             '</section>' +
             '<section class="legal-section" id="collected"><h2>what gets processed</h2><ul>' +
             '<li><strong>request data:</strong> hosting and network providers can receive your IP address, requested URL, timestamps, browser or device details, approximate location derived from IP, and security, error, or performance information.</li>' +
-            '<li><strong>analytics, on by default:</strong> unless you turn it off or your browser sends a recognized privacy signal, google analytics 4 receives page URLs and titles, referrers, browser and device details, language, approximate region, and interaction events. this site disables google signals and advertising-personalization signals. google says an IP address may be used transiently to provide the service and infer approximate location, but is not logged or stored as an individual IP address in GA4.</li>' +
-            '<li><strong>browser storage:</strong> <code>sessionStorage</code> keeps a repository-data cache for about five minutes. the schedule tool stores its timetable and reduction setting in <code>localStorage</code>. the analytics choice stores only <code>on</code> or <code>off</code>.</li>' +
+            '<li><strong>browser storage:</strong> <code>sessionStorage</code> keeps a repository-data cache for about five minutes. the schedule tool stores its timetable and reduction setting in <code>localStorage</code>.</li>' +
             '<li><strong>public project and status data:</strong> project listings normally load from a file served by this site; if that fails, your browser may request the same public data directly from jsdelivr (a CDN that mirrors public github content), or a server-side api on this site fetches it from github instead. discord status always goes through a server-side api on this site, which checks a public lanyard endpoint and falls back to a direct bot connection if lanyard is unavailable, so your browser does not contact discord or lanyard directly. visitors are not asked to sign in to github or discord or provide credentials.</li>' +
             '</ul></section>' +
             '<section class="legal-section" id="providers"><h2>services involved</h2><div class="legal-provider-list">' +
             '<div class="legal-provider"><p class="legal-provider-name">vercel</p><p>hosts the static site and API routes, serves files through its network, and may keep operational or security logs. <a href="https://vercel.com/legal/privacy-notice" rel="noopener">vercel privacy</a></p></div>' +
-            '<div class="legal-provider"><p class="legal-provider-name">google</p><p>provides google analytics, on by default and can be turned off below, and remotely hosted fonts, which load on every visit regardless of the analytics choice. loading either sends a request to google, and some DNS records for this domain are also served through google. <a href="https://policies.google.com/privacy" rel="noopener">google privacy</a></p></div>' +
+            '<div class="legal-provider"><p class="legal-provider-name">google</p><p>provides remotely hosted fonts, which load on every visit and send a request to google. some DNS records for this domain are also served through google. <a href="https://policies.google.com/privacy" rel="noopener">google privacy</a></p></div>' +
             '<div class="legal-provider"><p class="legal-provider-name">cloudflare</p><p>manages the domain and most DNS records. if a DNS record is proxied, cloudflare may also process connection and request metadata. <a href="https://www.cloudflare.com/policies/privacy/" rel="noopener">cloudflare privacy</a></p></div>' +
             '<div class="legal-provider"><p class="legal-provider-name">github, jsdelivr, discord, and lanyard</p><p>provide public project or status information used by parts of the site. github and jsdelivr may receive a request directly from your browser if the cached copy on this site is unavailable; discord and lanyard are only ever contacted by a server-side api on this site, not by your browser directly. their own policies apply when they receive a request.</p></div>' +
             '</div></section>' +
-            '<section class="legal-section" id="cookies"><h2>analytics, cookies, and choices</h2>' +
-            '<p>google analytics loads automatically on this site unless a recognized privacy signal is present in your browser or you have turned it off. once loaded, it can set first-party cookies such as <code>_ga</code> to distinguish visits and sessions. turning analytics off blocks future analytics calls from this site and attempts to remove its cookies for this domain.</p>' +
-            '<p>global privacy control and the common do-not-track signal keep analytics off automatically, even on a first visit, before any choice is made. browser cookie controls, extensions, and network blockers can provide additional control.</p>' +
+            '<section class="legal-section" id="cookies"><h2>cookies and choices</h2>' +
+            '<p>this site does not set its own cookies and does not run analytics. third-party services such as fonts or a proxied cdn may process requests under their own policies. browser cookie controls, extensions, and network blockers can provide additional control.</p>' +
             '</section>' +
             '<section class="legal-section" id="retention"><h2>retention and requests</h2>' +
-            '<p>browser storage remains on your device until it expires, is replaced, or you clear it. provider-side logs and analytics data follow the retention settings and privacy terms of each provider. because this site has no user accounts, there is usually no profile here to retrieve or delete.</p>' +
+            '<p>browser storage remains on your device until it expires, is replaced, or you clear it. provider-side logs follow the retention settings and privacy terms of each provider. because this site has no user accounts, there is usually no profile here to retrieve or delete.</p>' +
             '<p>for a privacy question or request connected to data controlled by this site, email <a href="mailto:me@aitji.xyz">me@aitji.xyz</a>. do not send secrets through ordinary email.</p>' +
             '</section>' +
             '<section class="legal-section" id="children"><h2>children</h2><p>the site is a general personal portfolio and is not designed to collect personal information from children. please do not submit personal details through linked contact channels if you are not comfortable doing so.</p></section>' +
-            '<section class="legal-section" id="changes"><h2>changes</h2><p>this notice may change when the site, hosting, or analytics setup changes. the date at the top will be updated when that happens.</p></section>' +
+            '<section class="legal-section" id="changes"><h2>changes</h2><p>this notice may change when the site or hosting setup changes. the date at the top will be updated when that happens.</p></section>' +
             '</div></div>'
         )
     }

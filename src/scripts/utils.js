@@ -74,7 +74,7 @@
 
     function iconSpan(name, extraClass) {
         return '<span class="icon' + (extraClass ? " " + extraClass : "") +
-            '" style="--icon-src:url(/img/icons/' + name + '.svg)" aria-hidden="true"></span>'
+            '" style="-webkit-mask-image:url(/img/icons/' + name + '.svg);mask-image:url(/img/icons/' + name + '.svg)" aria-hidden="true"></span>'
     }
 
     var REPO_TTL = 5 * 60 * 1000

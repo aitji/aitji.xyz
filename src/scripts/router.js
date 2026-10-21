@@ -91,10 +91,6 @@
         })
     }
 
-    function trackPageView() {
-        if (AITJI.Analytics) AITJI.Analytics.trackPageView()
-    }
-
     function updateActiveTab(pathname) {
         var seg = topSegmentSlug(pathname)
         var buttons = navTabsEl ? navTabsEl.querySelectorAll(".tab-btn") : []
@@ -174,7 +170,6 @@
                 else navigate("/")
             })
             setMeta({ title: "404", description: "that route wandered somewhere else.", pathname: pathname })
-            if (!opts.initial) trackPageView()
             updateActiveTab(pathname)
             lastPathname = normalize(pathname)
             return
@@ -200,7 +195,6 @@
         viewEl.innerHTML = ""
         await useResult(def.render(viewEl, match.params))
         applyViewMeta(def, match.params, pathname)
-        if (!opts.initial) trackPageView()
         updateActiveTab(pathname)
         lastPathname = normalize(pathname)
 
