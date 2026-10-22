@@ -1,5 +1,14 @@
 [
   {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-10-22T04:11:40Z"
+  },
+  {
     "name": "aitji.xyz",
     "description": "it's me",
     "url": "https://github.com/aitji/aitji.xyz",
@@ -7,15 +16,6 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-10-21T11:51:24Z"
-  },
-  {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-10-21T04:11:47Z"
   },
   {
     "name": "aCSS",
