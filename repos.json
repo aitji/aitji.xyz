@@ -1,5 +1,23 @@
 [
   {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-10-24T04:06:53Z"
+  },
+  {
+    "name": "id.thatako.net",
+    "description": "grab free domain [name].id.thatako.net",
+    "url": "https://github.com/aitji/id.thatako.net",
+    "homepage": "",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-10-24T01:34:19Z"
+  },
+  {
     "name": "QoF",
     "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel. Requires BetaAPIs enabled under Experiments.",
     "url": "https://github.com/aitji/QoF",
@@ -18,15 +36,6 @@
     "updated": "2026-10-23T06:08:03Z"
   },
   {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-10-23T04:15:44Z"
-  },
-  {
     "name": "aitji.xyz",
     "description": "it's me",
     "url": "https://github.com/aitji/aitji.xyz",
@@ -43,15 +52,6 @@
     "language": "CSS",
     "stars": 0,
     "updated": "2026-10-15T13:37:58Z"
-  },
-  {
-    "name": "id.thatako.net",
-    "description": "grab free domain [name].id.thatako.net",
-    "url": "https://github.com/aitji/id.thatako.net",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-10-12T14:07:57Z"
   },
   {
     "name": "songs.thatako.net",
