@@ -1,12 +1,21 @@
 [
   {
+    "name": "songs.thatako.net",
+    "description": "morning song request. pr @ thatakophitthayakhom",
+    "url": "https://github.com/aitji/songs.thatako.net",
+    "homepage": "https://songs.thatako.net",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-10-28T12:40:16Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-10-27T04:32:03Z"
+    "updated": "2026-10-28T05:04:26Z"
   },
   {
     "name": "QoF",
@@ -88,15 +97,6 @@
     "language": "CSS",
     "stars": 0,
     "updated": "2026-10-15T13:37:58Z"
-  },
-  {
-    "name": "songs.thatako.net",
-    "description": "morning song request. pr @ thatakophitthayakhom",
-    "url": "https://github.com/aitji/songs.thatako.net",
-    "homepage": "https://songs.thatako.net",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-10-02T15:32:59Z"
   },
   {
     "name": "7tv-anywhere",
