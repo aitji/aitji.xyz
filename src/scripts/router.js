@@ -256,7 +256,7 @@
             topRoutes = [
                 { title: "home", slug: "/", path: "home" },
                 { title: "about", slug: "/about", path: "about" },
-                { title: "blogs", slug: "/blogs", path: "blogs" },
+                { title: "notes", slug: "/notes", path: "notes" },
                 { title: "projects", slug: "/projects", path: "projects" }
             ]
             matchList = topRoutes.concat([

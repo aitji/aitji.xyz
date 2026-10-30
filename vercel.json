@@ -23,6 +23,16 @@
             "source": "/dis",
             "destination": "https://discord.gg/YPjawnUnsx",
             "permanent": false
+        },
+        {
+            "source": "/blogs",
+            "destination": "/notes",
+            "permanent": true
+        },
+        {
+            "source": "/blogs/:slug",
+            "destination": "/notes",
+            "permanent": true
         }
     ],
     "rewrites": [

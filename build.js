@@ -182,7 +182,8 @@ function loadRuntime() {
     const files = [
         'src/scripts/utils.js',
         'src/scripts/project-ui.js',
-        'src/data/blogs.js',
+        'src/data/notes.js',
+        'src/data/projects.js',
         'src/scripts/page-templates.js'
     ]
 
@@ -192,60 +193,6 @@ function loadRuntime() {
     )
 
     return sandbox.AITJI
-}
-
-const sortRepos = (repos) => repos.slice().sort((a, b) => {
-    const starDiff = (b.stars || 0) - (a.stars || 0)
-    if (starDiff) return starDiff
-
-    const descriptionDiff = (b.description || '').length - (a.description || '').length
-    if (descriptionDiff) return descriptionDiff
-
-    return (b.name || '').length - (a.name || '').length
-})
-
-const fetchJSON = async (url, timeout = 8000) => {
-    const controller = new AbortController()
-    const timer = setTimeout(() => controller.abort(), timeout)
-
-    try {
-        const response = await fetch(url, { signal: controller.signal })
-        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
-        return await response.json()
-    } finally { clearTimeout(timer) }
-}
-
-let repoCache = null
-const loadRepos = async (refresh = false) => {
-    if (repoCache && !refresh) return repoCache
-
-    const source = process.env.AITJI_OFFLINE === '1' ? [] : [
-        process.env.AITJI_REPOS_URL,
-        'https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json',
-        'https://raw.githubusercontent.com/aitji/aitji.xyz/data/repos.json'
-    ].filter(Boolean)
-
-    for (const src of source) {
-        try {
-            const data = await fetchJSON(src)
-            if (Array.isArray(data)) {
-                repoCache = sortRepos(data)
-                console.log(`[ssg] loaded ${repoCache.length} projects from ${src}`)
-                return repoCache
-            }
-        } catch (error) {
-            if (!WATCH) console.warn(`[ssg] project source failed: ${src} (${error.message})`)
-        }
-    }
-
-    const fallback = path.join(SRC, 'data', 'repos.json')
-    try {
-        const data = JSON.parse(fs.readFileSync(fallback, 'utf8'))
-        repoCache = sortRepos(Array.isArray(data) ? data : [])
-    } catch { repoCache = [] }
-
-    console.warn(`[ssg] using local project snapshot (${repoCache.length} projects)`)
-    return repoCache
 }
 
 // helper?
@@ -351,8 +298,8 @@ const sitemapXML = (pages) => {
 const genSSG = async (refresh = false) => {
     const AITJI = loadRuntime()
     const template = AITJI.PageTemplates
-    const blog = (AITJI.BLOGS || []).slice()
-    const repos = await loadRepos(refresh)
+    const notes = (AITJI.NOTES || []).slice()
+    const projects = AITJI.Data.projects()
     const today = new Date().toISOString().slice(0, 10)
 
     const pages = [
@@ -360,7 +307,7 @@ const genSSG = async (refresh = false) => {
             route: '/',
             title: 'aitji',
             description: 'self-taught developer. sort of full-stack web dev.',
-            content: template.home(repos, 6),
+            content: template.home(projects, 6),
             lastmod: today
         },
         {
@@ -371,17 +318,17 @@ const genSSG = async (refresh = false) => {
             lastmod: today
         },
         {
-            route: '/blogs',
-            title: 'blogs',
-            description: 'notes on things aitji built, broke, or thought about for too long.',
-            content: template.blogs(),
-            lastmod: blog.reduce((latest, post) => post.date > latest ? post.date : latest, today)
+            route: '/notes',
+            title: 'notes',
+            description: 'tiny thoughts from aitji. no titles, no pressure.',
+            content: template.notes(),
+            lastmod: notes.reduce((latest, n) => n.date > latest ? n.date : latest, '2000-01-01')
         },
         {
             route: '/projects',
             title: 'projects',
             description: 'things aitji built, mostly for fun, occasionally on purpose.',
-            content: template.projects(repos, 'all'),
+            content: template.projects(projects, 'all'),
             lastmod: today
         },
         {
@@ -389,7 +336,7 @@ const genSSG = async (refresh = false) => {
             title: 'privacy',
             description: 'how aitji.xyz handles hosting logs, browser storage, and third-party services.',
             content: template.privacy(),
-            lastmod: '2026-10-21'
+            lastmod: '2026-10-30'
         },
         {
             route: '/tos',
@@ -400,31 +347,17 @@ const genSSG = async (refresh = false) => {
         }
     ]
 
-    for (const post of blog) pages.push({
-        route: `/blogs/${post.slug}`,
-        title: post.title,
-        description: post.excerpt,
-        type: 'article',
-        content: template.blogPost(post.slug).html,
-        lastmod: post.date
+    for (const p of projects) pages.push({
+        route: `/projects/${p.slug}`,
+        title: p.name,
+        description: p.description,
+        content: template.projectDetail(p),
+        lastmod: today
     })
-
-    for (const repo of repos) {
-        const slug = AITJI.Utils.slugify(repo.name)
-        if (!slug) continue
-        pages.push({
-            route: `/projects/${slug}`,
-            title: repo.name,
-            description: repo.description || `project details for ${repo.name}.`,
-            content: template.projectDetail(repo),
-            lastmod: String(repo.updated || repo.updated_at || repo.pushed_at || today).slice(0, 10)
-        })
-    }
 
     for (const page of pages) await writePage(page)
 
     ensure(path.join(OUT, 'data'))
-    fs.writeFileSync(path.join(OUT, 'data', 'repos.json'), JSON.stringify(repos))
     fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemapXML(pages))
     validateSSG(pages)
 

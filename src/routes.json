@@ -24,16 +24,9 @@
             ]
         },
         {
-            "title": "blogs",
-            "slug": "/blogs",
-            "path": "blogs",
-            "pages": [
-                {
-                    "title": "post",
-                    "slug": "/blogs/*",
-                    "path": "blogs/post"
-                }
-            ]
+            "title": "notes",
+            "slug": "/notes",
+            "path": "notes"
         },
         {
             "title": "projects",

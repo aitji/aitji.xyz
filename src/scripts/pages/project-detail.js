@@ -2,7 +2,11 @@
     "use strict"
     window.AITJI = window.AITJI || {}
 
-    var onRepo = null
+    var current = null
+    var find = function (slug) {
+        return AITJI.Data.projects().find(function (p) { return p.slug === slug }) || null
+    }
+
     function mount() {
         var content = document.getElementById("post-content")
         var toc = document.getElementById("toc-mount")
@@ -10,35 +14,17 @@
         return { cleanup: AITJI.TOC.build(content, toc) }
     }
 
-    async function renderProject(container, params) {
-        onRepo = null
-        container.innerHTML = AITJI.PageTemplates.projectLoading()
-
-        var repos
-        try { repos = await AITJI.Data.fetchRepos() }
-        catch (e) {
-            if (document.querySelector(".detail-loading")) container.innerHTML = AITJI.PageTemplates.projectNotFound()
-            return
-        }
-
-        if (!document.querySelector(".detail-loading")) return
-
-        var repo = repos.find(function (item) { return AITJI.Utils.slugify(item.name) === params.slug })
-        onRepo = repo || null
-        container.innerHTML = repo
-            ? AITJI.PageTemplates.projectDetail(repo)
-            : AITJI.PageTemplates.projectNotFound()
-
-        if (repo) return mount()
-    }
-
     AITJI.Router.registerView("projects/detail", {
-        title: function (params) { return onRepo ? onRepo.name : params.slug || "project" },
+        title: function (params) { var p = find(params.slug); return p ? p.name : "project not found" },
         description: function (params) {
-            if (onRepo && onRepo.description) return onRepo.description
-            return "project details for " + (params.slug || "aitji") + "."
+            var p = find(params.slug)
+            return p ? p.description : "project details for " + (params.slug || "aitji") + "."
         },
-        render: renderProject,
+        render: function (container, params) {
+            current = find(params.slug)
+            container.innerHTML = AITJI.PageTemplates.projectDetail(current)
+            if (current) return mount()
+        },
         mount: mount
     })
 })()

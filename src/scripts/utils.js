@@ -77,60 +77,26 @@
             '" style="-webkit-mask-image:url(/img/icons/' + name + '.svg);mask-image:url(/img/icons/' + name + '.svg)" aria-hidden="true"></span>'
     }
 
-    var REPO_TTL = 5 * 60 * 1000
-    var reposPromise = null
-    function fetchRepos() {
-        if (reposPromise) return reposPromise
+    var CATEGORY_COLOR = Object.freeze({
+        minecraft: "#62b947", thatako: "#e0607e", web: "#3178c6",
+        extension: "#f1e05a", "co-op": "#a371f7", misc: "#9b8890"
+    })
+    var CATEGORY_LABEL = Object.freeze({
+        minecraft: "minecraft", thatako: "thatako school", web: "web",
+        extension: "extension", "co-op": "co-contributing", misc: "misc"
+    })
 
-        reposPromise = (async function () {
-            try {
-                var cached = sessionStorage.getItem("aitji:repos")
-                if (cached) {
-                    var parsed = JSON.parse(cached)
-                    if (Date.now() - parsed.t < REPO_TTL) return parsed.data
-                }
-            } catch { }
-
-            var data = null
-            var sources = [
-                "/data/repos.json",
-                "https://cdn.jsdelivr.net/gh/aitji/aitji.xyz@data/repos.json",
-                "/api/repos"
-            ]
-
-            for (var i = 0; i < sources.length && !data; i++) {
-                try {
-                    var response = await fetch(sources[i])
-                    if (response.ok) data = await response.json()
-                } catch { }
-            }
-            if (!data) throw new Error("fetch failed -.-;;")
-
-            data = data.sort(function (a, b) {
-                var starDiff = (b.stars || 0) - (a.stars || 0)
-                if (starDiff) return starDiff
-                var desDiff = (b.description || "").length - (a.description || "").length
-                if (desDiff) return desDiff
-                return (b.name || "").length - (a.name || "").length
-            })
-
-            try {
-                sessionStorage.setItem("aitji:repos",
-                    JSON.stringify({
-                        t: Date.now(),
-                        data: data
-                    })
-                )
-            } catch { }
-            return data
-        })()
-
-        return reposPromise
+    function projectList() {
+        return (AITJI.PROJECTS || []).map(function (p, i) { return { p: p, i: i } })
+            .sort(function (x, y) { return (!!y.p.featured - !!x.p.featured) || (x.i - y.i) })
+            .map(function (x) { return x.p })
     }
 
-    window.AITJI.Data = { fetchRepos: fetchRepos }
+    window.AITJI.Data = { projects: projectList }
     window.AITJI.Utils = {
         LANG_COLOR: LANG_COLOR,
+        CATEGORY_COLOR: CATEGORY_COLOR,
+        CATEGORY_LABEL: CATEGORY_LABEL,
         escapeHtml: escapeHtml,
         slugify: slugify,
         formatDate: formatDate,

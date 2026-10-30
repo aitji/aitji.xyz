@@ -14,7 +14,7 @@
         { label: "operating systems", tags: ["windows", "linux-nixos"] }
     ]
 
-    const sortedBlogs = () => (AITJI.BLOGS || [])
+    const sortedNotes = () => (AITJI.NOTES || [])
         .slice()
         .sort((a, b) => b.date.localeCompare(a.date))
 
@@ -58,27 +58,25 @@
         return html + '<span class="friend-card"><span class="friend-name">vongwean</span><span class="friend-desc muted">art human</span></span>'
     }
 
-    function blogPreviewHTML() {
-        var posts = sortedBlogs().slice(0, 3)
-        if (!posts.length) return '<p class="empty-state">nothing written yet.</p>'
+    function notePreviewHTML() {
+        var notes = sortedNotes().slice(0, 3)
+        if (!notes.length) return '<p class="empty-state">nothing here yet.</p>'
 
         var u = AITJI.Utils
-        return '<div class="blog-preview-list">' + posts.map(function (post) {
+        return '<div class="blog-preview-list">' + notes.map(function (n) {
             return (
-                '<a href="/blogs/' + post.slug + '" class="blog-preview-card">' +
-                '<span class="blog-preview-title">' + u.escapeHtml(post.title) + "</span>" +
-                '<span class="blog-preview-date">' + u.formatDate(post.date) + "</span>" +
+                '<a href="/notes#' + n.id + '" class="blog-preview-card">' +
+                '<span class="blog-preview-title">' + u.escapeHtml(n.text) + "</span>" +
+                '<span class="blog-preview-date">' + u.formatDate(n.date) + "</span>" +
                 "</a>"
             )
         }).join("") + "</div>"
     }
 
-    function home(repos, limit) {
-        repos = Array.isArray(repos) ? repos : []
+    function home(list, limit) {
+        list = Array.isArray(list) ? list : []
         limit = limit || 6
-        var projects = repos.length
-            ? repos.slice(0, limit).map(AITJI.ProjectUI.cardHTML).join("")
-            : AITJI.ProjectUI.skeletonCards(limit)
+        var projects = list.slice(0, limit).map(AITJI.ProjectUI.cardHTML).join("")
 
         return (
             '<div class="page">' +
@@ -96,8 +94,8 @@
             '<section class="section container" id="about">' +
             '<p class="section-label">about</p>' +
             '<div class="card">' +
-            "<p>hey, i'm <strong>aitji</strong> a developer who builds things. i like making stuff. " +
-            "currently figuring out what to do with this domain.</p>" +
+            "<p>hey, i'm <strong>aitji</strong>, a developer who builds things, mostly minecraft bedrock addons and web tools. " +
+            "i also run the small infrastructure behind my school's website.</p>" +
             '<div class="tag-row" style="margin-top:0.85rem">' +
             '<span class="tag">javascript</span><span class="tag">typescript</span><span class="tag">python</span>' +
             '<span class="tag">solidjs</span><span class="tag">vercel</span>' +
@@ -108,10 +106,10 @@
             '<p class="section-label">links</p>' +
             '<div class="socials-row">' + socialsRow() + "</div>" +
             "</section>" +
-            '<section class="section container" id="writing">' +
-            '<p class="section-label">writing</p>' +
-            blogPreviewHTML() +
-            '<a href="/blogs" class="section-more">read more posts</a>' +
+            '<section class="section container" id="notes">' +
+            '<p class="section-label">notes</p>' +
+            notePreviewHTML() +
+            '<a href="/notes" class="section-more">all notes</a>' +
             "</section>" +
             '<section class="section container" id="projects">' +
             '<p class="section-label">projects</p>' +
@@ -144,9 +142,10 @@
             '<h1 class="page-title">about me</h1>' +
             '<p class="page-lede">the longer version of the one-liner on the home page.</p>' +
             '<section class="section"><div class="bio">' +
-            "<p>i'm <strong>aitji</strong>, a self-taught developer who enjoys building things for the web. i mostly work with javascript and typescript, and i care a lot about writing code that's simple, readable, and fast, " +
-            "outside of programming, i'm student public relations &amp; ex-council. i also have a terrible short-term memory.</p>" +
-            "<p>i prefer lowercase letters, clean interfaces, and i'm always trying to improve a little thing.</p>" +
+            "<p>i'm <strong>aitji</strong>, a self-taught developer from thailand. i mostly work with javascript and typescript, and i care a lot about writing code that's simple, readable, and fast.</p>" +
+            "<p>most of what i make is for minecraft bedrock, like the addons chain of mining and quality of features. the rest is web tools, a browser extension, and the small infrastructure behind my school's website, url shortener, and subdomains.</p>" +
+            "<p>outside of programming, i'm student public relations &amp; ex-council. i also have a terrible short-term memory.</p>" +
+            "<p>i prefer lowercase letters and clean interfaces, and i'm always trying to improve one little thing.</p>" +
             "</div></section>" +
             '<section class="section"><p class="section-label">quick facts</p><div class="facts-grid">' +
             '<div class="fact-card"><p class="fact-label">based in</p><p class="fact-value">thailand</p></div>' +
@@ -164,189 +163,93 @@
         )
     }
 
-    function blogCardHTML(post) {
+    function noteCardHTML(n) {
         var u = AITJI.Utils
         return (
-            '<a href="/blogs/' + post.slug + '" class="post-card">' +
+            '<div class="post-card" id="note-' + u.escapeHtml(n.id) + '">' +
             '<div class="post-card-top">' +
-            u.iconSpan("calendar") + "<span>" + u.formatDate(post.date) + "</span>" +
-            '<span aria-hidden="true">&middot;</span>' +
-            u.iconSpan("clock") + "<span>" + u.readingTime(post.content) + "</span>" +
+            u.iconSpan("calendar") + "<span>" + u.formatDate(n.date) + "</span>" +
+            '<a href="/notes#' + u.escapeHtml(n.id) + '" class="muted" aria-label="link to this note">#</a>' +
             "</div>" +
-            '<p class="post-card-title">' + u.escapeHtml(post.title) + "</p>" +
-            '<p class="post-card-excerpt">' + u.escapeHtml(post.excerpt) + "</p>" +
-            '<div class="post-card-tags">' + post.tags.map(function (tag) { return '<span class="tag">' + tag + "</span>" }).join("") + "</div>" +
-            "</a>"
+            '<p class="post-card-excerpt">' + u.escapeHtml(n.text) + "</p>" +
+            ((n.tags || []).length ? '<div class="post-card-tags">' + n.tags.map(function (tag) { return '<span class="tag">' + u.escapeHtml(tag) + "</span>" }).join("") + "</div>" : "") +
+            "</div>"
         )
     }
 
-    function blogs() {
-        var posts = sortedBlogs()
-        var body = posts.length
-            ? '<div class="post-list">' + posts.map(blogCardHTML).join("") + "</div>"
-            : '<p class="empty-state">nothing written yet, check back later.</p>'
+    function notes() {
+        var list = sortedNotes()
+        var body = list.length
+            ? '<div class="post-list">' + list.map(noteCardHTML).join("") + "</div>"
+            : '<p class="empty-state">nothing here yet, check back later.</p>'
 
         return (
             '<div class="blogs-page container">' +
-            '<h1 class="page-title">blogs</h1>' +
-            '<p class="page-lede">notes on things i built, broke, or thought about for too long.</p>' +
-            '<p class="post-count">' + posts.length + (posts.length === 1 ? " post" : " posts") + "</p>" +
+            '<h1 class="page-title">notes</h1>' +
+            '<p class="page-lede">tiny thoughts tiny head</p>' +
+            '<p class="post-count">' + list.length + (list.length === 1 ? " note" : " notes") + "</p>" +
             body +
             "</div>"
         )
     }
 
-    function blogNavLinkHTML(post, direction) {
-        if (!post) return "<span></span>"
-        return (
-            '<a href="/blogs/' + post.slug + '" class="post-nav-link ' + direction + '">' +
-            '<span class="post-nav-dir">' + (direction === "next" ? "next" : "previous") + "</span>" +
-            '<span class="post-nav-title">' + AITJI.Utils.escapeHtml(post.title) + "</span>" +
-            "</a>"
-        )
-    }
+    function catOf(p) { return AITJI.Utils.CATEGORY_LABEL[p.category] || p.category || "misc" }
 
-    function blogPostNotFound() {
-        return (
-            '<div class="post-page container">' +
-            '<a href="/blogs" class="back-link">' + AITJI.Utils.iconSpan("arrow-left") + "<span>back to blogs</span></a>" +
-            '<h1 class="page-title">post not found</h1>' +
-            '<p class="muted">that one doesn\'t exist, or got moved.</p>' +
-            "</div>"
-        )
-    }
-
-    function blogPost(slug) {
-        var sorted = sortedBlogs()
-        var index = sorted.findIndex(function (post) { return post.slug === slug })
-        if (index === -1) return { html: blogPostNotFound(), post: null }
-
-        var post = sorted[index]
-        var next = index > 0 ? sorted[index - 1] : null
-        var prev = index < sorted.length - 1 ? sorted[index + 1] : null
+    function projectCardHTML(p) {
         var u = AITJI.Utils
-
-        return {
-            post: post,
-            html: (
-                '<div class="post-page container">' +
-                '<a href="/blogs" class="back-link">' + u.iconSpan("arrow-left") + "<span>back to blogs</span></a>" +
-                '<div class="with-toc"><div>' +
-                '<header class="post-header">' +
-                '<h1 class="post-title">' + u.escapeHtml(post.title) + "</h1>" +
-                '<div class="post-meta-row">' +
-                '<span class="post-meta-item">' + u.iconSpan("calendar") + "<span>" + u.formatDate(post.date) + "</span></span>" +
-                '<span class="post-meta-item">' + u.iconSpan("clock") + "<span>" + u.readingTime(post.content) + "</span></span>" +
-                "</div>" +
-                '<div class="tag-row">' + post.tags.map(function (tag) { return '<span class="tag">' + tag + "</span>" }).join("") + "</div>" +
-                "</header>" +
-                '<article class="post-content" id="post-content">' + post.content + "</article>" +
-                '<nav class="post-footer-nav">' + blogNavLinkHTML(prev, "prev") + blogNavLinkHTML(next, "next") + "</nav>" +
-                "</div>" +
-                '<aside class="toc" id="toc-mount"></aside>' +
-                "</div></div>"
-            )
-        }
-    }
-
-    function projectCardHTML(repo) {
-        var u = AITJI.Utils
-        var slug = u.slugify(repo.name)
-        var updated = repo.updated || repo.updated_at || repo.pushed_at
-        var tags = ([repo.language].filter(Boolean)).concat(repo.topics || [])
-
         return (
-            '<a href="/projects/' + slug + '" class="post-card">' +
+            '<a href="/projects/' + p.slug + '" class="post-card">' +
             '<div class="post-card-top">' +
-            (repo.language
-                ? '<span class="lang-dot" style="background:' + (u.LANG_COLOR[repo.language] || "#9b8890") + '"></span><span>' + u.escapeHtml(repo.language) + '</span><span aria-hidden="true">&middot;</span>'
-                : "") +
-            (repo.stars > 0 ? "<span>★ " + repo.stars + ' stars</span><span aria-hidden="true">&middot;</span>' : "") +
-            (updated ? u.iconSpan("calendar") + "<span>" + u.formatDate(String(updated).slice(0, 10)) + "</span>" : "") +
+            '<span class="lang-dot" style="background:' + (u.CATEGORY_COLOR[p.category] || "#9b8890") + '"></span><span>' + u.escapeHtml(catOf(p)) + "</span>" +
+            '<span aria-hidden="true">&middot;</span><span>' + u.escapeHtml(p.status || "active") + "</span>" +
             "</div>" +
-            '<p class="post-card-title">' + u.escapeHtml(repo.name) + "</p>" +
-            '<p class="post-card-excerpt">' + (repo.description ? u.escapeHtml(repo.description) : "no description yet. click through for details.") + "</p>" +
-            (tags.length ? '<div class="post-card-tags">' + tags.slice(0, 5).map(function (tag) { return '<span class="tag">' + u.escapeHtml(tag) + "</span>" }).join("") + "</div>" : "") +
+            '<p class="post-card-title">' + u.escapeHtml(p.name) + "</p>" +
+            '<p class="post-card-excerpt">' + u.escapeHtml(p.description) + "</p>" +
+            ((p.tags || []).length ? '<div class="post-card-tags">' + p.tags.slice(0, 5).map(function (tag) { return '<span class="tag">' + u.escapeHtml(tag) + "</span>" }).join("") + "</div>" : "") +
             "</a>"
         )
     }
 
-    function projectFiltersHTML(repos, activeLang) {
-        var langs = {}
-        repos.forEach(function (repo) {
-            if (repo.language) langs[repo.language] = (langs[repo.language] || 0) + 1
-        })
-
-        var sortedLangs = Object.keys(langs).sort(function (a, b) { return langs[b] - langs[a] })
+    function projectFiltersHTML(list, active) {
         var u = AITJI.Utils
-        var chips = ['<button class="filter-chip' + (activeLang === "all" ? " active" : "") + '" data-lang="all">all (' + repos.length + ")</button>"]
+        var cats = {}
+        list.forEach(function (p) { cats[p.category] = (cats[p.category] || 0) + 1 })
 
-        sortedLangs.forEach(function (lang) {
+        var chips = ['<button class="filter-chip' + (active === "all" ? " active" : "") + '" data-lang="all">all (' + list.length + ")</button>"]
+        Object.keys(cats).sort(function (a, b) { return cats[b] - cats[a] }).forEach(function (c) {
             chips.push(
-                '<button class="filter-chip' + (activeLang === lang ? " active" : "") + '" data-lang="' + u.escapeHtml(lang) + '">' +
-                '<span class="lang-dot" style="background:' + (u.LANG_COLOR[lang] || "#9b8890") + '"></span>' +
-                u.escapeHtml(lang) + " (" + langs[lang] + ")</button>"
+                '<button class="filter-chip' + (active === c ? " active" : "") + '" data-lang="' + u.escapeHtml(c) + '">' +
+                '<span class="lang-dot" style="background:' + (u.CATEGORY_COLOR[c] || "#9b8890") + '"></span>' +
+                u.escapeHtml(u.CATEGORY_LABEL[c] || c) + " (" + cats[c] + ")</button>"
             )
         })
-
         return chips.join("")
     }
 
-    function filteredRepos(repos, activeLang) {
-        return activeLang === "all" ? repos : repos.filter(function (repo) { return repo.language === activeLang })
+    function filteredProjects(list, active) {
+        return active === "all" ? list : list.filter(function (p) { return p.category === active })
     }
 
-    function projectListHTML(repos, activeLang) {
-        var filtered = filteredRepos(repos, activeLang)
-        return filtered.length
-            ? filtered.map(projectCardHTML).join("")
-            : '<p class="empty-state">nothing here for that filter.</p>'
+    function projectListHTML(list, active) {
+        var f = filteredProjects(list, active)
+        return f.length ? f.map(projectCardHTML).join("") : '<p class="empty-state">nothing here for that filter.</p>'
     }
 
-    function projectCount(repos, activeLang) {
-        var count = filteredRepos(repos, activeLang).length
-        return count + (count === 1 ? " project" : " projects")
+    function projectCount(list, active) {
+        var n = filteredProjects(list, active).length
+        return n + (n === 1 ? " project" : " projects")
     }
 
-    function projects(repos, activeLang) {
-        repos = Array.isArray(repos) ? repos : []
-        activeLang = activeLang || "all"
+    function projects(list, active) {
+        list = Array.isArray(list) ? list : []
+        active = active || "all"
         return (
             '<div class="projects-page container">' +
             '<h1 class="page-title">projects</h1>' +
-            '<p class="page-lede">things i\'ve built, mostly for fun, occasionally on purpose. each one gets its own writeup.</p>' +
-            '<div class="filter-row" id="lang-filters">' + projectFiltersHTML(repos, activeLang) + "</div>" +
-            '<p class="post-count" id="repo-count">' + projectCount(repos, activeLang) + "</p>" +
-            '<div class="post-list" id="projects-list">' + projectListHTML(repos, activeLang) + "</div>" +
-            "</div>"
-        )
-    }
-
-    function projectsLoading() {
-        var one =
-            '<div class="post-card skeleton-card">' +
-            '<div class="skeleton-title" style="width:40%;height:0.9rem;margin-bottom:0.6rem"></div>' +
-            '<div class="skeleton-desc" style="height:2.5rem"></div>' +
-            "</div>"
-
-        return (
-            '<div class="projects-page container">' +
-            '<h1 class="page-title">projects</h1>' +
-            '<p class="page-lede">things i\'ve built, mostly for fun, occasionally on purpose. each one gets its own writeup.</p>' +
-            '<div class="filter-row" id="lang-filters"></div>' +
-            '<p class="post-count" id="repo-count"></p>' +
-            '<div class="post-list" id="projects-list">' + new Array(5).fill(one).join("") + "</div>" +
-            "</div>"
-        )
-    }
-
-    function projectLoading() {
-        return (
-            '<div class="post-page container detail-loading">' +
-            '<a href="/projects" class="back-link">' + AITJI.Utils.iconSpan("arrow-left") + "<span>back to projects</span></a>" +
-            '<div class="skeleton-title" style="height:2rem;width:50%;margin-bottom:1rem"></div>' +
-            '<div class="skeleton-desc" style="height:4rem;width:100%;margin-bottom:1.5rem"></div>' +
-            '<div class="skeleton-lang" style="height:1.5rem;width:8rem"></div>' +
+            '<p class="page-lede">things i\'ve built, mostly for fun, occasionally on purpose.</p>' +
+            '<div class="filter-row" id="lang-filters">' + projectFiltersHTML(list, active) + "</div>" +
+            '<p class="post-count" id="repo-count">' + projectCount(list, active) + "</p>" +
+            '<div class="post-list" id="projects-list">' + projectListHTML(list, active) + "</div>" +
             "</div>"
         )
     }
@@ -356,53 +259,50 @@
             '<div class="post-page container">' +
             '<a href="/projects" class="back-link">' + AITJI.Utils.iconSpan("arrow-left") + "<span>back to projects</span></a>" +
             '<h1 class="page-title">project not found</h1>' +
-            '<p class="muted">couldn\'t find a repo matching that slug.</p>' +
+            '<p class="muted">couldn\'t find a project matching that slug.</p>' +
             "</div>"
         )
     }
 
-    function projectContent(repo) {
+    function projectContent(p) {
         var u = AITJI.Utils
-        var topics = repo.topics || []
-        var html = "<h2>overview</h2>"
-        html += "<p>" + (repo.description ? u.escapeHtml(repo.description) : "no description written for this one yet. check the source for details.") + "</p>"
+        var html = "<h2>overview</h2><p>" + u.escapeHtml(p.description) + "</p>"
+        if (p.story) html += "<h2>the story</h2>" + p.story
+        var stats = Object.keys(p.stats || {})
+        if (stats.length) {
+            html += "<h2>numbers</h2><div class=\"tag-row\">" + stats.map(function (k) {
+                return '<span class="tag">' + u.escapeHtml(p.stats[k]) + " " + u.escapeHtml(k) + "</span>"
+            }).join("") + "</div>"
+        }
         html += "<h2>tech stack</h2><div class=\"tag-row\">"
-        if (repo.language) html += '<span class="tag">' + u.escapeHtml(repo.language) + "</span>"
-        topics.forEach(function (topic) { html += '<span class="tag">' + u.escapeHtml(topic) + "</span>" })
-        if (!repo.language && !topics.length) html += '<span class="muted" style="font-size:0.85rem">not specified.</span>'
-        html += "</div><h2>links</h2><div class=\"cta-row\">"
-        html += '<a href="' + repo.url + '" class="btn btn-accent" target="_blank" rel="noopener noreferrer">' + u.iconSpan("external-link") + "<span>view on github</span></a>"
-        if (repo.homepage) html += '<a href="' + repo.homepage + '" class="btn" target="_blank" rel="noopener noreferrer">' + u.iconSpan("external-link") + "<span>live demo</span></a>"
-        return html + "</div>"
+        ;(p.tags || []).forEach(function (t) { html += '<span class="tag">' + u.escapeHtml(t) + "</span>" })
+        if (!(p.tags || []).length) html += '<span class="muted" style="font-size:0.85rem">not specified.</span>'
+        html += "</div>"
+        if ((p.links || []).length) {
+            html += "<h2>links</h2><div class=\"cta-row\">" + p.links.map(function (l, i) {
+                return '<a href="' + u.escapeHtml(l.url) + '" class="btn' + (i === 0 ? " btn-accent" : "") + '" target="_blank" rel="noopener noreferrer">' +
+                    u.iconSpan("external-link") + "<span>" + u.escapeHtml(l.label) + "</span></a>"
+            }).join("") + "</div>"
+        }
+        return html
     }
 
-    function projectDetail(repo) {
-        if (!repo) return projectNotFound()
-
+    function projectDetail(p) {
+        if (!p) return projectNotFound()
         var u = AITJI.Utils
-        var forks = repo.forks || repo.forks_count
-        var updated = repo.updated || repo.updated_at || repo.pushed_at
-        var metaItems = []
-
-        if (repo.language) {
-            metaItems.push(
-                '<span class="post-meta-item"><span class="lang-dot" style="background:' +
-                (u.LANG_COLOR[repo.language] || "#9b8890") + '"></span><span>' + u.escapeHtml(repo.language) + "</span></span>"
-            )
-        }
-        if (repo.stars > 0) metaItems.push('<span class="post-meta-item">★ ' + repo.stars + "</span>")
-        if (forks) metaItems.push('<span class="post-meta-item">' + u.iconSpan("fork") + "<span>" + forks + "</span></span>")
-        if (updated) metaItems.push('<span class="post-meta-item">' + u.iconSpan("calendar") + "<span>updated " + u.formatDate(String(updated).slice(0, 10)) + "</span></span>")
+        var meta =
+            '<span class="post-meta-item"><span class="lang-dot" style="background:' + (u.CATEGORY_COLOR[p.category] || "#9b8890") + '"></span><span>' + u.escapeHtml(catOf(p)) + "</span></span>" +
+            '<span class="post-meta-item"><span>' + u.escapeHtml(p.status || "active") + "</span></span>"
 
         return (
             '<div class="post-page container">' +
             '<a href="/projects" class="back-link">' + u.iconSpan("arrow-left") + "<span>back to projects</span></a>" +
             '<div class="with-toc"><div>' +
             '<header class="post-header">' +
-            '<h1 class="post-title mono">' + u.escapeHtml(repo.name) + "</h1>" +
-            (metaItems.length ? '<div class="post-meta-row">' + metaItems.join("") + "</div>" : "") +
+            '<h1 class="post-title mono">' + u.escapeHtml(p.name) + "</h1>" +
+            '<div class="post-meta-row">' + meta + "</div>" +
             "</header>" +
-            '<article class="post-content" id="post-content">' + projectContent(repo) + "</article>" +
+            '<article class="post-content" id="post-content">' + projectContent(p) + "</article>" +
             "</div>" +
             '<aside class="toc" id="toc-mount"></aside>' +
             "</div></div>"
@@ -428,7 +328,7 @@
             '</div></div>' +
             '<nav class="nf-actions" aria-label="working routes">' +
             '<a href="/" class="btn btn-accent">home</a>' +
-            '<a href="/blogs" class="btn">blogs</a>' +
+            '<a href="/notes" class="btn">notes</a>' +
             '<a href="/projects" class="btn">projects</a>' +
             '<button type="button" class="btn" id="go-back">go back</button>' +
             '</nav></div>' +
@@ -440,7 +340,7 @@
     function privacy() {
         return (
             '<div class="legal-page container">' +
-            '<p class="legal-stamp">last updated 21 october 2026</p>' +
+            '<p class="legal-stamp">last updated 30 october 2026</p>' +
             '<h1 class="page-title">privacy</h1>' +
             '<p class="legal-intro">this is a small personal site. it has no accounts, payments, advertising, or form that asks for personal details. some technical data is still processed so pages can load and stay secure. there is no analytics or tracking script on this site.</p>' +
             '<div class="legal-content">' +
@@ -449,14 +349,14 @@
             '</section>' +
             '<section class="legal-section" id="collected"><h2>what gets processed</h2><ul>' +
             '<li><strong>request data:</strong> hosting and network providers can receive your IP address, requested URL, timestamps, browser or device details, approximate location derived from IP, and security, error, or performance information.</li>' +
-            '<li><strong>browser storage:</strong> <code>sessionStorage</code> keeps a repository-data cache for about five minutes. the schedule tool stores its timetable and reduction setting in <code>localStorage</code>.</li>' +
-            '<li><strong>public project and status data:</strong> project listings normally load from a file served by this site; if that fails, your browser may request the same public data directly from jsdelivr (a CDN that mirrors public github content), or a server-side api on this site fetches it from github instead. discord status always goes through a server-side api on this site, which checks a public lanyard endpoint and falls back to a direct bot connection if lanyard is unavailable, so your browser does not contact discord or lanyard directly. visitors are not asked to sign in to github or discord or provide credentials.</li>' +
+            '<li><strong>browser storage:</strong> the schedule tool stores its timetable and reduction setting in <code>localStorage</code>.</li>' +
+            '<li><strong>public status data:</strong> project and note listings are part of this site\'s own files. discord status always goes through a server-side api on this site, which checks a public lanyard endpoint and falls back to a direct bot connection if lanyard is unavailable, so your browser does not contact discord or lanyard directly. visitors are not asked to sign in to github or discord or provide credentials.</li>' +
             '</ul></section>' +
             '<section class="legal-section" id="providers"><h2>services involved</h2><div class="legal-provider-list">' +
             '<div class="legal-provider"><p class="legal-provider-name">vercel</p><p>hosts the static site and API routes, serves files through its network, and may keep operational or security logs. <a href="https://vercel.com/legal/privacy-notice" rel="noopener">vercel privacy</a></p></div>' +
             '<div class="legal-provider"><p class="legal-provider-name">google</p><p>provides remotely hosted fonts, which load on every visit and send a request to google. some DNS records for this domain are also served through google. <a href="https://policies.google.com/privacy" rel="noopener">google privacy</a></p></div>' +
             '<div class="legal-provider"><p class="legal-provider-name">cloudflare</p><p>manages the domain and most DNS records. if a DNS record is proxied, cloudflare may also process connection and request metadata. <a href="https://www.cloudflare.com/policies/privacy/" rel="noopener">cloudflare privacy</a></p></div>' +
-            '<div class="legal-provider"><p class="legal-provider-name">github, jsdelivr, discord, and lanyard</p><p>provide public project or status information used by parts of the site. github and jsdelivr may receive a request directly from your browser if the cached copy on this site is unavailable; discord and lanyard are only ever contacted by a server-side api on this site, not by your browser directly. their own policies apply when they receive a request.</p></div>' +
+            '<div class="legal-provider"><p class="legal-provider-name">jsdelivr, github, discord, and lanyard</p><p>jsdelivr (a CDN that mirrors public github content) serves this site\'s stylesheets, so your browser contacts it directly on every visit. discord and lanyard supply public status information and are only ever contacted by a server-side api on this site, not by your browser directly. their own policies apply when they receive a request.</p></div>' +
             '</div></section>' +
             '<section class="legal-section" id="cookies"><h2>cookies and choices</h2>' +
             '<p>this site does not set its own cookies and does not run analytics. third-party services such as fonts or a proxied cdn may process requests under their own policies. browser cookie controls, extensions, and network blockers can provide additional control.</p>' +
@@ -476,7 +376,7 @@
             '<div class="legal-page container">' +
             '<p class="legal-stamp">last updated 1 august 2026</p>' +
             '<h1 class="page-title">terms</h1>' +
-            '<p class="legal-intro">these terms are intentionally small because this is a personal portfolio, blog, and project index rather than a paid service.</p>' +
+            '<p class="legal-intro">these terms are intentionally small because this is a personal portfolio, notes, and project index rather than a paid service.</p>' +
             '<div class="legal-content">' +
             '<section class="legal-section legal-callout" id="use"><h2>using the site</h2><p>you may browse, link to, and share public pages. please do not try to disrupt the site, overload its APIs, bypass access controls, impersonate the site or its owner, or use it for unlawful activity.</p></section>' +
             '<section class="legal-section" id="content"><h2>content and source code</h2><p>unless a page says otherwise, written content and personal branding remain owned by aitji. source code published in the linked repository is available under the license included with that repository. third-party names, logos, code, and media remain subject to their own licenses and rights.</p></section>' +
@@ -491,14 +391,11 @@
     window.AITJI.PageTemplates = {
         home: home,
         about: about,
-        blogs: blogs,
-        blogPost: blogPost,
+        notes: notes,
         projects: projects,
-        projectsLoading: projectsLoading,
         projectFiltersHTML: projectFiltersHTML,
         projectListHTML: projectListHTML,
         projectCount: projectCount,
-        projectLoading: projectLoading,
         projectNotFound: projectNotFound,
         projectDetail: projectDetail,
         notFound: notFound,
