@@ -1,21 +1,30 @@
 [
   {
-    "name": "aitji",
-    "description": "my github profiles",
-    "url": "https://github.com/aitji/aitji",
-    "homepage": "https://github.com/aitji",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-10-31T04:59:05Z"
-  },
-  {
     "name": "aitji.xyz",
     "description": "it's me",
     "url": "https://github.com/aitji/aitji.xyz",
     "homepage": "https://aitji.xyz",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-10-30T03:07:27Z"
+    "updated": "2026-11-01T13:25:16Z"
+  },
+  {
+    "name": "aitji",
+    "description": "my github profiles",
+    "url": "https://github.com/aitji/aitji",
+    "homepage": "https://github.com/aitji",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-11-01T05:29:52Z"
+  },
+  {
+    "name": "qol",
+    "description": "just a buch of another pack in 1 pack | this is repo for only version control the pack",
+    "url": "https://github.com/aitji/qol",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-10-31T13:15:21Z"
   },
   {
     "name": "QoF",
@@ -43,15 +52,6 @@
     "language": "HTML",
     "stars": 0,
     "updated": "2026-10-25T07:45:18Z"
-  },
-  {
-    "name": "qol",
-    "description": "just a buch of another pack in 1 pack | this is repo for only version control the pack",
-    "url": "https://github.com/aitji/qol",
-    "homepage": "",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-10-25T03:28:24Z"
   },
   {
     "name": "brute-force",
