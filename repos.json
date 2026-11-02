@@ -1,12 +1,12 @@
 [
   {
-    "name": "aitji.xyz",
-    "description": "it's me",
-    "url": "https://github.com/aitji/aitji.xyz",
-    "homepage": "https://aitji.xyz",
+    "name": "songs.thatako.net",
+    "description": "morning song request. pr @ thatakophitthayakhom",
+    "url": "https://github.com/aitji/songs.thatako.net",
+    "homepage": "https://songs.thatako.net",
     "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-11-01T13:25:16Z"
+    "updated": "2026-11-02T14:23:27Z"
   },
   {
     "name": "aitji",
@@ -15,7 +15,25 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-11-01T05:29:52Z"
+    "updated": "2026-11-02T05:28:17Z"
+  },
+  {
+    "name": "thatako.net",
+    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
+    "url": "https://github.com/aitji/thatako.net",
+    "homepage": "https://thatako.net",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-11-02T03:11:16Z"
+  },
+  {
+    "name": "aitji.xyz",
+    "description": "it's me",
+    "url": "https://github.com/aitji/aitji.xyz",
+    "homepage": "https://aitji.xyz",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-11-01T13:25:16Z"
   },
   {
     "name": "qol",
@@ -34,15 +52,6 @@
     "language": "",
     "stars": 7,
     "updated": "2026-10-29T07:54:34Z"
-  },
-  {
-    "name": "songs.thatako.net",
-    "description": "morning song request. pr @ thatakophitthayakhom",
-    "url": "https://github.com/aitji/songs.thatako.net",
-    "homepage": "https://songs.thatako.net",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-10-28T12:40:16Z"
   },
   {
     "name": "qof.aitji.xyz",
@@ -106,15 +115,6 @@
     "language": "JavaScript",
     "stars": 1,
     "updated": "2026-08-20T14:24:33Z"
-  },
-  {
-    "name": "thatako.net",
-    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
-    "url": "https://github.com/aitji/thatako.net",
-    "homepage": "https://thatako.net",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-08-03T00:59:51Z"
   },
   {
     "name": "addon",
