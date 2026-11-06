@@ -1,12 +1,12 @@
 [
   {
-    "name": "songs.thatako.net",
-    "description": "morning song request. pr @ thatakophitthayakhom",
-    "url": "https://github.com/aitji/songs.thatako.net",
-    "homepage": "https://songs.thatako.net",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-11-05T12:22:03Z"
+    "name": "QoF",
+    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel.",
+    "url": "https://github.com/aitji/QoF",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "",
+    "stars": 7,
+    "updated": "2026-11-06T06:44:14Z"
   },
   {
     "name": "aitji",
@@ -15,7 +15,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-11-05T06:03:32Z"
+    "updated": "2026-11-06T05:59:07Z"
+  },
+  {
+    "name": "songs.thatako.net",
+    "description": "morning song request. pr @ thatakophitthayakhom",
+    "url": "https://github.com/aitji/songs.thatako.net",
+    "homepage": "https://songs.thatako.net",
+    "language": "JavaScript",
+    "stars": 0,
+    "updated": "2026-11-06T03:29:49Z"
   },
   {
     "name": "thatako.net",
@@ -43,15 +52,6 @@
     "language": "",
     "stars": 0,
     "updated": "2026-10-31T13:15:21Z"
-  },
-  {
-    "name": "QoF",
-    "description": "A Minecraft Bedrock addon that adds small vanilla-friendly features. Each module is configurable through the in-game pack settings panel.",
-    "url": "https://github.com/aitji/QoF",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "",
-    "stars": 7,
-    "updated": "2026-10-29T07:54:34Z"
   },
   {
     "name": "qof.aitji.xyz",
