@@ -1,12 +1,21 @@
 [
   {
-    "name": "qof.aitji.xyz",
+    "name": "thatako.net",
+    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
+    "url": "https://github.com/aitji/thatako.net",
+    "homepage": "https://thatako.net",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-11-09T14:39:23Z"
+  },
+  {
+    "name": "tpsc-livestream",
     "description": "",
-    "url": "https://github.com/aitji/qof.aitji.xyz",
-    "homepage": "https://qof.aitji.xyz",
-    "language": "HTML",
+    "url": "https://github.com/aitji/tpsc-livestream",
+    "homepage": "",
+    "language": "JavaScript",
     "stars": 0,
-    "updated": "2026-11-08T12:17:52Z"
+    "updated": "2026-11-09T10:38:30Z"
   },
   {
     "name": "aitji",
@@ -15,7 +24,16 @@
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-11-08T05:31:43Z"
+    "updated": "2026-11-09T05:42:24Z"
+  },
+  {
+    "name": "qof.aitji.xyz",
+    "description": "",
+    "url": "https://github.com/aitji/qof.aitji.xyz",
+    "homepage": "https://qof.aitji.xyz",
+    "language": "HTML",
+    "stars": 0,
+    "updated": "2026-11-08T12:17:52Z"
   },
   {
     "name": "QoF",
@@ -34,15 +52,6 @@
     "language": "JavaScript",
     "stars": 0,
     "updated": "2026-11-06T03:29:49Z"
-  },
-  {
-    "name": "thatako.net",
-    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
-    "url": "https://github.com/aitji/thatako.net",
-    "homepage": "https://thatako.net",
-    "language": "JavaScript",
-    "stars": 1,
-    "updated": "2026-11-02T03:11:16Z"
   },
   {
     "name": "aitji.xyz",
@@ -133,15 +142,6 @@
     "language": "",
     "stars": 0,
     "updated": "2026-07-07T14:37:17Z"
-  },
-  {
-    "name": "tpsc-livestream",
-    "description": "",
-    "url": "https://github.com/aitji/tpsc-livestream",
-    "homepage": "",
-    "language": "JavaScript",
-    "stars": 0,
-    "updated": "2026-06-01T16:41:35Z"
   },
   {
     "name": "tools",
