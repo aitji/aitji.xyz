@@ -1,21 +1,21 @@
 [
   {
+    "name": "thatako.net",
+    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
+    "url": "https://github.com/aitji/thatako.net",
+    "homepage": "https://thatako.net",
+    "language": "JavaScript",
+    "stars": 1,
+    "updated": "2026-11-12T09:47:43Z"
+  },
+  {
     "name": "aitji",
     "description": "my github profiles",
     "url": "https://github.com/aitji/aitji",
     "homepage": "https://github.com/aitji",
     "language": "",
     "stars": 0,
-    "updated": "2026-11-11T05:39:49Z"
-  },
-  {
-    "name": "thatako.net",
-    "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
-    "url": "https://github.com/aitji/thatako.net",
-    "homepage": "https://thatako.net",
-    "language": "HTML",
-    "stars": 1,
-    "updated": "2026-11-10T13:10:38Z"
+    "updated": "2026-11-12T06:46:01Z"
   },
   {
     "name": "tpsc-livestream",
