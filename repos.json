@@ -1,5 +1,14 @@
 [
   {
+    "name": "CoM",
+    "description": "Break one block, and chain-mine the whole vein, tree, crop field, or leaf cluster at once",
+    "url": "https://github.com/aitji/CoM",
+    "homepage": "",
+    "language": "",
+    "stars": 0,
+    "updated": "2026-11-14T16:31:29Z"
+  },
+  {
     "name": "thatako.net",
     "description": "โครงสร้างพื้นฐานสำหรับโรงเรียนท่าตะโกพิทยาคม - ตัวย่อ URL, รหัส QR-CODE, โดเมนย่อย, API สาธารณะ และอื่น ๆ อีกมากมายที่จะตามมา สำหรับนักเรียนและคุณครู",
     "url": "https://github.com/aitji/thatako.net",
@@ -133,15 +142,6 @@
     "language": "JavaScript",
     "stars": 3,
     "updated": "2026-07-17T02:52:24Z"
-  },
-  {
-    "name": "CoM",
-    "description": "Break one block, and chain-mine the whole vein, tree, crop field, or leaf cluster at once",
-    "url": "https://github.com/aitji/CoM",
-    "homepage": "",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-07-07T14:37:17Z"
   },
   {
     "name": "tools",
