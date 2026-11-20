@@ -72,15 +72,6 @@
     "updated": "2026-11-01T13:25:16Z"
   },
   {
-    "name": "qol",
-    "description": "just a buch of another pack in 1 pack | this is repo for only version control the pack",
-    "url": "https://github.com/aitji/qol",
-    "homepage": "",
-    "language": "",
-    "stars": 0,
-    "updated": "2026-10-31T13:15:21Z"
-  },
-  {
     "name": "brute-force",
     "description": "this is my program to run testing brute force cracking da password (just a free time programing), don't need install lib",
     "url": "https://github.com/aitji/brute-force",
